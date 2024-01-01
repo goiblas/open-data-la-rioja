@@ -1,0 +1,25 @@
+import UnemploymentRatesPerAgeGroup from '@/components/charts/UnemploymentRatesPerAgeGroup'
+import UnemploymentRatesPerAgeGroupWomen from '@/components/charts/UnemploymentRatesPerAgeGroupWomen'
+import UnemploymentRatesPerAgeGroupMen from '@/components/charts/UnemploymentRatesPerAgeGroupMen'
+
+export const metadata = {
+  title: 'Desempleo',
+}
+
+# Desempleo por grupos de edad
+
+Porcentaje de parados por grupo de edad, segrún la encuesta de Población Activa (EPA), los datos provenientes del portal oficial de datos abiertos del Gobierno de La Rioja. [https://web.larioja.org/dato-abierto/datoabierto?n=opd-29](https://web.larioja.org/dato-abierto/datoabierto?n=opd-29)
+
+<UnemploymentRatesPerAgeGroup />
+
+## Desempleo en mujeres
+
+Porcentaje de mujeres en edad de trabajar que se encuentran en situación de desempleo, separadas por grupos de edad.
+
+<UnemploymentRatesPerAgeGroupWomen />
+
+## Desempleo en hombres
+
+Porcentaje de hombres en edad de trabajar que se encuentran en situación de desempleo, separados por grupos de edad.
+
+<UnemploymentRatesPerAgeGroupMen />

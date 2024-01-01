@@ -2,26 +2,45 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+@layer base {
+  body {
+    font-family: var(--font-inconsolata);
+  }
+  h1 {
+    font-family: var(--font-ibm-plex-sans);
+    font-weight: 600;
+    font-size: 40px;
   }
 }
 
+:root {
+  --foreground-rgb: 255, 255, 255;
+  --background-start-rgb: 0, 0, 0;
+  --background-end-rgb: 0, 0, 0;
+}
+
+/* 
 body {
   color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  background-color: rgb(var(--background-start-rgb));
+} */
+
+@layer components {
+  .content-layout {
+    @apply py-2 px-4;
+  }
+
+  .content-layout > * {
+    @apply mx-auto;
+    max-width: 664px;
+  }
+
+  .content-layout > .container-expanded {
+    max-width: 882px;
+    @apply mx-auto;
+  }
+
+  .logo {
+    @apply text-balance font-display font-bold dark:text-slate-50 text-3xl;
+  }
 }

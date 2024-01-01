@@ -1,8 +1,20 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import { IBM_Plex_Sans, Inconsolata } from 'next/font/google'
 import './globals.css'
+import clsx from 'clsx'
 
-const inter = Inter({ subsets: ['latin'] })
+const incosolata = Inconsolata({ 
+  subsets: ['latin'],
+  variable: "--font-inconsolata",
+  display: "swap",
+})
+
+const ibmPlexSans = IBM_Plex_Sans({ 
+  subsets: ['latin'],
+  variable: "--font-ibm-plex-sans",
+  weight: ["400", "600"],
+  display: "swap"
+})
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -15,8 +27,10 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
-      <body className={inter.className}>{children}</body>
+    <html lang="es" className='dark'>
+      <body className={clsx(incosolata.variable, ibmPlexSans.variable, "bg-white dark:bg-slate-950")}>
+          {children}
+      </body>
     </html>
   )
 }

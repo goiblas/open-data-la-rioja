@@ -1,0 +1,35 @@
+import FuelComsumptionPerYear from '@/components/charts/FuelComsumptionPerYear'
+import FuelComsumptionPerType from '@/components/charts/FuelComsumptionPerType'
+import FuelComsumptionPerSpecificType from '@/components/charts/FuelComsumptionPerSpecificType'
+import FuelComsumptionPerMonth from '@/components/charts/FuelComsumptionPerMonth'
+
+export const metadata = {
+  title: 'Consumo de combustible',
+}
+
+# Consumo de combustible 
+
+Toneladas de combustible comsumidos en La Rioja registrados desde el año 2000, los datos provenientes del portal oficial de datos abiertos del Gobierno de La Rioja. [https://web.larioja.org/dato-abierto/datoabierto?n=opd-102](https://web.larioja.org/dato-abierto/datoabierto?n=opd-102)
+
+La bajada del consumo de combustible en el año 2023 se debe a la falta de datos, ya que solo están registrados los datos hasta el mes de marzo.
+
+<FuelComsumptionPerYear />
+
+## Consumo por tipo de combustible
+
+Desglose del consumo por tipo de combustibles, gasolinas, gasóleos y fuelóleo BIA. Se observa como el Gasoleo es el combustible más utilizado en La Rioja.
+
+<FuelComsumptionPerType />
+
+## Consumo de combustibles por tipos más específicos
+
+Detalle del consumo de combustibles por tipos más específicos, gasolinas, gasóleos y fuelóleo BIA. Se observa como el Gasoleo A es el combustible más utilizado.
+
+<FuelComsumptionPerSpecificType />
+
+## Consumo de combustibles por meses
+
+Desglose del consumo de combustibles por meses. Aquí se observa como falta información del año 2023, ya que solo se tienen datos hasta el mes de marzo.
+
+<FuelComsumptionPerMonth />
+

@@ -1,0 +1,21 @@
+import ElectricityComsumptionPerYear from '@/components/charts/ElectricityComsumptionPerYear'
+import ElectricityComsumptionPerType from '@/components/charts/ElectricityComsumptionPerType'
+// import ElectricityComsumptionPerMonth from '@/components/charts/ElectricityComsumptionPerMonth'
+
+export const metadata = {
+  title: 'Consumo eléctrico',
+}
+
+# Consumo eléctrico 
+
+Consumo eléctrico en Kilovatios hora. La información se elabora a partir de los datos que mensualmente proporciona IBERDROLA, S.A. sobre energía suministrada.
+
+Los datos provenientes del portal oficial de datos abiertos del Gobierno de La Rioja. [https://web.larioja.org/dato-abierto/datoabierto?n=opd-101](https://web.larioja.org/dato-abierto/datoabierto?n=opd-101)
+
+<ElectricityComsumptionPerYear />
+
+## Consumo eléctrico por sector
+
+Desglose por sectores de actividad. Los principales consumidores de energía eléctrica son los sectores de servicios, industria y uso doméstico.
+
+<ElectricityComsumptionPerType />
