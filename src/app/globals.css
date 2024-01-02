@@ -41,6 +41,10 @@ body {
   }
 
   .logo {
-    @apply text-balance font-display font-bold dark:text-slate-50 text-3xl;
+    @apply text-balance font-display font-bold dark:text-slate-50 text-3xl inline-block;
+  }
+
+  .logo-text-gradient {
+    @apply from-indigo-500 via-purple-500 to-pink-500 bg-gradient-to-r bg-clip-text text-transparent;
   }
 }

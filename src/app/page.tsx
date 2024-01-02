@@ -1,30 +1,22 @@
-import Image from 'next/image'
 import Link from 'next/link'
 import { menuItems } from '@/config'
+import Footer from '@/components/layout/Footer'
+import GridMenu from '@/components/layout/GridMenu'
 
 export default function Home() {
   return (
-    <main className="p-24 text-slate-50">
-      <div className='pb-10'>
-        <h1>Open data La Rioja</h1>
-        <p>Visualización de los datos abiertos del Gobierno de La Rioja</p>
-      </div>
-      <div className='d-grid gap-1'>
-          {menuItems.map((item) => (
-            <div key={item.title}>
-              <h2 className='font-display font-bold mb-2 mt-4'>{item.title}</h2>
-              <div>
-                <ul>
-                  {item.items.map((child) => (
-                    <li key={child.title}>
-                      <Link href={child.url}>{child.title}</Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-          ))}
-      </div>
-    </main>
+    <div className='min-h-screen flex flex-col justify-center'>
+      <main className="py-24 text-slate-50">
+
+        <div className='mb-16 text-center'>
+          <h1 className='logo text-4xl mb-2'>Open data <span className='logo-text-gradient'>La Rioja</span></h1>
+          <p className="text-lg text-slate-400">Visualización de los datos abiertos del Gobierno de La Rioja</p>
+        </div>
+
+        <GridMenu items={menuItems} />
+      </main>
+
+      <Footer />
+    </div>
   )
 }

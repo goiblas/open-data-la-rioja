@@ -10,8 +10,7 @@ export default function Navbar() {
     return (
         <nav className="py-6 px-2 md:px-6">
             <div className='mb-8'>
-                <h1 className='logo'>Open Data <span className='from-indigo-500 via-purple-500 to-pink-500 bg-gradient-to-r bg-clip-text text-transparent'>La Rioja</span></h1>
-                {/* <p className='text-slate-400 text-sm'>Visualización de los datos abiertos del gobierno de La Rioja</p> */}
+                <Link href="/" className='logo'>Open Data <span className='logo-text-gradient'>La Rioja</span></Link>
             </div>
 
             {menuItems.map((item) => (
