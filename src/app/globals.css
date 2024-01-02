@@ -41,10 +41,10 @@ body {
   }
 
   .logo {
-    @apply text-balance font-display font-bold dark:text-slate-50 text-3xl inline-block;
+    @apply font-display font-bold dark:text-slate-50 text-xl md:text-3xl inline-block leading-6 md:leading-8;
   }
 
   .logo-text-gradient {
-    @apply from-indigo-500 via-purple-500 to-pink-500 bg-gradient-to-r bg-clip-text text-transparent;
+    @apply from-indigo-500 via-purple-500 to-pink-500 bg-gradient-to-r bg-clip-text text-transparent block;
   }
 }
