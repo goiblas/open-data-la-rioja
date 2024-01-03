@@ -37,7 +37,7 @@ body {
 
   .content-layout > .container-expanded {
     max-width: 882px;
-    @apply mx-auto;
+    @apply -mx-4 md:mx-auto;
   }
 
   .logo {
