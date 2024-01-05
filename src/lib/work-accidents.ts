@@ -1,6 +1,10 @@
 import database from "./shared/database";
 import { WorkAccidentDto, WorkAccident } from "../types";
 import { config } from "@/config";
+import { ChartData, ChartDataPerYear } from "@/types";
+
+const TOTAL_INJURIES = "TOTAL" as const;
+const MINOR_INJURIES = "Leve" as const;
 
 // [GRADO DE LA LESIÓN].[Leve] -> Leve
 function getInjury(injury: string) {
@@ -25,74 +29,85 @@ type Result = {
     }
 }
 
-export async function getWorkAccidents(): Promise<Result[]> {
+export async function getWorkAccidentsPerYear(): Promise<ChartData> {
     const databaseDtos = await database.get<WorkAccidentDto>(config.work_accidents.file)
 
-    return databaseDtos.reduce((acc, dto) => {
-        const year = getYear(dto["[CICLO]"])
-        const injury = getInjury(dto["[GRADO DE LA LESIÓN]"])
-        const accidents = dto["[Measures].[Accidentes]"]
+    const workAccidents = databaseDtos
+        .map(dto => ({
+            year: getYear(dto["[CICLO]"]),
+            amount: dto["[Measures].[Accidentes]"],
+            injury: getInjury(dto["[GRADO DE LA LESIÓN]"])
+        }))
+        .filter(wa => wa.injury !== TOTAL_INJURIES)
 
-        if (!acc[year]) {
-            acc[year] = {}
+    const years = [...new Set(workAccidents.map(wa => wa.year))].sort()
+    const injuries = [...new Set(workAccidents.map(wa => wa.injury))]
+
+    const data = years.map(year => {
+        const workAccidentsOfYear = workAccidents.filter(fuel => fuel.year === year)
+
+        const groups = workAccidentsOfYear.reduce((acc, fuel) => {
+            const { injury, amount } = fuel
+            
+            if (acc[injury]) {
+                acc[injury] += amount
+            } else {
+                acc[injury] = amount
+            }
+            return acc
+        }, {})
+
+        return {
+            year,
+            ...groups
         }
+    })
 
-        if (!acc[year][injury]) {
-            acc[year][injury] = 0
-        }
-
-        acc[year][injury] += accidents
-
-        return acc
-    }, {})
-}
-
-function normalizeKey(key: string) {
-    return key.replace(/ /g, "_").replaceAll(".", "_").replaceAll("[", "").replaceAll("]", "")
-}
-
-// '[CNAE_09]': '[CNAE_09].[AGRICULTURA]' -> AGRICULTURA
-// '[CNAE_09]': '[CNAE_09].[SERVICIOS].[H Transporte y almacenamiento]' -> SERVICIOS
-function getSector(cnae: string) {
-    const match = cnae.match(/\[CNAE_09\]\.\[(.+)\]/)
-
-    if (!match) {
-        throw new Error(`Invalid cnae ${cnae}`)
+    return {
+        data,
+        index: "year",
+        categories: injuries
     }
-
-    return match[1]
 }
 
-export async function getAccidentsBySector(): Promise<any[]> {
-    const databaseDtos = await database.get<WorkAccidentDto>(config.work_accidents.file)
-    
-    return []
-}
-export async function getWorkAccidentsCNAE(): Promise<any[]> {
+export async function getWorkAccidentsSeriousPerYear(): Promise<ChartData> {
     const databaseDtos = await database.get<WorkAccidentDto>(config.work_accidents.file)
 
-    return databaseDtos.reduce((acc, dto) => {
-        const year = getYear(dto["[CICLO]"])
-        const injury = getInjury(dto["[GRADO DE LA LESIÓN]"])
-        const accidents = dto["[Measures].[Accidentes]"]
-        const cnae =  normalizeKey(dto["[CNAE_09]"])
-        const sector = getSector(dto["[CNAE_09]"])
+    const workAccidents = databaseDtos
+        .map(dto => ({
+            year: getYear(dto["[CICLO]"]),
+            amount: dto["[Measures].[Accidentes]"],
+            injury: getInjury(dto["[GRADO DE LA LESIÓN]"])
+        }))
+        .filter(wa => wa.injury !== TOTAL_INJURIES)
+        .filter(wa => wa.injury !== MINOR_INJURIES)
 
-        if(injury === "TOTAL")   return acc
-        if(!acc[cnae]){
-            acc[cnae] = {}
+    const years = [...new Set(workAccidents.map(wa => wa.year))].sort()
+    const injuries = [...new Set(workAccidents.map(wa => wa.injury))]
+
+    const data = years.map(year => {
+        const workAccidentsOfYear = workAccidents.filter(fuel => fuel.year === year)
+
+        const groups = workAccidentsOfYear.reduce((acc, fuel) => {
+            const { injury, amount } = fuel
+            
+            if (acc[injury]) {
+                acc[injury] += amount
+            } else {
+                acc[injury] = amount
+            }
+            return acc
+        }, {})
+
+        return {
+            year,
+            ...groups
         }
+    })
 
-        if (!acc[cnae][year]) {
-            acc[cnae][year] = {}
-        }
-
-        if (!acc[cnae][year][injury]) {
-            acc[cnae][year][injury] = 0
-        }
-
-        acc[cnae][year][injury] += accidents
-
-        return acc
-    }, {})
+    return {
+        data,
+        index: "year",
+        categories: injuries
+    }
 }

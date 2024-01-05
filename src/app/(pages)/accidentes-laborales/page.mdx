@@ -1,5 +1,18 @@
+import WorkAccidentsPerYear from '@/components/charts/WorkAccidentsPerYear'
+import WorkAccidentsSeriousPerYear from '@/components/charts/WorkAccidentsSeriousPerYear'
+
 export const metadata = {
   title: 'Accidentes laborales',
 }
 
-## Accidentes
+## Accidentes laborales
+
+Accidentes laborales por gravedad y año, los datos provenientes del portal oficial de datos abiertos del Gobierno de La Rioja. [https://web.larioja.org/dato-abierto/datoabierto?n=opd-54](https://web.larioja.org/dato-abierto/datoabierto?n=opd-54)
+
+<WorkAccidentsPerYear />
+
+## Accidentes laborales graves
+
+Accidentes laborales graves, muy graves y mortales por año
+
+<WorkAccidentsSeriousPerYear />

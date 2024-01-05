@@ -15,8 +15,8 @@ export const config: Config = {
     },
     work_accidents: {
         file: 'accidentes_sector.json',
-        url: 'https://web.larioja.org/dato-abierto/datoabierto?n=opd-54',
-        last_update: '2023-11-02'
+        url: 'https://web.larioja.org/dato-abierto/datoabierto?n=opd-355',
+        last_update: '2023-01-02'
     },
     work_occupancy: {
         file: 'ocupados_por_sector.json',

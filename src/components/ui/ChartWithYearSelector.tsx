@@ -10,7 +10,7 @@ export type ChartWithYearSelectorProps = ChartDataPerYear & {
 
 export default function ChartWithYearSelector(props: ChartWithYearSelectorProps) {
     const { data, years, categories, index, Chart = BarChart, className } = props;
-    const [year, setYear] = useState(2023);
+    const [year, setYear] = useState(years[years.length - 1]);
 
     const monthData = data[year];
 
