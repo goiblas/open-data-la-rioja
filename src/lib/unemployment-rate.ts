@@ -17,6 +17,19 @@ type UnemploymentDto = {
     "[Measures].[Porcentaje por edad], [SEXO ].[Mujeres]"?: number
 }
 
+type UnemploymentRateBySex = {
+    "[CICLO]": string
+    "[Measures].[Tasa de paro], [SEXO].[Mujeres]": number
+    "[Measures].[Tasa de empleo], [SEXO].[Ambos sexos]": number
+    "[Measures].[Tasa de paro], [SEXO].[Hombres]": number
+    "[Measures].[Tasa de actividad], [SEXO].[Hombres]": number
+    "[Measures].[Tasa de paro], [SEXO].[Ambos sexos]": number
+    "[Measures].[Tasa de actividad], [SEXO].[Ambos sexos]": number
+    "[Measures].[Tasa de actividad], [SEXO].[Mujeres]": number
+    "[Measures].[Tasa de empleo], [SEXO].[Hombres]": number
+    "[Measures].[Tasa de empleo], [SEXO].[Mujeres]": number
+}      
+
 type UnemploymentRate = {
     year: number
     men: number
@@ -50,7 +63,7 @@ function getYearFromCycle(cycle: string): number {
 }
 
 async function getUnemploymentValues(): Promise<UnemploymentRate[]> {
-    const reponse = await  database.get<FuelDto>(config.unemployment.file)
+    const reponse = await  database.get<UnemploymentDto>(config.unemployment.file)
 
     return reponse
         .filter(dto => dto["[GRUPOS DE EDAD ]"] !== GENERAL_AGE_GROUP)
@@ -84,7 +97,6 @@ export async function getUnemploymentRateByAgeGroup(params: Params): Promise<Cha
     // calculate average
     const unemploymentRatesAverage = Object.keys(unemploymentRatesByYear).sort().map(year => {
         const unemploymentRates = unemploymentRatesByYear[Number(year)]
-        const length = unemploymentRates.length
 
         const groupedByAgeGroup = unemploymentRates.reduce((acc, ur) => {
             if(!acc[ur.ageGroup]) {
@@ -117,5 +129,56 @@ export async function getUnemploymentRateByAgeGroup(params: Params): Promise<Cha
         index: "year",
         data: unemploymentRatesAverage,
         categories: ageGroups
+    }
+}
+
+export async function getUnemploymentRateBySex(): Promise<ChartData> {
+    const reponse = await  database.get<UnemploymentRateBySex>(config.unemployment_by_sex.file)
+
+    const unemploymentRates = reponse.map(ur => {
+        return {
+            year: getYearFromCycle(ur["[CICLO]"]),
+            Ambos: ur["[Measures].[Tasa de paro], [SEXO].[Ambos sexos]"],
+            Hombres: ur["[Measures].[Tasa de paro], [SEXO].[Hombres]"],
+            Mujeres: ur["[Measures].[Tasa de paro], [SEXO].[Mujeres]"]
+        }
+    })
+
+    const categories = Object.keys(unemploymentRates[0]).filter(key => key !== "year")
+
+    const groupedByYear = unemploymentRates.reduce((acc, ur) => {
+        if(!acc[ur.year]) {
+            acc[ur.year] = []
+        }
+
+        acc[ur.year].push(ur)
+
+        return acc
+    }, {})
+
+    const data = Object.keys(groupedByYear).sort().map(year => {
+        const unemploymentRates = groupedByYear[Number(year)]
+
+        const averageByCatogory = categories.reduce((acc, category) => {
+            const unemploymentOfYear = unemploymentRates.filter(ur => ur.year === Number(year))
+            const length = unemploymentOfYear.length
+
+            const average = round(unemploymentOfYear.reduce((acc, e) => acc + e[category], 0) / length)
+
+            acc[category] = average
+
+            return acc
+        }, {})
+
+        return {
+            year: Number(year),
+            ...averageByCatogory
+        }
+    })
+
+    return {
+        index: "year",
+        data,
+        categories: categories
     }
 }

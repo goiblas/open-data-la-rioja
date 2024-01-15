@@ -13,6 +13,11 @@ export const config: Config = {
         url: 'https://web.larioja.org/dato-abierto/datoabierto?n=opd-29',
         last_update: '2023-11-02'
     },
+    unemployment_by_sex: {
+        file: 'tasas_por_sexo.json',
+        url: 'https://web.larioja.org/dato-abierto/datoabierto?n=opd-34',
+        last_update: '2023-11-02'
+    },
     work_accidents: {
         file: 'accidentes_sector.json',
         url: 'https://web.larioja.org/dato-abierto/datoabierto?n=opd-355',
