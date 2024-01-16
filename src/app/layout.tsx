@@ -1,11 +1,11 @@
 import type { Metadata } from 'next'
-import { IBM_Plex_Sans, Inconsolata } from 'next/font/google'
+import { IBM_Plex_Sans, Mulish } from 'next/font/google'
 import './globals.css'
 import clsx from 'clsx'
 
-const incosolata = Inconsolata({ 
+const incosolata = Mulish({ 
   subsets: ['latin'],
-  variable: "--font-inconsolata",
+  variable: "--font-mulish",
   display: "swap",
 })
 

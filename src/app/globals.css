@@ -4,7 +4,7 @@
 
 @layer base {
   body {
-    font-family: var(--font-inconsolata);
+    font-family: var(--font-mulish);
   }
   h1 {
     font-family: var(--font-ibm-plex-sans);

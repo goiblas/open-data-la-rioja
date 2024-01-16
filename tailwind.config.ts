@@ -11,7 +11,7 @@ const config: Config = {
   ],
   theme: {
     fontFamily: {
-      body: ['var(--font-inconsolata)', 'sans-serif'],
+      body: ['var(--font-mulish)', 'sans-serif'],
       display: ['var(--font-ibm-plex-sans)', 'sans-serif'],
     },
     extend: {
