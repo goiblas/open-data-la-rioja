@@ -24,7 +24,7 @@ export default function GridMenu({ items }: { items: Item[] }) {
         <div className='mb-16 grid gap-[1px] grid-cols-2 md:grid-cols-3 lg:grid-cols-4 w-full max-w-[1200px] bg-slate-700 mx-auto shadow-slate-950 shadow-[inset_0_0_250px]'>
             {items.map((item) => (
               <div key={item.title} className="bg-slate-950 p-4">
-                <h2 className='text-sm uppercase text-slate-600 tracking-widest mb-4'>{item.title}</h2>
+                <h2 className='text-xs uppercase text-slate-400 tracking-widest mb-4'>{item.title}</h2>
                 <div>
                   <ul>
                     {item.items.map((child) => (
