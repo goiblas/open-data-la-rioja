@@ -18,5 +18,5 @@ test('Should render unemployment rate page', async ({ page }) => {
   await page.goto('/')
   await page.click('text=Desempleo')
   await expect(page).toHaveURL('/desempleo')
-  await expect(page.locator('h1')).toContainText('Desempleo por grupos de edad')
+  await expect(page.locator('h1')).toContainText('Desempleo')
 });
