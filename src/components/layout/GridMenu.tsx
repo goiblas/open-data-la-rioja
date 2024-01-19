@@ -9,7 +9,7 @@ function getRest({ cells, columns } : { cells: number, columns: number }): numbe
   return columns - (cells % columns)
 }
 
-export default function GridMenu({ items }: { items: MenuItem["items"] }) {
+export default function GridMenu({ items }: { items: MenuItem[] }) {
   const isTablet = useMediaQuery('md')
   const isDesktop = useMediaQuery('lg')
 
