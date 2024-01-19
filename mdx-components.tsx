@@ -1,5 +1,4 @@
 import type { MDXComponents } from 'mdx/types'
-import Heading from '@/components/ui/Heading'
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {
