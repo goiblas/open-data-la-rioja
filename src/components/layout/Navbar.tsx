@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { menuItems } from '@/config';
 import { usePathname } from 'next/navigation'
 import clsx from 'clsx'
+import MenuItem from '@/components/ui/MenuItem'
 
 export default function Navbar() {
     const pathname = usePathname()
@@ -19,8 +20,13 @@ export default function Navbar() {
                     <div className='mb-12'>
                         <ul>
                             {item.items.map((child) => (
-                                <li key={child.title} className='py-1'>
-                                    <Link href={child.url} className={ clsx('text-slate-300', child.url === pathname && "underline" )}>{child.title}</Link>
+                                <li key={child.title}>
+                                    <MenuItem
+                                        actived={child.url === pathname}
+                                        href={child.url}
+                                        >
+                                        {child.title}
+                                    </MenuItem>
                                 </li>
                             ))}
                         </ul>
