@@ -42,7 +42,7 @@ export const config: Config = {
     }
 }
 
-type MenuItem = {
+export type MenuItem = {
     title: string
     items: {
         title: string
