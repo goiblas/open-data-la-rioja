@@ -1,16 +1,16 @@
-'use client';
-import { AreaChart, AreaChartProps } from "@tremor/react";
+'use client'
+import { AreaChart, type AreaChartProps } from '@tremor/react'
 
-type UnemploymentRatesPerAgeGroupProps = {
-    data: AreaChartProps["data"];
-    index: AreaChartProps["index"];
-    categories: AreaChartProps["categories"];
-};
+interface UnemploymentRatesPerAgeGroupProps {
+  data: AreaChartProps['data']
+  index: AreaChartProps['index']
+  categories: AreaChartProps['categories']
+}
 
-export default function UnemploymentRatesPerAgeGroupClient(props: UnemploymentRatesPerAgeGroupProps) {
-    const { data, index, categories } = props;
-    
-    return (
+export default function UnemploymentRatesPerAgeGroupClient (props: UnemploymentRatesPerAgeGroupProps) {
+  const { data, index, categories } = props
+
+  return (
         <AreaChart
             data={data}
             index={index}
@@ -19,5 +19,5 @@ export default function UnemploymentRatesPerAgeGroupClient(props: UnemploymentRa
             onValueChange={() => {}}
             connectNulls
         />
-  );
+  )
 }

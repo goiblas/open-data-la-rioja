@@ -1,14 +1,13 @@
-'use client';
-import Link from 'next/link';
-import { menuItems } from '@/config';
+'use client'
+import Link from 'next/link'
+import { menuItems } from '@/config'
 import { usePathname } from 'next/navigation'
-import clsx from 'clsx'
 import MenuItem from '@/components/ui/MenuItem'
 
-export default function Navbar() {
-    const pathname = usePathname()
+export default function Navbar () {
+  const pathname = usePathname()
 
-    return (
+  return (
         <nav className="py-10 px-2 md:px-6">
             <div className='mb-12'>
                 <Link href="/" className='logo'>Open Data <span className='logo-text-gradient'>La Rioja</span></Link>
@@ -34,5 +33,5 @@ export default function Navbar() {
                 </div>
             ))}
         </nav>
-    )
+  )
 }

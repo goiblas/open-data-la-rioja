@@ -1,11 +1,11 @@
-import { getElectricityConsumptionPerMonth } from "@/lib/electricity";
-import { Card } from "@tremor/react";
-import ChartWithYearSelector from "@/components/ui/ChartWithYearSelector";
+import { getElectricityConsumptionPerMonth } from '@/lib/electricity'
+import { Card } from '@tremor/react'
+import ChartWithYearSelector from '@/components/ui/ChartWithYearSelector'
 
-export default async function ElectricityComsumptionPerMonth() {
-    const { index, data, categories, years } = await getElectricityConsumptionPerMonth();
+export default async function ElectricityComsumptionPerMonth () {
+  const { index, data, categories, years } = await getElectricityConsumptionPerMonth()
 
-    return (
+  return (
         <div className="my-12 container-expanded">
             <Card>
                 <ChartWithYearSelector
@@ -16,5 +16,5 @@ export default async function ElectricityComsumptionPerMonth() {
                 />
             </Card>
         </div>
-  );
-}  
+  )
+}

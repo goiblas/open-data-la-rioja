@@ -1,15 +1,15 @@
-'use client';
+'use client'
 import Link from 'next/link'
 import useMediaQuery from '@/hooks/useMediaQuery'
-import { MenuItem } from '@/config'
+import { type MenuItem } from '@/config'
 
-const extras = 4;
+const extras = 4
 
-function getRest({ cells, columns } : { cells: number, columns: number }): number {
+function getRest ({ cells, columns }: { cells: number, columns: number }): number {
   return columns - (cells % columns)
 }
 
-export default function GridMenu({ items }: { items: MenuItem[] }) {
+export default function GridMenu ({ items }: { items: MenuItem[] }) {
   const isTablet = useMediaQuery('md')
   const isDesktop = useMediaQuery('lg')
 

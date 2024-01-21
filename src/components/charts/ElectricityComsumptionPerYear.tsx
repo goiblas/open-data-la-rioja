@@ -1,10 +1,10 @@
-import { getElectricityTotalPerYear } from "@/lib/electricity";
-import { BarChart, Card, Title } from "@tremor/react";
+import { getElectricityTotalPerYear } from '@/lib/electricity'
+import { BarChart, Card } from '@tremor/react'
 
-export default async function ElectricityComsumptionPerYear() {
-    const { index, data, categories } = await getElectricityTotalPerYear();
+export default async function ElectricityComsumptionPerYear () {
+  const { index, data, categories } = await getElectricityTotalPerYear()
 
-    return (
+  return (
         <div className="my-12 container-expanded">
             <Card>
                 <BarChart
@@ -16,5 +16,5 @@ export default async function ElectricityComsumptionPerYear() {
                 />
             </Card>
         </div>
-  );
-}  
+  )
+}

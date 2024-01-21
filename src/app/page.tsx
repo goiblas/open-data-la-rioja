@@ -1,9 +1,8 @@
-import Link from 'next/link'
 import { menuItems } from '@/config'
 import Footer from '@/components/layout/Footer'
 import GridMenu from '@/components/layout/GridMenu'
 
-export default function Home() {
+export default function Home () {
   return (
     <div className='min-h-screen flex flex-col justify-center'>
       <main className="py-8 text-slate-50 mb-[4vh]">

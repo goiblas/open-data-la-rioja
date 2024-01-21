@@ -1,10 +1,10 @@
-import { getFuelConsumptionTotalPerYear } from "@/lib/fuel-consumption";
-import { BarChart, Card, Title } from "@tremor/react";
+import { getFuelConsumptionTotalPerYear } from '@/lib/fuel-consumption'
+import { BarChart, Card } from '@tremor/react'
 
-export default async function FuelComsumptionPerYear() {
-    const { index, data, categories } = await getFuelConsumptionTotalPerYear();
+export default async function FuelComsumptionPerYear () {
+  const { index, data, categories } = await getFuelConsumptionTotalPerYear()
 
-    return (
+  return (
         <div className="my-12 container-expanded">
             <Card>
                 <BarChart
@@ -16,5 +16,5 @@ export default async function FuelComsumptionPerYear() {
                 />
             </Card>
         </div>
-  );
-}  
+  )
+}

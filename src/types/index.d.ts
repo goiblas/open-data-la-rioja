@@ -1,2 +1,2 @@
-export * from "./work-accidents"
-export * from "./charts"
+export * from './work-accidents'
+export * from './charts'

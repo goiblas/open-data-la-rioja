@@ -1,10 +1,10 @@
-import { getFuelConsumptionPerType } from "@/lib/fuel-consumption";
-import { LineChart, Card } from "@tremor/react";
+import { getFuelConsumptionPerType } from '@/lib/fuel-consumption'
+import { LineChart, Card } from '@tremor/react'
 
-export default async function FuelComsumptionPerType() {
-    const { index, data, categories } = await getFuelConsumptionPerType();
+export default async function FuelComsumptionPerType () {
+  const { index, data, categories } = await getFuelConsumptionPerType()
 
-    return (
+  return (
         <div className="my-12 container-expanded">
             <Card>
                 <LineChart
@@ -15,5 +15,5 @@ export default async function FuelComsumptionPerType() {
                 />
             </Card>
         </div>
-  );
-}  
+  )
+}

@@ -5,15 +5,15 @@ import Header from '@/components/layout/Header'
 import Breadcrumbs from '@/components/layout/Breadcrumbs'
 
 export const metadata: Metadata = {
-  title: 'Interna',
+  title: 'Interna'
 }
 
-export default function RootLayout({
-  children,
+export default function RootLayout ({
+  children
 }: {
   children: React.ReactNode
 }) {
-    return (
+  return (
         <div className='md:grid md:grid-cols-[280px_1fr] gap-6 min-h-[100vh]'>
             <div className="md:hidden">
               <div className="border-b border-b-slate-800">
@@ -35,5 +35,5 @@ export default function RootLayout({
               <Footer />
             </div>
         </div>
-    )
+  )
 }

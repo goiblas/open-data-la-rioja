@@ -1,11 +1,10 @@
-import { getWorkAccidentsSeriousPerYear } from "@/lib/work-accidents";
-import { Card, AreaChart } from "@tremor/react";
-import ChartWithYearSelector from "@/components/ui/ChartWithYearSelector";
+import { getWorkAccidentsSeriousPerYear } from '@/lib/work-accidents'
+import { Card, AreaChart } from '@tremor/react'
 
-export default async function WorkAccidents() {
-    const { index, data, categories } = await getWorkAccidentsSeriousPerYear();
+export default async function WorkAccidents () {
+  const { index, data, categories } = await getWorkAccidentsSeriousPerYear()
 
-    return (
+  return (
         <div className="my-12 container-expanded">
             <Card>
                 <AreaChart
@@ -16,5 +15,5 @@ export default async function WorkAccidents() {
                 />
             </Card>
         </div>
-  );
-}  
+  )
+}
