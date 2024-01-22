@@ -3,7 +3,7 @@ import UnemploymentRatesPerAgeGroupClient from './UnemploymentRatesPerAgeGroupCl
 import CardExpanded from '@/components/ui/CardExpanded'
 
 export default async function UnemploymentRatesPerAgeGroup ({ originUrl }: { originUrl: string }) {
-  const { index, data, categories } = await getUnemploymentRateByAgeGroup({ groupName: 'average' })
+  const { index, data, categories } = await getUnemploymentRateByAgeGroup()
 
   return (
         <CardExpanded originUrl={originUrl}>

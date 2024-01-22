@@ -45,14 +45,14 @@ describe('unempeloyment-rate', () => {
 
     databaseMock.mockResolvedValue(databaseDtos)
 
-    const { data, index, categories } = await getUnemploymentRateByAgeGroup({ groupName: 'average' })
+    const { data, index, categories } = await getUnemploymentRateByAgeGroup()
 
     expect(data).toEqual(expected)
     expect(index).toEqual('year')
     expect(categories).toEqual(['De 56 a 64 años'])
   })
 
-  test('should return value by group name', async () => {
+  test('should return average values', async () => {
     const databaseMock = vi.spyOn(database, 'get')
     const databaseDtos = [{
       '[Measures].[Personas], [SEXO ].[Hombres]': 1179.26,
@@ -85,13 +85,13 @@ describe('unempeloyment-rate', () => {
 
     const expected = [{
       year: 2022,
-      'De 56 a 64 años': 25.63,
-      'De 16 a 25 años': 24.05
+      'De 56 a 64 años': 20.75,
+      'De 16 a 25 años': 21.15
     }]
 
     databaseMock.mockResolvedValue(databaseDtos)
 
-    const { data, index, categories } = await getUnemploymentRateByAgeGroup({ groupName: 'women' })
+    const { data, index, categories } = await getUnemploymentRateByAgeGroup()
 
     expect(data).toEqual(expected)
     expect(index).toEqual('year')

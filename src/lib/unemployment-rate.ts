@@ -79,11 +79,7 @@ async function getUnemploymentValues (): Promise<UnemploymentRate[]> {
     })
 }
 
-interface Params {
-  groupName: string
-}
-
-export async function getUnemploymentRateByAgeGroup (params: Params): Promise<ChartData> {
+export async function getUnemploymentRateByAgeGroup (): Promise<ChartData> {
   const unemploymentRates = await getUnemploymentValues()
   const ageGroups = [...new Set(unemploymentRates.map(ur => ur.ageGroup))]
 
@@ -116,7 +112,7 @@ export async function getUnemploymentRateByAgeGroup (params: Params): Promise<Ch
       const ageGroupUnemploymentRates = groupedByAgeGroup[ageGroup]
       const length = ageGroupUnemploymentRates.length
 
-      const average = round(ageGroupUnemploymentRates.reduce((acc, e) => acc + e[params.groupName], 0) / length)
+      const average = round(ageGroupUnemploymentRates.reduce((acc, e) => acc + e.average, 0) / length)
 
       acc[ageGroup] = average
 
