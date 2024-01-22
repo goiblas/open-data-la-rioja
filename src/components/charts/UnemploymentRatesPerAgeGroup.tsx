@@ -1,18 +1,17 @@
-import { Card } from '@tremor/react'
 import { getUnemploymentRateByAgeGroup } from '@/lib/unemployment-rate'
 import UnemploymentRatesPerAgeGroupClient from './UnemploymentRatesPerAgeGroupClient'
+import CardExpanded from '@/components/ui/CardExpanded'
 
-export default async function UnemploymentRatesPerAgeGroup () {
+export default async function UnemploymentRatesPerAgeGroup ({ originUrl }: { originUrl: string }) {
   const { index, data, categories } = await getUnemploymentRateByAgeGroup({ groupName: 'average' })
+
   return (
-        <div className="my-12 container-expanded">
-            <Card>
-                <UnemploymentRatesPerAgeGroupClient
-                    data={data}
-                    index={index}
-                    categories={categories}
-                />
-            </Card>
-        </div>
+        <CardExpanded originUrl={originUrl}>
+            <UnemploymentRatesPerAgeGroupClient
+                data={data}
+                index={index}
+                categories={categories}
+            />
+        </CardExpanded>
   )
 }

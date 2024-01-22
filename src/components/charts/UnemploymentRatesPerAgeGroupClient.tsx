@@ -17,6 +17,7 @@ export default function UnemploymentRatesPerAgeGroupClient (props: UnemploymentR
             categories={categories}
             valueFormatter={value => `${value}%`}
             onValueChange={() => {}}
+            yAxisWidth={32}
             connectNulls
         />
   )

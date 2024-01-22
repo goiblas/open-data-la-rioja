@@ -1,19 +1,17 @@
 import { getUnemploymentRateBySex } from '@/lib/unemployment-rate'
-import { BarChart, Card } from '@tremor/react'
+import CardExpanded from '@/components/ui/CardExpanded'
+import UnemploymentRatesPerSexClient from './UnemploymentRatesPerSexClient'
 
-export default async function FuelComsumptionPerType () {
+export default async function FuelComsumptionPerType ({ originUrl }: { originUrl: string }) {
   const { index, data } = await getUnemploymentRateBySex()
 
   return (
-        <div className="my-12 container-expanded">
-            <Card>
-                <BarChart
-                    className="mt-6"
-                    data={data}
-                    index={index}
-                    categories={['Mujeres', 'Hombres']}
-                />
-            </Card>
-        </div>
+        <CardExpanded originUrl={originUrl}>
+            <UnemploymentRatesPerSexClient
+                data={data}
+                index={index}
+                categories={['Mujeres', 'Hombres']}
+            />
+        </CardExpanded>
   )
 }
