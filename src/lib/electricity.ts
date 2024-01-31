@@ -62,7 +62,9 @@ export async function getElectricityTotalPerYear (): Promise<ChartData> {
   const electricity = await getElectricity()
 
   const years = [...new Set(electricity.map(e => e.year))]
-  const data = years.map(year => {
+  const orderedYears = years.sort((a, b) => a - b)
+
+  const data = orderedYears.map(year => {
     const electricityOfYear = electricity.filter(e => e.year === year)
 
     const total = electricityOfYear.reduce((acc, e) => {
@@ -88,8 +90,9 @@ export async function getElectricityConsumptionPerType (): Promise<ChartData> {
 
   const years = [...new Set(electricity.map(e => e.year))]
   const sectors = [...new Set(electricity.map(e => e.sector))]
+  const orderedYears = years.sort((a, b) => a - b)
 
-  const data = years.map(year => {
+  const data = orderedYears.map(year => {
     const electricityOfYear = electricity.filter(e => e.year === year)
 
     const groups = electricityOfYear.reduce((acc, { sector, measure }) => {
@@ -125,8 +128,9 @@ export async function getElectricityConsumptionPerMonth (): Promise<ChartDataPer
 
   const years = [...new Set(electricity.map(e => e.year))]
   const sectors = [...new Set(electricity.map(e => e.sector))]
+  const orderedYears = years.sort((a, b) => a - b)
 
-  const data = years.reduce<any>((acc, year) => {
+  const data = orderedYears.reduce<any>((acc, year) => {
     const electricityOfYear = electricity.filter(e => e.year === year)
 
     const data = MONTHS.map(month => {

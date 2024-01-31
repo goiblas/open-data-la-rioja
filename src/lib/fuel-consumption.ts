@@ -116,7 +116,10 @@ export async function getFuelConsumptionPerType (): Promise<ChartData> {
 
   const years = [...new Set(fuels.map(fuel => fuel.year))]
   const types = [...new Set(fuels.map(fuel => fuel.type))]
-  const data = years.map(year => {
+
+  const orderedYears = years.sort((a, b) => a - b)
+
+  const data = orderedYears.map(year => {
     const fuelsOfYear = fuels.filter(fuel => fuel.year === year)
 
     const groups = fuelsOfYear.reduce((acc, fuel) => {
@@ -147,7 +150,9 @@ export async function getFuelConsumptionTotalPerYear (): Promise<ChartData> {
   const fuels = await getFuels()
 
   const years = [...new Set(fuels.map(fuel => fuel.year))]
-  const data = years.map(year => {
+  const orderedYears = years.sort((a, b) => a - b)
+
+  const data = orderedYears.map(year => {
     const fuelsOfYear = fuels.filter(fuel => fuel.year === year)
 
     const total = fuelsOfYear.reduce((acc, fuel) => {
@@ -173,7 +178,9 @@ export async function getFuelConsumptionPerSpecificType (): Promise<ChartData> {
 
   const years = [...new Set(fuels.map(fuel => fuel.year))]
   const types = [...new Set(fuels.map(fuel => fuel.type))]
-  const data = years.map(year => {
+  const orderedYears = years.sort((a, b) => a - b)
+
+  const data = orderedYears.map(year => {
     const fuelsOfYear = fuels.filter(fuel => fuel.year === year)
 
     const groups = fuelsOfYear.reduce((acc, fuel) => {
@@ -205,8 +212,9 @@ export async function getFuelConsumptionPerMonth (): Promise<ChartDataPerYear> {
 
   const years = [...new Set(fuels.map(fuel => fuel.year))]
   const types = [...new Set(fuels.map(fuel => fuel.type))]
+  const orderedYears = years.sort((a, b) => a - b)
 
-  const data = years.reduce<any>((acc, year) => {
+  const data = orderedYears.reduce<any>((acc, year) => {
     const fuelsOfYear = fuels.filter(fuel => fuel.year === year)
     const data = MONTHS.map(month => {
       const fuelsOfMonth = fuelsOfYear.filter(fuel => fuel.month === month)
