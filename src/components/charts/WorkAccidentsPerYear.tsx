@@ -1,19 +1,19 @@
 import { getWorkAccidentsPerYear } from '@/lib/work-accidents'
-import { Card, BarChart } from '@tremor/react'
+import CardExpanded from '@/components/ui/CardExpanded'
+import WorkAccidentsPerYearClient from './WorkAccidentsPerYearClient'
 
-export default async function WorkAccidents () {
+export default async function WorkAccidents ({ originUrl }: { originUrl?: string }) {
   const { index, data, categories } = await getWorkAccidentsPerYear()
 
   return (
         <div className="my-12 container-expanded">
-            <Card>
-                <BarChart
-                    className="mt-6"
+            <CardExpanded originUrl={originUrl}>
+                <WorkAccidentsPerYearClient
                     data={data}
                     index={index}
                     categories={categories}
                 />
-            </Card>
+            </CardExpanded>
         </div>
   )
 }

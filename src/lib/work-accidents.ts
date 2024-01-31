@@ -2,6 +2,7 @@ import database from './shared/database'
 import { type WorkAccidentDto } from '../types'
 import { config } from '@/config'
 import { type ChartData } from '@/types'
+import { capitalize } from './shared/utils'
 
 const TOTAL_INJURIES = 'TOTAL' as const
 const MINOR_INJURIES = 'Leve' as const
@@ -23,18 +24,40 @@ function getYear (cycle: string): number {
   return match ? parseInt(match[0]) : 0
 }
 
-export async function getWorkAccidentsPerYear (): Promise<ChartData> {
+// "[CNAE_09].[CONSTRUCCIÓN]" -> "Construcción"
+// "[CNAE_09].[AGRICULTURA].[A Agricultura, ganadería, silvicultura y pesca]" -> "Agricultura"
+function getSector (cnae: string): string {
+  const match = cnae.split('.')[1]
+
+  if (!match) {
+    throw new Error(`Invalid cnae ${cnae}`)
+  }
+
+  const sectorText = match.replace('[', '').replace(']', '')
+  return capitalize(sectorText.toLowerCase())
+}
+
+async function getWorkAccidents () {
   const databaseDtos = await database.get<WorkAccidentDto>(config.work_accidents.file)
 
   const workAccidents = databaseDtos
     .map(dto => ({
       year: getYear(dto['[CICLO]']),
       amount: dto['[Measures].[Accidentes]'],
-      injury: getInjury(dto['[GRADO DE LA LESIÓN]'])
+      injury: getInjury(dto['[GRADO DE LA LESIÓN]']),
+      sector: getSector(dto['[CNAE_09]'])
     }))
     .filter(wa => wa.injury !== TOTAL_INJURIES)
 
-  const years = [...new Set(workAccidents.map(wa => wa.year))]
+  return workAccidents
+}
+
+export async function getWorkAccidentsPerYear (): Promise<ChartData> {
+  const allWorkAccidents = await getWorkAccidents()
+
+  const workAccidents = allWorkAccidents.filter(wa => wa.injury !== TOTAL_INJURIES)
+
+  const years = [...new Set(workAccidents.map(wa => wa.year).sort((a, b) => a - b))]
   const injuries = [...new Set(workAccidents.map(wa => wa.injury))]
 
   const data = years.map(year => {
@@ -64,31 +87,26 @@ export async function getWorkAccidentsPerYear (): Promise<ChartData> {
   }
 }
 
-export async function getWorkAccidentsSeriousPerYear (): Promise<ChartData> {
-  const databaseDtos = await database.get<WorkAccidentDto>(config.work_accidents.file)
+export async function getWorkAccidentsSeriousPerSector (): Promise<ChartData> {
+  const allWorkAccidents = await getWorkAccidents()
 
-  const workAccidents = databaseDtos
-    .map(dto => ({
-      year: getYear(dto['[CICLO]']),
-      amount: dto['[Measures].[Accidentes]'],
-      injury: getInjury(dto['[GRADO DE LA LESIÓN]'])
-    }))
+  const workAccidents = allWorkAccidents
     .filter(wa => wa.injury !== TOTAL_INJURIES)
     .filter(wa => wa.injury !== MINOR_INJURIES)
 
-  const years = [...new Set(workAccidents.map(wa => wa.year))]
-  const injuries = [...new Set(workAccidents.map(wa => wa.injury))]
+  const years = [...new Set(workAccidents.map(wa => wa.year).sort((a, b) => a - b))]
+  const sectors = [...new Set(workAccidents.map(wa => wa.sector))]
 
   const data = years.map(year => {
-    const workAccidentsOfYear = workAccidents.filter(fuel => fuel.year === year)
+    const workAccidentsOfYear = workAccidents.filter(wa => wa.year === year)
 
-    const groups = workAccidentsOfYear.reduce((acc, fuel) => {
-      const { injury, amount } = fuel
+    const groups = workAccidentsOfYear.reduce((acc, workAccident) => {
+      const { sector, amount } = workAccident
 
-      if (acc[injury]) {
-        acc[injury] += amount
+      if (acc[sector]) {
+        acc[sector] += amount
       } else {
-        acc[injury] = amount
+        acc[sector] = amount
       }
       return acc
     }, {})
@@ -102,6 +120,6 @@ export async function getWorkAccidentsSeriousPerYear (): Promise<ChartData> {
   return {
     data,
     index: 'year',
-    categories: injuries
+    categories: sectors
   }
 }
