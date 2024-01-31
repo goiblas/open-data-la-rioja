@@ -59,21 +59,17 @@ describe('getFuelConsumptions', () => {
       '[TIEMPO]': '[TIEMPO].[2023].[Mayo (2023)]'
     }]
 
-    const expected = [{
-      Gasolina: 2246.85,
-      year: 2022
-    }, {
-      'Fuelóleo BIA': 4493.7,
-      Gasolina: 22,
-      year: 2023
-    }]
-
     databaseMock.mockResolvedValue(databaseDtos)
 
     const { data, index, categories } = await getFuelConsumptionPerType()
 
+    const expected = [{
+      'Fuelóleo BIA': 4493.7,
+      year: 2023
+    }]
+
     expect(data).toEqual(expected)
-    expect(categories).toEqual(expect.arrayContaining(['Gasolina', 'Fuelóleo BIA']))
+    expect(categories).toEqual(expect.arrayContaining(['Fuelóleo BIA']))
     expect(index).toEqual('year')
   })
 })
