@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "next lint",
     "test": "vitest",
-    "test:e2e": "npx playwright test"
+    "test:e2e": "npx playwright test",
+    "scraper": "node ./scraper/index.mjs"
   },
   "dependencies": {
     "@mdx-js/loader": "^3.0.0",
@@ -17,6 +18,7 @@
     "@tremor/react": "^3.12.1",
     "@types/mdx": "^2.0.10",
     "clsx": "^2.0.0",
+    "fast-xml-parser": "^4.3.4",
     "framer-motion": "^10.18.0",
     "next": "14.0.3",
     "react": "^18",
