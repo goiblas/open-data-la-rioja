@@ -15,12 +15,17 @@ const DEST = 'data'
 const files = Object.values(config)
 
 async function getXML() {
-  const response = await fetch(ORIGIN_XML, {
-    signal: AbortSignal.timeout(1)
-  }).catch(err => {
-    console.error(err.name, err.code, err.message, err.cause);
-  });
-  return await response.text()
+  try {
+    const response = await fetch(ORIGIN_XML, {
+      signal: AbortSignal.timeout(1)
+    })
+    return await response.text()
+
+  } catch (error) {
+    console.error(error)
+
+    throw new Error('Error fetching XML')
+  }
 }
 
 function download(url, dest) {
