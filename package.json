@@ -9,7 +9,7 @@
     "lint": "next lint",
     "test": "vitest",
     "test:e2e": "npx playwright test",
-    "scraper": "node ./scraper/index.mjs"
+    "cron": "node ./cron/index.mjs"
   },
   "dependencies": {
     "@mdx-js/loader": "^3.0.0",

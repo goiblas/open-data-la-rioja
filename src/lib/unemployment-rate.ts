@@ -63,7 +63,7 @@ function getYearFromCycle (cycle: string): number {
 }
 
 async function getUnemploymentValues (): Promise<UnemploymentRate[]> {
-  const reponse = await database.get<UnemploymentDto>(config.unemployment.file)
+  const reponse = await database.get<UnemploymentDto>(config.unemployment.fileName)
 
   return reponse
     .filter(dto => dto['[GRUPOS DE EDAD ]'] !== GENERAL_AGE_GROUP)
@@ -133,7 +133,7 @@ export async function getUnemploymentRateByAgeGroup (): Promise<ChartData> {
 }
 
 export async function getUnemploymentRateBySex (): Promise<ChartData> {
-  const reponse = await database.get<UnemploymentRateBySex>(config.unemployment_by_sex.file)
+  const reponse = await database.get<UnemploymentRateBySex>(config.unemployment_by_sex.fileName)
 
   const unemploymentRates = reponse.map(ur => {
     return {

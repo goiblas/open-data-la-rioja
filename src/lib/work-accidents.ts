@@ -38,7 +38,7 @@ function getSector (cnae: string): string {
 }
 
 async function getWorkAccidents () {
-  const databaseDtos = await database.get<WorkAccidentDto>(config.work_accidents.file)
+  const databaseDtos = await database.get<WorkAccidentDto>(config.work_accidents.fileName)
 
   const workAccidents = databaseDtos
     .map(dto => ({

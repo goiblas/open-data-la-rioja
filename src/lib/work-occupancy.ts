@@ -35,7 +35,7 @@ function getSector (activity: string): string {
 const GENERAL_ACTIVITY = 'Actividad principal'
 
 export async function getWorkOccupancy (): Promise<WorkOccupancy[]> {
-  const databaseDtos = await database.get<WorkOccupancyDto>(config.work_occupancy.file)
+  const databaseDtos = await database.get<WorkOccupancyDto>(config.work_occupancy.fileName)
 
   const workOccupancy = databaseDtos
     .map(dto => {

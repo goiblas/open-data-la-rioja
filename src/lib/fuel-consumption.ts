@@ -68,7 +68,7 @@ function isGeneralType (fuel: string): boolean {
 }
 
 async function getFuelsWithSpecificType (): Promise<FuelWithType[]> {
-  const reponse = await database.get<FuelDto>(config.fuel.file)
+  const reponse = await database.get<FuelDto>(config.fuel.fileName)
 
   return reponse
     .filter(dto => isSpecificType(dto['[TIPO DE COMBUSTIBLE]']))
@@ -83,7 +83,7 @@ async function getFuelsWithSpecificType (): Promise<FuelWithType[]> {
 }
 
 async function getFuelsWithType (): Promise<FuelWithType[]> {
-  const reponse = await database.get<FuelDto>(config.fuel.file)
+  const reponse = await database.get<FuelDto>(config.fuel.fileName)
 
   return reponse
     .filter(dto => isGeneralType(dto['[TIPO DE COMBUSTIBLE]']))
@@ -98,7 +98,7 @@ async function getFuelsWithType (): Promise<FuelWithType[]> {
 }
 
 async function getFuels (): Promise<Fuel[]> {
-  const reponse = await database.get<FuelDto>(config.fuel.file)
+  const reponse = await database.get<FuelDto>(config.fuel.fileName)
 
   return reponse
     .filter(dto => isGeneralType(dto['[TIPO DE COMBUSTIBLE]']))

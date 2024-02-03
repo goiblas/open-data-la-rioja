@@ -30,7 +30,7 @@ function getSector (activity: string): string {
 }
 
 async function getElectricity (): Promise<Electricity[]> {
-  const reponse = await database.get<ElectricityDto>(config.electricity.file)
+  const reponse = await database.get<ElectricityDto>(config.electricity.fileName)
 
   return reponse
     .filter(dto => dto['[ACTIVIDAD DE CONSUMO ]'] === ALL_SECTORS)
@@ -44,7 +44,7 @@ async function getElectricity (): Promise<Electricity[]> {
 }
 
 async function getElectricityWithSector (): Promise<ElectricityWithSector[]> {
-  const reponse = await database.get<ElectricityDto>(config.electricity.file)
+  const reponse = await database.get<ElectricityDto>(config.electricity.fileName)
 
   return reponse
     .filter(dto => dto['[ACTIVIDAD DE CONSUMO ]'] !== ALL_SECTORS)
