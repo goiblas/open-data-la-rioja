@@ -2,7 +2,6 @@ import { XMLParser } from 'fast-xml-parser'
 import fs from 'node:fs'
 import https from 'node:https'
 import config from "../data.config.json"  assert { type: "json" };
-import fetch from 'node-fetch'
 
 const parser = new XMLParser({
   ignoreAttributes: false,
