@@ -1,6 +1,7 @@
 import { XMLParser } from 'fast-xml-parser'
 import fs from 'node:fs'
 import https from 'node:https'
+import fetch from 'node-fetch'
 import config from "../data.config.json"  assert { type: "json" };
 
 const parser = new XMLParser({
@@ -15,17 +16,8 @@ const DEST = 'data'
 const files = Object.values(config)
 
 async function getXML() {
-  try {
-    const response = await fetch(ORIGIN_XML, {
-      signal: AbortSignal.timeout(1)
-    })
-    return await response.text()
-
-  } catch (error) {
-    console.error(error)
-
-    throw new Error('Error fetching XML')
-  }
+  const response = await fetch(ORIGIN_XML)
+  return await response.text()
 }
 
 function download(url, dest) {
