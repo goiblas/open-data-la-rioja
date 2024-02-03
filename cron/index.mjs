@@ -15,7 +15,9 @@ const DEST = 'data'
 const files = Object.values(config)
 
 async function getXML() {
-  const response = await fetch(ORIGIN_XML)
+  const response = await fetch(ORIGIN_XML, {
+    signal: AbortSignal.timeout(5000)
+  })
   return await response.text()
 }
 
