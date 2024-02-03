@@ -21,6 +21,7 @@
     "fast-xml-parser": "^4.3.4",
     "framer-motion": "^10.18.0",
     "next": "14.0.3",
+    "node-fetch": "^3.3.2",
     "react": "^18",
     "react-dom": "^18",
     "react-icons": "^4.12.0",
