@@ -15,19 +15,8 @@ const DEST = 'data'
 const files = Object.values(config)
 
 async function getXML() {
-  return new Promise((resolve, reject) => {
-    https.get(ORIGIN_XML, (response) => {
-      let data = ''
-      response.on('data', (chunk) => {
-        data += chunk
-      })
-      response.on('end', () => {
-        resolve(data)
-      })
-    }).on('error', (error) => {
-      reject(error)
-    })
-  })
+  const response = await fetch(ORIGIN_XML)
+  return await response.text()
 }
 
 function download(url, dest) {

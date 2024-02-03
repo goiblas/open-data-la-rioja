@@ -2,8 +2,8 @@ name: Get lastest open data
 
 on:
   workflow_dispatch:
-  schedule:
-    - cron: "0 8 * * 2" # At 08:00 on Tuesday GMT+2
+  # schedule:
+  #   - cron: "0 8 * * 2" # At 08:00 on Tuesday GMT+2
 
 jobs:
   build:
