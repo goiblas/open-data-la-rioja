@@ -16,8 +16,10 @@ const files = Object.values(config)
 
 async function getXML() {
   const response = await fetch(ORIGIN_XML, {
-    signal: AbortSignal.timeout(5000)
-  })
+    signal: AbortSignal.timeout(1)
+  }).catch(err => {
+    console.error(err.name, err.code, err.message, err.cause);
+  });
   return await response.text()
 }
 

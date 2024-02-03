@@ -18,6 +18,8 @@ export default function WorkAccidentsPerSectorClient (props: WorkAccidentsPerSec
             categories={categories}
             onValueChange={() => {}}
             yAxisWidth={40}
+            layout="vertical"
+            stack
         />
   )
 }
