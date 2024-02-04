@@ -10,7 +10,7 @@ export default function CardExpanded (props: CardExpandedProps) {
 
   return (
         <div className='mt-10 mb-16 container-expanded'>
-            <Card>
+            <Card className='px-1 md:px-6'>
                 {children}
             </Card>
 
