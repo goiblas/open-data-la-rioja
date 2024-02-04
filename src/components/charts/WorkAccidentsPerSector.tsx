@@ -6,14 +6,12 @@ export default async function WorkAccidentsPerSector ({ originUrl }: { originUrl
   const { index, data, categories } = await getWorkAccidentsSeriousPerSector()
 
   return (
-        <div className="my-12 container-expanded">
-            <CardExpanded originUrl={originUrl}>
-                <WorkAccidentsPerSectorClient
-                    data={data}
-                    index={index}
-                    categories={categories}
-                />
-            </CardExpanded>
-        </div>
+        <CardExpanded originUrl={originUrl}>
+            <WorkAccidentsPerSectorClient
+                data={data}
+                index={index}
+                categories={categories}
+            />
+        </CardExpanded>
   )
 }
