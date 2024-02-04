@@ -1,8 +1,7 @@
 import database from './shared/database'
 import { config } from '@/config'
 import { getMonthFromTimeDto, getYearFromTimeDto } from './shared/utils'
-import { MONTHS } from './shared/constants'
-import { type ChartData, type ChartDataPerYear } from '@/types'
+import { type ChartData } from '@/types'
 
 const ALL_SECTORS = '[ACTIVIDAD DE CONSUMO ].[Todas las actividades]'
 
@@ -118,52 +117,6 @@ export async function getElectricityConsumptionPerType (): Promise<ChartData> {
 
   return {
     index: 'year',
-    categories: sectors,
-    data
-  }
-}
-
-export async function getElectricityConsumptionPerMonth (): Promise<ChartDataPerYear> {
-  const electricity = await getElectricityWithSector()
-
-  const years = [...new Set(electricity.map(e => e.year))]
-  const sectors = [...new Set(electricity.map(e => e.sector))]
-  const orderedYears = years.sort((a, b) => a - b)
-
-  const data = orderedYears.reduce<any>((acc, year) => {
-    const electricityOfYear = electricity.filter(e => e.year === year)
-
-    const data = MONTHS.map(month => {
-      const electricityOfMonth = electricityOfYear.filter(e => e.month === month)
-      const sectorsInMonth = [...new Set(electricityOfMonth.map(e => e.sector))]
-
-      const measuresBySector = sectorsInMonth.reduce((acc, sector) => {
-        const electricityOfSector = electricityOfMonth.filter(e => e.sector === sector)
-
-        const total = electricityOfSector.reduce((acc, e) => {
-          acc += e.measure
-          return acc
-        }, 0)
-
-        acc[sector] = Math.round(total)
-        return acc
-      }, {})
-
-      return {
-        month,
-        ...measuresBySector
-      }
-    })
-
-    return {
-      ...acc,
-      [year]: data
-    }
-  }, {})
-
-  return {
-    years,
-    index: 'month',
     categories: sectors,
     data
   }

@@ -1,25 +1,25 @@
 'use client'
-import { AreaChart } from '@tremor/react'
+import { BarChart } from '@tremor/react'
 import { formatLargeNumber } from '@/lib/shared/formatters'
 
-interface WorkAccidentsPerYearClientProps {
+interface ElectricityComsumptionPerYearClientProps {
   data: number[]
   index: string
   categories: string[]
 }
 
-export default function WorkAccidentsPerYearClient (props: WorkAccidentsPerYearClientProps) {
+export default function ElectricityComsumptionPerYearClient (props: ElectricityComsumptionPerYearClientProps) {
   const { index, data, categories } = props
 
   return (
-        <AreaChart
+        <BarChart
             className="mt-6"
             data={data}
             index={index}
             categories={categories}
+            showLegend={false}
             valueFormatter={formatLargeNumber}
-            onValueChange={() => {}}
-            yAxisWidth={40}
+            yAxisWidth={52}
         />
   )
 }

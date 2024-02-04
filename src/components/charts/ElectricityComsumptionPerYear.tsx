@@ -1,20 +1,17 @@
 import { getElectricityTotalPerYear } from '@/lib/electricity'
-import { BarChart, Card } from '@tremor/react'
+import CardExpanded from '@/components/ui/CardExpanded'
+import ElectricityComsumptionPerYearClient from './ElectricityComsumptionPerYearClient'
 
-export default async function ElectricityComsumptionPerYear () {
+export default async function ElectricityComsumptionPerYear ({ originUrl }: { originUrl?: string }) {
   const { index, data, categories } = await getElectricityTotalPerYear()
 
   return (
-        <div className="my-12 container-expanded">
-            <Card>
-                <BarChart
-                    className="mt-6"
-                    data={data}
-                    index={index}
-                    categories={categories}
-                    showLegend={false}
-                />
-            </Card>
-        </div>
+        <CardExpanded originUrl={originUrl}>
+            <ElectricityComsumptionPerYearClient
+                data={data}
+                index={index}
+                categories={categories}
+            />
+        </CardExpanded>
   )
 }

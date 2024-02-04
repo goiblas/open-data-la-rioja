@@ -1,19 +1,17 @@
 import { getElectricityConsumptionPerType } from '@/lib/electricity'
-import { LineChart, Card } from '@tremor/react'
+import CardExpanded from '@/components/ui/CardExpanded'
+import ElectricityComsumptionPerTypeClient from './ElectricityComsumptionPerTypeClient'
 
-export default async function ElectricityComsumptionPerType () {
+export default async function ElectricityComsumptionPerType ({ originUrl }: { originUrl?: string }) {
   const { index, data, categories } = await getElectricityConsumptionPerType()
 
   return (
-        <div className="my-12 container-expanded">
-            <Card>
-                <LineChart
-                    className="mt-6"
-                    data={data}
-                    index={index}
-                    categories={categories}
-                />
-            </Card>
-        </div>
+        <CardExpanded originUrl={originUrl}>
+            <ElectricityComsumptionPerTypeClient
+                data={data}
+                index={index}
+                categories={categories}
+            />
+        </CardExpanded>
   )
 }
