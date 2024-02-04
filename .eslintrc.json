@@ -28,12 +28,12 @@
         "@typescript-eslint/prefer-nullish-coalescing": "off"
     },
     "overrides": [{
-        "files": ["cron/**/*.mjs"],
+        "files": ["scripts/**/*.mjs"],
         "parserOptions": {
             "sourceType": "module"
         }
     }],
-    "ignorePatterns": ["cron/**/*.mjs"],
+    "ignorePatterns": ["scripts/**/*.mjs"],
     "settings": {
         "react": {
             "version": "detect"
