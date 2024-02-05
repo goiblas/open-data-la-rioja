@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { IBM_Plex_Sans, Mulish } from 'next/font/google'
 import './globals.css'
 import clsx from 'clsx'
+import { Analytics } from '@vercel/analytics/react'
 
 const incosolata = Mulish({
   subsets: ['latin'],
@@ -30,6 +31,7 @@ export default function RootLayout ({
     <html lang="es" className='dark'>
       <body className={clsx(incosolata.variable, ibmPlexSans.variable, 'bg-white dark:bg-slate-950')}>
           {children}
+          <Analytics />
       </body>
     </html>
   )
