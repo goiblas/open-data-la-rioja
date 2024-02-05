@@ -40,4 +40,12 @@ export const menuItems: MenuItem[] = [{
       url: '/consumo-electrico'
     }
   ]
+}, {
+  title: 'Demografía',
+  items: [
+    {
+      title: 'Población',
+      url: '/poblacion'
+    }
+  ]
 }]

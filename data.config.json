@@ -23,5 +23,13 @@
     "electricity": {
         "fileName": "electrica.json",
         "url": "https://web.larioja.org/dato-abierto/datoabierto?n=opd-101"
+    },
+    "population_by_age": {
+        "fileName": "padron_comarcas.json",
+        "url": "https://web.larioja.org/dato-abierto/datoabierto?n=opd-65"
+    },
+    "population": {
+        "fileName": "padron_distrito.json",
+        "url": "https://web.larioja.org/dato-abierto/datoabierto?n=opd-66"
     }
 }
