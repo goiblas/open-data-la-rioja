@@ -31,5 +31,9 @@
     "population": {
         "fileName": "padron_distrito.json",
         "url": "https://web.larioja.org/dato-abierto/datoabierto?n=opd-66"
+    },
+    "emigration": {
+        "fileName": "emigracion_anio_sexo_edad_nacionalidad.json",
+        "url": "https://web.larioja.org/dato-abierto/datoabierto?n=opd-326"
     }
 }
