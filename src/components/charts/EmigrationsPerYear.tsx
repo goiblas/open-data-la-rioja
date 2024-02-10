@@ -1,18 +1,16 @@
 import { getEmigrationPerYear } from '@/lib/emigration'
 import CardExpanded from '@/components/ui/CardExpanded'
-import { BarChart } from '@tremor/react'
+import EmigrationsPerYearClient from './EmigrationsPerYearClient'
 
 export default async function EmigrationsPerYear ({ originUrl }: { originUrl?: string }) {
   const { index, data, categories } = await getEmigrationPerYear()
 
   return (
         <CardExpanded originUrl={originUrl}>
-            <BarChart
-                className='mt-6'
+            <EmigrationsPerYearClient
                 data={data}
                 index={index}
                 categories={categories}
-                showLegend={false}
             />
         </CardExpanded>
   )

@@ -1,17 +1,25 @@
-import { getEmigrationPerYear } from '@/lib/emigration'
-import CardExpanded from '@/components/ui/CardExpanded'
-import WorkAccidentsPerYearClient from './WorkAccidentsPerYearClient'
+'use client'
+import { type BarChartProps, BarChart } from '@tremor/react'
+import { formatLargeNumber } from '@/lib/shared/formatters'
 
-export default async function EmigrationsPerYear ({ originUrl }: { originUrl?: string }) {
-  const { index, data, categories } = await getEmigrationPerYear()
+interface EmigrationsPerYearClientProps {
+  data: BarChartProps['data']
+  index: BarChartProps['index']
+  categories: BarChartProps['categories']
+}
+
+export default function EmigrationsPerYearClient (props: EmigrationsPerYearClientProps) {
+  const { index, data, categories } = props
 
   return (
-        <CardExpanded originUrl={originUrl}>
-            <WorkAccidentsPerYearClient
-                data={data}
-                index={index}
-                categories={categories}
-            />
-        </CardExpanded>
+        <BarChart
+            className='mt-6'
+            data={data}
+            index={index}
+            categories={categories}
+            valueFormatter={formatLargeNumber}
+            yAxisWidth={40}
+            showLegend={false}
+        />
   )
 }
