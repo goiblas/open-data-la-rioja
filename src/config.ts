@@ -46,6 +46,9 @@ export const menuItems: MenuItem[] = [{
     {
       title: 'Población',
       url: '/poblacion'
+    }, {
+      title: 'Emigración',
+      url: '/emigracion'
     }
   ]
 }]

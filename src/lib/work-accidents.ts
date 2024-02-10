@@ -1,11 +1,18 @@
 import database from './shared/database'
-import { type WorkAccidentDto } from '../types'
 import { config } from '@/config'
 import { type ChartData } from '@/types'
 import { capitalize } from './shared/utils'
 
 const TOTAL_INJURIES = 'TOTAL' as const
 const MINOR_INJURIES = 'Leve' as const
+
+export interface WorkAccidentDto {
+  '[CNAE_09]': string
+  '[GRADO DE LA LESIÓN]': string
+  '[CICLO]': string
+  '[TIPO ACCIDENTE]': string
+  '[Measures].[Accidentes]': number
+}
 
 // [GRADO DE LA LESIÓN].[Leve] -> Leve
 function getInjury (injury: string) {
