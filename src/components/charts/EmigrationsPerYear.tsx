@@ -1,6 +1,5 @@
 import { getEmigrationPerYear } from '@/lib/emigration'
 import CardExpanded from '@/components/ui/CardExpanded'
-import WorkAccidentsPerYearClient from './WorkAccidentsPerYearClient'
 import { BarChart } from '@tremor/react'
 
 export default async function EmigrationsPerYear ({ originUrl }: { originUrl?: string }) {

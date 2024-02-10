@@ -18,6 +18,8 @@ interface Emigration {
   ageGroup: string
 }
 
+const TotalKey = 'Total' as const
+
 // [EDAD GRUPOS QUINQUENALES].[50 a 54 años] -> 50 a 54 años
 function getAgeGroup (ageGroup: string): string {
   const ageGroupPart = ageGroup.split('.')[1]
@@ -58,8 +60,7 @@ export async function getEmigrationPerYear (): Promise<ChartData> {
 
   const data = years.map(year => {
     const yearData = emigrations.filter(wa => wa.year === year)
-    const total = yearData.reduce((acc, wa) => acc + wa.measure, 0)
-
+    const total = yearData.find(wa => wa.destination === TotalKey)?.measure ?? 0
     return {
       year,
       Emigraciones: total
@@ -69,6 +70,75 @@ export async function getEmigrationPerYear (): Promise<ChartData> {
   return {
     index: 'year',
     categories: ['Emigraciones'],
+    data
+  }
+}
+
+export async function getEmigrationPerAgeGroup (): Promise<ChartData> {
+  const emigrations = await getEmigrations()
+
+  const emigrationWithoutTotal = emigrations.filter(wa => wa.ageGroup !== TotalKey)
+
+  const ageGroups = [...new Set(emigrationWithoutTotal.map(wa => wa.ageGroup))]
+  const years = [...new Set(emigrationWithoutTotal.map(wa => wa.year).sort((a, b) => a - b))]
+
+  const data = years.map(year => {
+    const emigrationsOfYear = emigrationWithoutTotal.filter(wa => wa.year === year)
+
+    const groups = emigrationsOfYear.reduce((acc, emigration) => {
+      const { ageGroup, measure } = emigration
+
+      if (acc[ageGroup]) {
+        acc[ageGroup] += measure
+      } else {
+        acc[ageGroup] = measure
+      }
+      return acc
+    }, {})
+
+    return {
+      year,
+      ...groups
+    }
+  })
+
+  return {
+    index: 'year',
+    categories: ageGroups,
+    data
+  }
+}
+
+export async function getEmigrationPerDestination (): Promise<ChartData> {
+  const emigrations = await getEmigrations()
+
+  const emigrationWithoutTotal = emigrations.filter(wa => wa.destination !== TotalKey)
+  const destinations = [...new Set(emigrationWithoutTotal.map(wa => wa.destination))]
+  const years = [...new Set(emigrationWithoutTotal.map(wa => wa.year).sort((a, b) => a - b))]
+
+  const data = years.map(year => {
+    const emigrationsOfYear = emigrationWithoutTotal.filter(wa => wa.year === year && wa.ageGroup === TotalKey)
+
+    const groups = emigrationsOfYear.reduce((acc, emigration) => {
+      const { destination, measure } = emigration
+
+      if (acc[destination]) {
+        acc[destination] += measure
+      } else {
+        acc[destination] = measure
+      }
+      return acc
+    }, {})
+
+    return {
+      year,
+      ...groups
+    }
+  })
+
+  return {
+    index: 'year',
+    categories: destinations,
     data
   }
 }
