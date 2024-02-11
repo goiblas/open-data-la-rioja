@@ -36,5 +36,14 @@
         "fileName": "emigracion_anio_sexo_edad_pais.json",
         "url": "https://web.larioja.org/dato-abierto/datoabierto?n=opd-327",
         "downloadUrl": "https://ias1.larioja.org/opendata/download?r=Y2Q9MzI3fGNmPTA0"
+    },
+    "foreign_inmigration": {
+        "fileName": "inmigracion_anio_sexo_edad_pais.json",
+        "url": "https://web.larioja.org/dato-abierto/datoabierto?n=opd-324",
+        "downloadUrl": "https://ias1.larioja.org/opendata/download?r=Y2Q9MzI0fGNmPTA0"
+    },
+    "inmigration": {
+        "fileName": "migracion_destino_rioja.json",
+        "url": "https://web.larioja.org/dato-abierto/datoabierto?n=opd-329"
     }
 }
