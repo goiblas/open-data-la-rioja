@@ -1,0 +1,19 @@
+name: Testing
+on:
+  pull_request:
+    branches:
+      - 'main'
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download Repository
+        uses: actions/checkout@v3
+      - name: Install Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: 18
+      - name: Install Node Dependencies
+        run: npm ci
+      - name: Run Tests
+        run:  npm run test
