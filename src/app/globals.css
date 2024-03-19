@@ -47,4 +47,8 @@ body {
   .logo-text-gradient {
     @apply from-indigo-500 via-purple-500 to-pink-500 bg-gradient-to-r bg-clip-text text-transparent block;
   }
+
+  .button {
+    @apply font-semibold text-white bg-blue-500 border-2 border-blue-500 rounded-md px-4 py-2;
+  }
 }
