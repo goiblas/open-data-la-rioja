@@ -45,5 +45,9 @@
     "inmigration": {
         "fileName": "migracion_destino_rioja.json",
         "url": "https://web.larioja.org/dato-abierto/datoabierto?n=opd-329"
+    },
+    "public_contracts": {
+        "fileName": "contratos.json",
+        "url": "https://web.larioja.org/dato-abierto/datoabierto?n=opd-179"
     }
 }
