@@ -21,10 +21,10 @@ export default async function CompanyPage (context: CompanyPageProps) {
   return (
         <>
         <div className="py-4">
-            <h1 className="text-3xl font-bold">
+            <h1 className="text-3xl text-slate-100 font-bold font-display mb-2">
                 {company.name}
             </h1>
-            <p className="opacity-60">
+            <p>
                 {company.identifier}
             </p>
         </div>
@@ -32,11 +32,11 @@ export default async function CompanyPage (context: CompanyPageProps) {
         <div className='border-b border-slate-600 pt-4 mb-4' />
 
         {contracts.map((contract, index) => (
-            <div key={`${contract.id}-${index}`} className="py-10">
-                <div className="text-xl">
+            <div key={`${contract.id}-${index}`} className="py-4 md:py-6">
+                <div className="text-slate-100">
                     {contract.year} - {contract.description}
                 </div>
-                <ul className="py-2 opacity-60">
+                <ul className="py-2 text-sm">
                     <li>Duración: {contract.durationMonths} meses</li>
                     <li>Cantidad: {formatCurrency(contract.amount)}</li>
                 </ul>

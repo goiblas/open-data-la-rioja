@@ -12,7 +12,7 @@ export default function RootLayout ({
 }) {
   return (
     <div className="pt-4">
-        <div className='mb-14'>
+        <div className='mb-6 md:mb-14'>
             <label>
                 <div className='text-slate-400 py-2 text-sm'>
                     Buscador de empresas con contratos públicos
