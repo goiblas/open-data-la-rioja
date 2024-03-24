@@ -2,7 +2,7 @@
 
 ## Configuración del Entorno
 
-Para configurar el entorno de desarrollo, necesitarás tener instalado NodeJS instalado en tu sistema. Puedes descargarlo desde [aquí](https://nodejs.org/).
+Para configurar el entorno de desarrollo, necesitarás tener instalado NodeJS instalado en tu sistema. Puedes descargarlo en [nodejs.org](https://nodejs.org/).
 
 Una vez que tengas NodeJS instalado, puedes clonar el repositorio y ejecutar el siguiente comando para instalar las dependencias del proyecto:
 
