@@ -2,6 +2,7 @@
 import { useState, useEffect, useRef, useId } from 'react'
 import { useOnClickOutside } from 'usehooks-ts'
 import Listbox, { ListItem } from './ListBox'
+import TextInput from './TextInput'
 
 const KEY_CODE = {
   up: 38,
@@ -136,7 +137,7 @@ export default function Autocomplete<T> (props: AutocompleteProps<T>) {
 
   return (
     <div className="autocomplete" ref={refContainer}>
-      <input type="search" {...inputProps} />
+      <TextInput type="search" {...inputProps} />
 
       {loading && (
         <div className="listbox">
