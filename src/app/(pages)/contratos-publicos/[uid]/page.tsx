@@ -29,7 +29,7 @@ export default async function CompanyPage (context: CompanyPageProps) {
             </p>
         </div>
 
-        <div className='border-b border-slate-600 pt-4 mb-4' />
+        <div className='border-b border-slate-800 pt-4 mb-4' />
 
         {contracts.map((contract, index) => (
             <div key={`${contract.id}-${index}`} className="py-4 md:py-6">
