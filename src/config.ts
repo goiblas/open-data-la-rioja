@@ -54,4 +54,12 @@ export const menuItems: MenuItem[] = [{
       url: '/inmigracion'
     }
   ]
+}, {
+  title: 'Sector público',
+  items: [
+    {
+      title: 'Contratos públicos',
+      url: '/contratos-publicos'
+    }
+  ]
 }]
