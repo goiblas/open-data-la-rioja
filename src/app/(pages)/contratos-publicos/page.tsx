@@ -9,7 +9,7 @@ interface CompanyTop {
   url: string
 }
 
-async function getData (): Promise<CompanyTop[]> {
+async function getTopCompanies (): Promise<CompanyTop[]> {
   const data = await getContracts()
 
   const companies = data.reduce<Record<string, CompanyTop>>((acc, contract) => {
@@ -34,12 +34,12 @@ async function getData (): Promise<CompanyTop[]> {
 }
 
 export default async function Page () {
-  const topCompanies = await getData()
+  const topCompanies = await getTopCompanies()
 
   return (
         <>
         <h1 className="text-3xl text-slate-100 font-bold font-display mb-8 mt-3 md:mt-8">
-            Top 10 empresas con adjudicaciones con mayor importe
+            Top 10 empresas con adjudicaciones de mayor importe
         </h1>
 
         {topCompanies.map((company) => (

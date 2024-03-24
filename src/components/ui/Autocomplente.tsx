@@ -137,11 +137,11 @@ export default function Autocomplete<T> (props: AutocompleteProps<T>) {
 
   return (
     <div className="autocomplete" ref={refContainer}>
-      <TextInput type="search" {...inputProps} />
+      <TextInput {...inputProps} />
 
       {loading && (
         <div className="listbox">
-          <div>...</div>
+          <div className='py-4 text-center text-slate-400'>...</div>
         </div>
       )}
 
@@ -156,7 +156,13 @@ export default function Autocomplete<T> (props: AutocompleteProps<T>) {
                 key={`list-item-${index}`}
                 id={`listbox-${id}-${index}`}
                 selected={index === itemSelected}
-                onClick={() => { selectOption(option) }}
+                onClick={() => {
+                  selectOption(option)
+
+                  setTimeout(() => {
+                    hideOptions()
+                  })
+                }}
               >
                 {renderOption ? renderOption(option) : option as unknown as string}
               </ListItem>

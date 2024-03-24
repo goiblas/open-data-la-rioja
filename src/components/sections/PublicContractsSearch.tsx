@@ -38,12 +38,13 @@ export default function Search () {
         <Autocomplete
             placeholder="Buscar..."
             onChange={(value) => { setSearch(value) }}
+            notMatchText="No se encontraron resultados"
             loading={loading}
             options={results}
             renderOption={(contract) => (
-                <div className="flex flex-col gap-1">
-                    <div className="text-xl">{contract.company.name}</div>
-                    <div className="opacity-60">{contract.description}</div>
+                <div>
+                    <div>{contract.company.name}</div>
+                    <div className='opacity-50'>{contract.description}</div>
                 </div>
             )}
             onSelect={(contract) => {
