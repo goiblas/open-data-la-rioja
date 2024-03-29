@@ -52,7 +52,8 @@
     width: 100%;
     left: 0;
     box-sizing: border-box;
-
+    overflow: hidden;
+    
     @apply bg-slate-900 text-slate-50 shadow-xl rounded-md;
   }
 
@@ -62,7 +63,7 @@
   }
 
   .listbox-item {
-    @apply text-slate-50 rounded-md py-3 px-4 block cursor-pointer transition-colors duration-200 text-sm;
+    @apply text-slate-50 py-3 px-4 block cursor-pointer transition-colors duration-200 text-sm;
   }
 
   .listbox-item:hover {
