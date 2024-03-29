@@ -43,8 +43,8 @@ export default function Search () {
             options={results}
             renderOption={(contract) => (
                 <div>
-                    <div>{contract.company.name}</div>
-                    <div className='opacity-50'>{contract.description}</div>
+                    <div>{contract.description}</div>
+                    <div className='opacity-50'>{contract.company.name}</div>
                 </div>
             )}
             onSelect={(contract) => {
