@@ -17,8 +17,11 @@ export default function Search () {
   const router = useRouter()
 
   useEffect(() => {
+    setLoading(!!search)
+  }, [search])
+
+  useEffect(() => {
     if (debouncedSearch) {
-      setLoading(true)
       fetch(`/api/public-contracts?q=${debouncedSearch}`)
         .then(async (response) => await response.json())
         .then((data) => {
@@ -30,6 +33,7 @@ export default function Search () {
           setResults(contracts as ContractWithUrl[])
         })
     } else {
+      setLoading(false)
       setResults([])
     }
   }, [debouncedSearch])
@@ -43,8 +47,8 @@ export default function Search () {
             options={results}
             renderOption={(contract) => (
                 <div>
-                    <div>{contract.company.name}</div>
-                    <div className='opacity-50'>{contract.description}</div>
+                    <div>{contract.description}</div>
+                    <div className='opacity-50'>{contract.company.name}</div>
                 </div>
             )}
             onSelect={(contract) => {

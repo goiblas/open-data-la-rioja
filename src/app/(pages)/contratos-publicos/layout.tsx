@@ -15,7 +15,7 @@ export default function RootLayout ({
         <div className='mb-6 md:mb-14'>
             <label>
                 <div className='text-slate-400 py-2 text-sm'>
-                    Buscador de empresas con contratos públicos
+                    Buscador de contratos públicos
                 </div>
                 <PublicContractsSearch />
             </label>

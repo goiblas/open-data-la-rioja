@@ -1,4 +1,4 @@
-import { getContractsByCompany } from '@/lib/public-contracts'
+import { getContractsByCompany, getCompanies } from '@/lib/public-contracts'
 import { notFound } from 'next/navigation'
 import { formatCurrency } from '@/lib/shared/formatters'
 
@@ -6,6 +6,14 @@ interface CompanyPageProps {
   params: {
     uid: string
   }
+}
+
+export async function generateStaticParams () {
+  const companies = await getCompanies()
+
+  return companies.map((company) => ({
+    uid: company.identifier
+  }))
 }
 
 export default async function CompanyPage (context: CompanyPageProps) {
