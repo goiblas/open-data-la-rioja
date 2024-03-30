@@ -49,5 +49,9 @@
     "public_contracts": {
         "fileName": "contratacion_electronica.json",
         "url": "https://web.larioja.org/dato-abierto/datoabierto?n=opd-179"
+    },
+    "ipc": {
+        "fileName": "ipc_rubricas.json",
+        "url": "https://web.larioja.org/dato-abierto/datoabierto?n=opd-124"
     }
 }

@@ -62,4 +62,12 @@ export const menuItems: MenuItem[] = [{
       url: '/contratos-publicos'
     }
   ]
+}, {
+  title: 'Economía',
+  items: [
+    {
+      title: 'Evolución del IPC',
+      url: '/evolucion-del-ipc'
+    }
+  ]
 }]
