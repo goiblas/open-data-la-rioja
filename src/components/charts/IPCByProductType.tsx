@@ -15,6 +15,7 @@ export default async function IPCByProductType ({ originUrl }: { originUrl?: str
           index={index}
           categories={categories}
           groupNames={groupNames}
+          label='Producto'
       />
     </CardExpanded>
   )

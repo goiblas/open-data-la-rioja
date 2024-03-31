@@ -15,6 +15,7 @@ export default async function IPCCurrentPeriod ({ originUrl }: { originUrl?: str
           index={index}
           categories={categories}
           groupNames={groupNames}
+          label='Grupo ECOICOP'
       />
     </CardExpanded>
   )
