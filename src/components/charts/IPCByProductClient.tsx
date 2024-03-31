@@ -1,18 +1,17 @@
 'use client'
 import { BarChart, Select, SelectItem, type BarChartProps } from '@tremor/react'
 import { useState } from 'react'
-import { GENERAL_GROUP } from '@/lib/ipc'
 
-interface IPCCurrentPeriodClientProps {
+interface IPCByProductClientProps {
   data: BarChartProps['data']
   index: BarChartProps['index']
   categories: BarChartProps['categories']
   groupNames: string[]
 }
 
-export default function IPCCurrentPeriodClient (props: IPCCurrentPeriodClientProps) {
+export default function IPCByProductClient (props: IPCByProductClientProps) {
   const { index, data, categories, groupNames } = props
-  const [groupSelected, setGroupSelected] = useState<string>(GENERAL_GROUP)
+  const [groupSelected, setGroupSelected] = useState<string>(groupNames[0])
 
   const filteredData = data.filter(d => d.groupName === groupSelected)
 

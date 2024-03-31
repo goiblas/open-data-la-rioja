@@ -62,7 +62,7 @@ function getMonth (time: string): string {
   }
 }
 
-export async function getIPCbyRubrics (): Promise<IPC[]> {
+export async function getIPCByProduct (): Promise<IPC[]> {
   const response = await database.get<IPByRubricCDto>(config.ipc_rubrics.fileName)
 
   return response.map(dto => {
@@ -117,23 +117,44 @@ const limitData = (data: any, limitMonths: number, initialDate: string) => {
 }
 
 export async function getCurrentPeriodIPCs ({ months }: { months: number }): Promise<ChartData> {
-  const ipcs = await getIPCs()
-  const fullData = ipcs.filter(ipc => !!ipc.month)
+  const IPCs = await getIPCs()
+  const fullData = IPCs.filter(IPC => !!IPC.month)
     .reverse()
-    .map(ipc => {
+    .map(IPC => {
       return {
-        time: `${ipc.month} ${ipc.year}`,
-        month: ipc.month,
-        year: ipc.year,
-        anual: ipc.measureAnual,
-        groupName: ipc.groupName
+        time: `${IPC.month} ${IPC.year}`,
+        month: IPC.month,
+        year: IPC.year,
+        anual: IPC.measureAnual,
+        groupName: IPC.groupName
       }
     })
 
-  const lastElementWidthMonth = fullData.findLast(ipc => ipc.month)
-  const lastDate = generateDate(lastElementWidthMonth.month, lastElementWidthMonth.year)
-
+  const lastElement = fullData.at(-1)
+  const lastDate = generateDate(lastElement.month, lastElement.year)
   const data = limitData(fullData, months, lastDate)
+
+  return {
+    index: 'time',
+    categories: ['anual'],
+    data
+  }
+}
+
+export async function getAllProducts () {
+  const IPCByProduct = await getIPCByProduct()
+  const data = IPCByProduct.filter(IPC => !!IPC.month)
+    .reverse()
+    .map(IPC => {
+      return {
+        time: `${IPC.month} ${IPC.year}`,
+        month: IPC.month,
+        year: IPC.year,
+        anual: IPC.measureAnual,
+        groupName: IPC.groupName
+      }
+    })
+
   return {
     index: 'time',
     categories: ['anual'],
