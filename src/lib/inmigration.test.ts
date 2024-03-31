@@ -1,4 +1,3 @@
-/* eslint-disable no-useless-escape */
 import { expect, test, afterEach, vi, describe } from 'vitest'
 import { getInmigrationPerYear } from './inmigration'
 import database from './shared/database'
