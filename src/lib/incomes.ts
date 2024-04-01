@@ -60,3 +60,13 @@ export async function getIncomes (): Promise<ChartData> {
     data
   }
 }
+
+export async function getIncomesByCategory (): Promise<ChartData> {
+  // TODO: Implement this function
+
+  return {
+    index: 'year',
+    categories: [],
+    data: []
+  }
+}
