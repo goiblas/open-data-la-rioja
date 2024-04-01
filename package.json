@@ -9,7 +9,7 @@
     "lint": "next lint",
     "test": "vitest",
     "test:e2e": "npx playwright test",
-    "update-data": "node ./scripts/updateData.mjs"
+    "update-data": "tsx ./scripts/updateData.ts"
   },
   "dependencies": {
     "@mdx-js/loader": "^3.0.0",
@@ -25,6 +25,7 @@
     "react": "^18",
     "react-dom": "^18",
     "react-icons": "^4.12.0",
+    "tsx": "^4.7.1",
     "usehooks-ts": "^2.16.0"
   },
   "devDependencies": {
