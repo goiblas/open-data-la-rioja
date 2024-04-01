@@ -57,5 +57,13 @@
     "ipc": {
         "fileName": "ipc.json",
         "url": "https://web.larioja.org/dato-abierto/datoabierto?n=opd-57"
+    },
+    "expenses": {
+        "fileName": "ejecucion_presupuestaria_gastos.json",
+        "url": "https://web.larioja.org/dato-abierto/datoabierto?n=opd-174"
+    },
+    "incomes": {
+        "fileName": "ejecucion_presupuestaria_ingresos.json",
+        "url": "https://web.larioja.org/dato-abierto/datoabierto?n=opd-175"
     }
 }
