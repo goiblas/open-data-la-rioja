@@ -73,7 +73,7 @@ describe('incomes', () => {
     expect(index).toEqual('year')
   })
 
-  test.skip('should get incomes by category formatted', async () => {
+  test('should get incomes by category formatted', async () => {
     const databaseMock = vi.spyOn(database, 'get')
     const mockData = [{
       MODIFICACION: 0,
@@ -107,7 +107,7 @@ describe('incomes', () => {
       ID_ARTICULO: '1-1'
     }, {
       MODIFICACION: 0,
-      EJERCICIO: '2002',
+      EJERCICIO: '2001',
       ID_CONCEPTO: '1-1-0',
       ID_SUBCONCEPTO: '1-1-0-01',
       DESC_CONCEPTO: 'Impuesto General Sobre Sucesiones Y Donaciones',
