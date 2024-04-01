@@ -68,6 +68,9 @@ export const menuItems: MenuItem[] = [{
     {
       title: 'Evolución del IPC',
       url: '/evolucion-del-ipc'
+    }, {
+      title: 'Gastos e ingresos',
+      url: '/gastos-ingresos'
     }
   ]
 }]
