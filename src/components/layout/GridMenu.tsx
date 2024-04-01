@@ -14,7 +14,8 @@ function getRest ({ cells, columns }: { cells: number, columns: number }): numbe
 export default function GridMenu ({ items }: { items: MenuItem[] }) {
   const isTablet = useMediaQuery('md')
 
-  const columns = isTablet ? 3 : 2
+  // invert boolean, fix flickering on first render in tablet
+  const columns = !isTablet ? 2 : 3
   const rest = getRest({ cells: items.length, columns })
 
   return (
