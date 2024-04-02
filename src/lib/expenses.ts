@@ -77,3 +77,13 @@ export async function getExpenses (): Promise<ChartData> {
     data
   }
 }
+
+export async function getExpensesByCategory (): Promise<ChartData> {
+  // TODO: Implement this function
+
+  return {
+    index: 'year',
+    categories: [],
+    data: []
+  }
+}
