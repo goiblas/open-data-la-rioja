@@ -7,7 +7,8 @@ export default function Footer () {
         <div className='mb-1'>Desarrollado con ♥ por:</div>
         <div>
           <Link className="underline-offset-2 decoration-slate-600 underline hover:decoration-transparent" href="https://goiblas.com/">Jesús Olazagoitia</Link>, {' '}
-          <Link className="underline-offset-2 decoration-slate-600 underline hover:decoration-transparent" href="https://www.gabrielromero.dev/">Gabriel Romero</Link>
+          <Link className="underline-offset-2 decoration-slate-600 underline hover:decoration-transparent" href="https://www.gabrielromero.dev/">Gabriel Romero</Link>, {' '}
+          <Link className="underline-offset-2 decoration-slate-600 underline hover:decoration-transparent" href="https://github.com/ibaiway">Ibai Alberdi</Link>
         </div>
       </div>
 
