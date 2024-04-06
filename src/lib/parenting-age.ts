@@ -114,3 +114,32 @@ export async function getBirthsPerYear () {
     data
   }
 }
+
+export async function getParentingPerAgeGroup () {
+  const response = await database.get<ParentingAgeDto>(config.parenting_age.fileName)
+  const parentingAges = response.map(mapDtoToParentingAge)
+  const years = Array.from(new Set(parentingAges.map(d => d.year)))
+  const ageGroups = Array.from(new Set(parentingAges.map(d => d.dad_age_group)))
+
+  const data = years.map(year => {
+    const yearParentingAges = parentingAges.filter(d => d.year === year)
+    const amounts = ageGroups.map(ageGroup => {
+      const ageGroupAmount = yearParentingAges.reduce((acc, d) => {
+        if (d.dad_age_group === ageGroup) {
+          return acc + Object.values(d.mom_age_group).reduce((acc, ageGroup) => acc + ageGroup, 0)
+        }
+        return acc
+      }, 0)
+      return ageGroupAmount
+    })
+    return {
+      year,
+      ...Object.fromEntries(ageGroups.map((c, i) => ['Hombres ' + c, amounts[i]]).filter(([, amount]) => amount !== 0))
+    }
+  })
+  return {
+    index: 'year',
+    categories: ageGroups.map(ageGroup => 'Hombres ' + ageGroup),
+    data
+  }
+}
