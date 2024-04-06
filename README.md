@@ -126,3 +126,39 @@ interface PopulationDto {
 async function getPopulation () {
     const reponse = await database.get<PopulationDto>(config.population.fileName)
 ```
+
+## Cómo añadir un gráfico
+
+Para crear un gráfico, añade un nuevo fichero en la carpeta `src/components/charts` con el nombre de la visualización. Por ejemplo, si quieres visualizar la evolución de la población por año, puedes ser algo así `src/components/charts/PopulationPerYear.tsx`.
+
+Para cargar los datos, puedes utilizar la función que has creado en `src/lib/population.ts`. al utilizar server components podemos hacer la llamada en el cuerpo del component, ejemplo:
+
+```jsx
+import { getPopulationTotalPerYear } from '@/lib/population'
+
+export default async function PopulationPerYear () {
+  const { index, data, categories } = await getPopulationTotalPerYear()
+
+  return (
+    // ...
+  )
+}
+```
+
+Para renderizar el gráfico, puedes utilizar la biblioteca [tremor](https://www.tremor.so/docs/visualizations/area-chart). Por ejemplo:
+
+```jsx
+import { AreaChart } from 'tremor'
+
+export default async function PopulationPerYear () {
+  const { index, data, categories } = await getPopulationTotalPerYear()
+
+  return (
+    <AreaChart
+      data={data}
+      index={index}
+      categories={categories}
+    />
+  )
+}
+```
