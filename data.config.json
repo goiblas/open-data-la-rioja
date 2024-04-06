@@ -69,5 +69,9 @@
     "house_transfer": {
         "fileName": "transmisiones_viviendas.json",
         "url": "https://web.larioja.org/dato-abierto/datoabierto?n=opd-118"
+    },
+    "car_registrations": {
+        "fileName": "matriculaciones_estado.json",
+        "url": "https://web.larioja.org/dato-abierto/datoabierto?n=opd-146"
     }
 }
