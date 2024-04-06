@@ -100,13 +100,17 @@ describe('parenting-age', () => {
       '[Measures].[Nacimientos], [GRUPOS DE EDAD MADRE].[de 50 a 54 años]': null,
       '[Measures].[Nacimientos], [GRUPOS DE EDAD MADRE].[de 55 a 59 años]': null
     }]
-    const expected = [{
-      year: 2019,
-      'Hombres de 50 a 54 años': 2,
-      'Hombres de 55 a 59 años': 3,
-      'Mujeres de 20 a 24 años': 2,
-      'Mujeres de 30 a 34 años': 3
-    }]
+    const expected = {
+      index: 'year',
+      categories: ['Mujeres de 10 a 14 años', 'Mujeres de 15 a 19 años', 'Mujeres de 20 a 24 años', 'Mujeres de 25 a 29 años', 'Mujeres de 30 a 34 años', 'Mujeres de 35 a 39 años', 'Mujeres de 40 a 44 años', 'Mujeres de 45 a 49 años', 'Mujeres de 50 a 54 años', 'Mujeres de 55 a 59 años', 'Hombres de 50 a 54 años', 'Hombres de 55 a 59 años'],
+      data: [{
+        year: 2019,
+        'Hombres de 50 a 54 años': 2,
+        'Hombres de 55 a 59 años': 3,
+        'Mujeres de 20 a 24 años': 2,
+        'Mujeres de 30 a 34 años': 3
+      }]
+    }
     databaseMock.mockResolvedValue(mockData)
 
     const result = await getParentingPerAgeGroup()

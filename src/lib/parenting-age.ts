@@ -16,24 +16,16 @@ interface ParentingAgeDto {
   '[MUNICIPIO]': string
   '[Measures].[Nacimientos], [GRUPOS DE EDAD MADRE].[de 15 a 19 años]': number
 }
-interface AgeGroup {
-  10_14: number
-  15_19: number
-  20_24: number
-  25_29: number
-  30_34: number
-  35_39: number
-  40_44: number
-  45_49: number
-  50_54: number
-  55_59: number
+interface WomenAgeGroup {
+  ageGroup: string
+  amount: number
 }
 
 export interface ParentingAge {
   year: number
   municipality: string
   dad_age_group: string
-  mom_age_group: AgeGroup
+  mom_age_group: WomenAgeGroup[]
 }
 
 // "[GRUPOS DE EDAD PADRE].[de 50 a 54 años]" -> "de 50 a 54 años"
@@ -47,6 +39,17 @@ function getDadAgeGroup (dadAgeGroupDto: string): string {
 
   const dadAgeGroupText = dadAgeGroup.replace('[', '').replace(']', '')
   return dadAgeGroupText
+}
+
+function getMomAgeGroup (momAgeGroupDto: string): string {
+  const momAgeGroup = momAgeGroupDto.split('.')[2]
+
+  if (!momAgeGroup) {
+    throw new Error(`Error getting age group from ${momAgeGroupDto}`)
+  }
+
+  const momAgeGroupText = momAgeGroup.replace('[', '').replace(']', '')
+  return momAgeGroupText
 }
 
 // "[AÑOS].[2020]"" -> 2020
@@ -76,18 +79,14 @@ function mapDtoToParentingAge (parentingAge: ParentingAgeDto): ParentingAge {
     year: getYear(parentingAge['[AÑOS]']),
     municipality: getMunicipality(parentingAge['[MUNICIPIO]']),
     dad_age_group: getDadAgeGroup(parentingAge['[GRUPOS DE EDAD PADRE]']),
-    mom_age_group: {
-      10_14: parentingAge['[Measures].[Nacimientos], [GRUPOS DE EDAD MADRE].[de 10 a 14 años]'],
-      15_19: parentingAge['[Measures].[Nacimientos], [GRUPOS DE EDAD MADRE].[de 15 a 19 años]'],
-      20_24: parentingAge['[Measures].[Nacimientos], [GRUPOS DE EDAD MADRE].[de 20 a 24 años]'],
-      25_29: parentingAge['[Measures].[Nacimientos], [GRUPOS DE EDAD MADRE].[de 25 a 29 años]'],
-      30_34: parentingAge['[Measures].[Nacimientos], [GRUPOS DE EDAD MADRE].[de 30 a 34 años]'],
-      35_39: parentingAge['[Measures].[Nacimientos], [GRUPOS DE EDAD MADRE].[de 35 a 39 años]'],
-      40_44: parentingAge['[Measures].[Nacimientos], [GRUPOS DE EDAD MADRE].[de 40 a 44 años]'],
-      45_49: parentingAge['[Measures].[Nacimientos], [GRUPOS DE EDAD MADRE].[de 45 a 49 años]'],
-      50_54: parentingAge['[Measures].[Nacimientos], [GRUPOS DE EDAD MADRE].[de 50 a 54 años]'],
-      55_59: parentingAge['[Measures].[Nacimientos], [GRUPOS DE EDAD MADRE].[de 55 a 59 años]']
-    }
+    mom_age_group: Object.entries(parentingAge)
+      .filter(([key]) => key.includes('[Measures].[Nacimientos], [GRUPOS DE EDAD MADRE]'))
+      .map(([key, amount]) => {
+        return {
+          ageGroup: getMomAgeGroup(key),
+          amount
+        }
+      })
   }
 }
 
@@ -100,7 +99,7 @@ export async function getBirthsPerYear () {
     const yearParentingAges = parentingAges.filter(d => d.year === year)
 
     const amountByYear = yearParentingAges.reduce((acc, d) => {
-      return acc + Object.values(d.mom_age_group).reduce((acc, ageGroup) => acc + ageGroup, 0)
+      return acc + d.mom_age_group.reduce((acc, ageGroup) => acc + ageGroup.amount, 0)
     }, 0)
 
     return {
@@ -118,28 +117,43 @@ export async function getBirthsPerYear () {
 export async function getParentingPerAgeGroup () {
   const response = await database.get<ParentingAgeDto>(config.parenting_age.fileName)
   const parentingAges = response.map(mapDtoToParentingAge)
-  const years = Array.from(new Set(parentingAges.map(d => d.year)))
-  const ageGroups = Array.from(new Set(parentingAges.map(d => d.dad_age_group)))
+  const years = Array.from(new Set(parentingAges.map(d => d.year).sort((a, b) => a - b)))
+  const manAgeGroups = Array.from(new Set(parentingAges.map(d => d.dad_age_group)))
+  const womanAgeGroups = Array.from(new Set(parentingAges.map(d => d.mom_age_group.map(d => d.ageGroup)).flat()))
 
   const data = years.map(year => {
     const yearParentingAges = parentingAges.filter(d => d.year === year)
-    const amounts = ageGroups.map(ageGroup => {
+    const womanAmounts = womanAgeGroups.map(ageGroup => {
+      const ageGroupAmount = yearParentingAges.reduce((acc, d) => {
+        return acc + d.mom_age_group.reduce((acc, momAgeGroup) => {
+          if (momAgeGroup.ageGroup === ageGroup) {
+            return acc + momAgeGroup.amount
+          }
+          return acc
+        }, 0)
+      }
+      , 0)
+      return ageGroupAmount
+    })
+    const manAmounts = manAgeGroups.map(ageGroup => {
       const ageGroupAmount = yearParentingAges.reduce((acc, d) => {
         if (d.dad_age_group === ageGroup) {
-          return acc + Object.values(d.mom_age_group).reduce((acc, ageGroup) => acc + ageGroup, 0)
+          return acc + d.mom_age_group.reduce((acc, ageGroup) => acc + ageGroup.amount, 0)
         }
         return acc
       }, 0)
       return ageGroupAmount
     })
+
     return {
       year,
-      ...Object.fromEntries(ageGroups.map((c, i) => ['Hombres ' + c, amounts[i]]).filter(([, amount]) => amount !== 0))
+      ...Object.fromEntries(womanAgeGroups.map((c, i) => ['Mujeres ' + c, womanAmounts[i]]).filter(([, amount]) => amount !== 0)),
+      ...Object.fromEntries(manAgeGroups.map((c, i) => ['Hombres ' + c, manAmounts[i]]).filter(([, amount]) => amount !== 0))
     }
   })
   return {
     index: 'year',
-    categories: ageGroups.map(ageGroup => 'Hombres ' + ageGroup),
+    categories: [...womanAgeGroups.map(ageGroup => 'Mujeres ' + ageGroup), ...manAgeGroups.map(ageGroup => 'Hombres ' + ageGroup)],
     data
   }
 }
