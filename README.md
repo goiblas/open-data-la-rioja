@@ -72,6 +72,7 @@ Para mantener los datos actualizados, añade el archivo JSON a la lista de archi
         "url": "https://web.larioja.org/dato-abierto/datoabierto?n=opd-66"
     },
 }
+```
 
 La clave `population` es el nombre del dataset, y el valor es un objeto con las propiedades `fileName` y `url`. `fileName` es el nombre del archivo JSON que has descargado, y `url` es la URL de la fuente de datos.
 
