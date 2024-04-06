@@ -162,3 +162,15 @@ export default async function PopulationPerYear () {
   )
 }
 ```
+
+## Cómo importar un gráfico en una página
+
+Para importar un gráfico en una página, puedes importar el componente en el archivo `page.mdx`. Por ejemplo:
+
+```mdx
+import PopulationPerYear from '@/components/charts/PopulationPerYear'
+
+# Población
+
+<PopulationPerYear />
+```
