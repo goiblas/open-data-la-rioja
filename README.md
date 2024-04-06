@@ -58,3 +58,37 @@ export const menuItems = [{
 }
 ]
 ```
+
+## Cómo añadir un nuevo dataset
+
+Busca la fuente de datos que quieres añadir en la [web de datos abiertos del Gobierno de La Rioja](https://web.larioja.org/dato-abierto). Una vez que hayas encontrado el dataset que quieres añadir, descarga el archivo JSON y guárdalo en la carpeta `data`.
+
+Para mantener los datos actualizados, añade el archivo JSON a la lista de archivos a descargar en el archivo `data.config.json`. Por ejemplo:
+
+```json
+{
+    "population": {
+        "fileName": "padron_distrito.json",
+        "url": "https://web.larioja.org/dato-abierto/datoabierto?n=opd-66"
+    },
+}
+
+La clave `population` es el nombre del dataset, y el valor es un objeto con las propiedades `fileName` y `url`. `fileName` es el nombre del archivo JSON que has descargado, y `url` es la URL de la fuente de datos.
+
+Una vez que hayas añadido el archivo JSON a la lista de archivos a descargar, puedes ejecutar el siguiente comando para confirmar que los datos se descargan correctamente:
+
+```bash
+npm run update-data
+```
+
+En algunos datasets antigüos, es posible que la descarga falle, en ese caso, puedes añadir la url de descarga directamente en el archivo `data.config.json` con la propiedad `downloadUrl`. Por ejemplo:
+
+```json
+{
+    "population": {
+        "fileName": "padron_distrito.json",
+        "url": "https://web.larioja.org/dato-abierto/datoabierto?n=opd-66",
+        "downloadUrl": "https://ias1.larioja.org/opendata/download?r=Y2Q9MzU1fGNmPTA0"
+    },
+}
+```
