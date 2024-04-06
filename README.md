@@ -92,3 +92,37 @@ En algunos datasets antigüos, es posible que la descarga falle, en ese caso, pu
     },
 }
 ```
+
+## Cómo formatear los datos
+
+Para hacer uso de un dataset, es necesario hacer un normalizado y formateo previo de los datos. Para ello puedes crear un archivo en la carpeta `src/lib` con el nombre del dataset, por ejemplo, si quieres formatear los datos del dataset `population`, puedes crear el archivo `src/lib/population.ts`.
+
+Dentro del archivo, utiliza `src/lib/shared/database` para importar los datos del dataset. puedes obtener el nombre del dataset de `src/congig` Por ejemplo:
+
+```typescript 
+import database from './shared/database'
+import { config } from '@/config'
+
+async function getPopulation () {
+    const reponse = await database.get(config.population.fileName)
+
+    // Formatear los datos
+
+    return response
+}
+```
+
+## Cómo añadir types a los datos
+
+Para crear los types de los datos, puedes utilizar la herramienta [JSON to TS](https://transform.tools/json-to-typescript). Copia la interface generada y utilizala al obtener los datos del dataset. Por ejemplo:
+
+```typescript
+interface PopulationDto {
+  '[AÑOS]': string
+  '[SECCIÓN CENSAL]': string
+  '[Measures].[Habitante]': number
+}
+
+async function getPopulation () {
+    const reponse = await database.get<PopulationDto>(config.population.fileName)
+```
