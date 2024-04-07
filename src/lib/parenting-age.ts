@@ -30,26 +30,23 @@ export interface ParentingAge {
 
 // "[GRUPOS DE EDAD PADRE].[de 50 a 54 años]" -> "de 50 a 54 años"
 
-function getDadAgeGroup (dadAgeGroupDto: string): string {
-  const dadAgeGroup = dadAgeGroupDto.split('.')[1]
+function getAgeGroup (ageGroupDto: string, index: number): string {
+  const ageGroup = ageGroupDto.split('.')[index]
 
-  if (!dadAgeGroup) {
-    throw new Error(`Error getting age group from ${dadAgeGroupDto}`)
+  if (!ageGroup) {
+    throw new Error(`Error getting age group from ${ageGroupDto}`)
   }
 
-  const dadAgeGroupText = dadAgeGroup.replace('[', '').replace(']', '')
-  return dadAgeGroupText
+  const ageGroupText = ageGroup.replace('[', '').replace(']', '')
+  return ageGroupText
+}
+
+function getDadAgeGroup (dadAgeGroupDto: string): string {
+  return getAgeGroup(dadAgeGroupDto, 1)
 }
 
 function getMomAgeGroup (momAgeGroupDto: string): string {
-  const momAgeGroup = momAgeGroupDto.split('.')[2]
-
-  if (!momAgeGroup) {
-    throw new Error(`Error getting age group from ${momAgeGroupDto}`)
-  }
-
-  const momAgeGroupText = momAgeGroup.replace('[', '').replace(']', '')
-  return momAgeGroupText
+  return getAgeGroup(momAgeGroupDto, 2)
 }
 
 // "[AÑOS].[2020]"" -> 2020
