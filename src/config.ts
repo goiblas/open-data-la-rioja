@@ -52,6 +52,9 @@ export const menuItems: MenuItem[] = [{
     }, {
       title: 'Inmigración',
       url: '/inmigracion'
+    }, {
+      title: 'Natalidad',
+      url: 'natalidad'
     }
   ]
 }, {
