@@ -2,7 +2,7 @@ import { getPopulationTotalPerYear } from '@/lib/population'
 import CardExpanded from '@/components/ui/CardExpanded'
 import PopulationPerYearClient from './PopulationPerYearClient'
 
-export default async function ElectricityComsumptionPerYear ({ originUrl }: { originUrl?: string }) {
+export default async function PopulationPerYear ({ originUrl }: { originUrl?: string }) {
   const { index, data, categories } = await getPopulationTotalPerYear()
 
   return (
