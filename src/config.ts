@@ -52,6 +52,10 @@ export const menuItems: MenuItem[] = [{
     }, {
       title: 'Inmigración',
       url: '/inmigracion'
+    },
+    {
+      title: 'Evolución edad en matrimonio',
+      url: '/evolucion-edad-matrimonio'
     }
   ]
 }, {

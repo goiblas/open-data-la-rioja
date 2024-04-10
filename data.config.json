@@ -65,5 +65,9 @@
     "incomes": {
         "fileName": "ejecucion_presupuestaria_ingresos.json",
         "url": "https://web.larioja.org/dato-abierto/datoabierto?n=opd-175"
+    },
+    "marriageEvolution": {
+        "fileName": "evolucion_edad_matrimonio.json",
+        "url": "https://web.larioja.org/dato-abierto/datoabierto?n=opd-54"
     }
 }
