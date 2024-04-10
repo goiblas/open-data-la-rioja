@@ -69,5 +69,17 @@
     "marriageEvolution": {
         "fileName": "evolucion_edad_matrimonio.json",
         "url": "https://web.larioja.org/dato-abierto/datoabierto?n=opd-54"
+    },
+    "parenting_age": {
+        "fileName": "nacimientos_por_edad_padres.json",
+        "url": "https://web.larioja.org/dato-abierto/datoabierto?n=opd-53"
+    },
+    "house_transfer": {
+        "fileName": "transmisiones_viviendas.json",
+        "url": "https://web.larioja.org/dato-abierto/datoabierto?n=opd-118"
+    },
+    "car_registrations": {
+        "fileName": "matriculaciones_estado.json",
+        "url": "https://web.larioja.org/dato-abierto/datoabierto?n=opd-146"
     }
 }

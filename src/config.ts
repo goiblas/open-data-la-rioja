@@ -56,6 +56,9 @@ export const menuItems: MenuItem[] = [{
     {
       title: 'Evolución edad en matrimonio',
       url: '/evolucion-edad-matrimonio'
+    }, {
+      title: 'Natalidad',
+      url: 'natalidad'
     }
   ]
 }, {
