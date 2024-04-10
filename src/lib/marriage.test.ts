@@ -68,7 +68,7 @@ describe('getDataGruopedByYear', () => {
     vi.restoreAllMocks()
   })
 
-  test('should return and exampleArray grouped byYear', () => {
+  test('should return and exampleArray grouped byYear', async () => {
     const databaseMock = vi.spyOn(database, 'get')
 
     const expected = {
@@ -118,7 +118,7 @@ describe('getDataGruopedByYear', () => {
 
     databaseMock.mockResolvedValue(exampleArray)
 
-    const data = groupByYear()
+    const data = await groupByYear()
 
     expect(data).toEqual(expected)
   })
@@ -129,14 +129,15 @@ describe('countMarriagesByAgesGroups', () => {
     vi.restoreAllMocks()
   })
 
-  test('should return an exampleArray from marriagesByGroups', () => {
+  test('should return an exampleArray from marriagesByGroups', async () => {
+    const databaseMock = vi.spyOn(database, 'get')
     const expected = [
       {
         '85 años o más': 0,
         año: '2020',
         'de 15 a 19 años': 0,
         'de 20 a 24 años': 0,
-        'de 25 a 29 años': 4,
+        'de 25 a 29 años': 1,
         'de 30 a 34 años': 0,
         'de 35 a 39 años': 0,
         'de 40 a 44 años': 0,
@@ -157,7 +158,7 @@ describe('countMarriagesByAgesGroups', () => {
         'de 25 a 29 años': 0,
         'de 30 a 34 años': 0,
         'de 35 a 39 años': 0,
-        'de 40 a 44 años': 2,
+        'de 40 a 44 años': 1,
         'de 45 a 49 años': 0,
         'de 50 a 54 años': 0,
         'de 55 a 59 años': 0,
@@ -165,11 +166,12 @@ describe('countMarriagesByAgesGroups', () => {
         'de 65 a 69 años': 0,
         'de 70 a 74 años': 0,
         'de 75 a 79 años': 0,
-        'de 80 a 84 años': 1
+        'de 80 a 84 años': 0
       }]
 
-    const data = getCountMarriagesByGroups()
+    databaseMock.mockResolvedValue(exampleArray)
+    const { cleanedData } = await getCountMarriagesByGroups()
 
-    expect(data).toEqual(expected)
+    expect(cleanedData).toEqual(expected)
   })
 })
