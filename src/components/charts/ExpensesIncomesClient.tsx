@@ -8,17 +8,19 @@ interface ExpensesIncomesClientProps {
   categories: BarChartProps['categories']
 }
 
-export default function ExpensesIncomesClient (props: ExpensesIncomesClientProps) {
+export default function ExpensesIncomesClient(
+  props: ExpensesIncomesClientProps
+) {
   const { index, data, categories } = props
 
   return (
-        <BarChart
-            className='mt-6'
-            data={data}
-            index={index}
-            categories={categories}
-            valueFormatter={formatLargeNumber}
-            yAxisWidth={40}
-        />
+    <BarChart
+      className="mt-6"
+      data={data}
+      index={index}
+      categories={categories}
+      valueFormatter={formatLargeNumber}
+      yAxisWidth={40}
+    />
   )
 }

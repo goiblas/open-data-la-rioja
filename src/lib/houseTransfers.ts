@@ -18,11 +18,15 @@ export interface HouseTransfer {
   'Vivienda nueva': number
 }
 
-const PRE_OWNED_HOUSING_TYPE = '[VIVIENDA Y COMPRAVENTA SEGÚN ESTADO].[Compraventa].[Compraventa vivienda usada]' as const
-const NEW_BUILD_HOUSING_TYPE = '[VIVIENDA Y COMPRAVENTA SEGÚN ESTADO].[Compraventa].[Compraventa vivienda nueva]' as const
+const PRE_OWNED_HOUSING_TYPE =
+  '[VIVIENDA Y COMPRAVENTA SEGÚN ESTADO].[Compraventa].[Compraventa vivienda usada]' as const
+const NEW_BUILD_HOUSING_TYPE =
+  '[VIVIENDA Y COMPRAVENTA SEGÚN ESTADO].[Compraventa].[Compraventa vivienda nueva]' as const
 
-export async function getHouseTransfers (): Promise<HouseTransfer[]> {
-  const reponse = await database.get<HouseTransferDTO>(config.house_transfer.fileName)
+export async function getHouseTransfers(): Promise<HouseTransfer[]> {
+  const reponse = await database.get<HouseTransferDTO>(
+    config.house_transfer.fileName
+  )
 
   // TODO: Implement this function
   return []

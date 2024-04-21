@@ -6,7 +6,7 @@ export const formatLargeNumber = (value: number): string => {
   }).format(value)
 }
 
-export function formatCurrency (amount: number) {
+export function formatCurrency(amount: number) {
   const formatter = new Intl.NumberFormat('es-ES', {
     style: 'currency',
     currency: 'EUR'

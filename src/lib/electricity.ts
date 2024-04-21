@@ -23,13 +23,15 @@ interface Electricity {
 type ElectricityWithSector = Electricity & { sector: string }
 
 // "[ACTIVIDAD DE CONSUMO ].[Agricultura]" -> "Agricultura"
-function getSector (activity: string): string {
+function getSector(activity: string): string {
   const sector = activity.split('.')[1]
   return sector.replace('[', '').replace(']', '').trim()
 }
 
-async function getElectricity (): Promise<Electricity[]> {
-  const reponse = await database.get<ElectricityDto>(config.electricity.fileName)
+async function getElectricity(): Promise<Electricity[]> {
+  const reponse = await database.get<ElectricityDto>(
+    config.electricity.fileName
+  )
 
   return reponse
     .filter(dto => dto['[ACTIVIDAD DE CONSUMO ]'] === ALL_SECTORS)
@@ -42,8 +44,10 @@ async function getElectricity (): Promise<Electricity[]> {
     })
 }
 
-async function getElectricityWithSector (): Promise<ElectricityWithSector[]> {
-  const reponse = await database.get<ElectricityDto>(config.electricity.fileName)
+async function getElectricityWithSector(): Promise<ElectricityWithSector[]> {
+  const reponse = await database.get<ElectricityDto>(
+    config.electricity.fileName
+  )
 
   return reponse
     .filter(dto => dto['[ACTIVIDAD DE CONSUMO ]'] !== ALL_SECTORS)
@@ -57,7 +61,7 @@ async function getElectricityWithSector (): Promise<ElectricityWithSector[]> {
     })
 }
 
-export async function getElectricityTotalPerYear (): Promise<ChartData> {
+export async function getElectricityTotalPerYear(): Promise<ChartData> {
   const electricity = await getElectricity()
 
   const years = [...new Set(electricity.map(e => e.year))]
@@ -84,7 +88,7 @@ export async function getElectricityTotalPerYear (): Promise<ChartData> {
   }
 }
 
-export async function getElectricityConsumptionPerType (): Promise<ChartData> {
+export async function getElectricityConsumptionPerType(): Promise<ChartData> {
   const electricity = await getElectricityWithSector()
 
   const years = [...new Set(electricity.map(e => e.year))]

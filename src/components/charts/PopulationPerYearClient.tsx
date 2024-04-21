@@ -8,18 +8,20 @@ interface PopulationPerYearClientProps {
   categories: AreaChartProps['categories']
 }
 
-export default function PopulationPerYearClient (props: PopulationPerYearClientProps) {
+export default function PopulationPerYearClient(
+  props: PopulationPerYearClientProps
+) {
   const { data, index, categories } = props
 
   return (
-        <AreaChart
-            data={data}
-            index={index}
-            categories={categories}
-            valueFormatter={formatLargeNumber}
-            onValueChange={() => {}}
-            yAxisWidth={48}
-            connectNulls
-        />
+    <AreaChart
+      data={data}
+      index={index}
+      categories={categories}
+      valueFormatter={formatLargeNumber}
+      onValueChange={() => {}}
+      yAxisWidth={48}
+      connectNulls
+    />
   )
 }

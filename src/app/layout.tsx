@@ -22,16 +22,22 @@ export const metadata: Metadata = {
   description: 'Visualización de los datos abiertos del Gobierno de La Rioja'
 }
 
-export default function RootLayout ({
+export default function RootLayout({
   children
 }: {
   children: React.ReactNode
 }) {
   return (
-    <html lang="es" className='dark'>
-      <body className={clsx(incosolata.variable, ibmPlexSans.variable, 'bg-white dark:bg-slate-950')}>
-          {children}
-          <Analytics />
+    <html lang="es" className="dark">
+      <body
+        className={clsx(
+          incosolata.variable,
+          ibmPlexSans.variable,
+          'bg-white dark:bg-slate-950'
+        )}
+      >
+        {children}
+        <Analytics />
       </body>
     </html>
   )

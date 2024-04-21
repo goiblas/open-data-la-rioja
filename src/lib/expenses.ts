@@ -45,7 +45,7 @@ export interface Expense {
   year: number
 }
 
-function mapDtoToIncome (expense: ExpenseDTO): Expense {
+function mapDtoToIncome(expense: ExpenseDTO): Expense {
   return {
     id: `${expense.ID_FUNCIONAL_1}-${expense.ID_FUNCIONAL_2}-${expense.ID_FUNCIONAL_3}-${expense.ID_FUNCIONAL_4}`,
     category: expense.DESC_ORGANICO_1,
@@ -56,7 +56,7 @@ function mapDtoToIncome (expense: ExpenseDTO): Expense {
   }
 }
 
-export async function getExpenses (): Promise<ChartData> {
+export async function getExpenses(): Promise<ChartData> {
   const reponse = await database.get<ExpenseDTO>(config.expenses.fileName)
   const incomes = reponse.map(mapDtoToIncome)
 
@@ -78,7 +78,7 @@ export async function getExpenses (): Promise<ChartData> {
   }
 }
 
-export async function getExpensesByCategory (): Promise<ChartData> {
+export async function getExpensesByCategory(): Promise<ChartData> {
   // TODO: Implement this function
 
   return {

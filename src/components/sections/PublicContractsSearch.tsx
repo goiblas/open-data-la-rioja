@@ -9,7 +9,7 @@ type ContractWithUrl = Contract & {
   url: string
 }
 
-export default function Search () {
+export default function Search() {
   const [search, setSearch] = useState('')
   const [debouncedSearch] = useDebounceValue(search, 500)
   const [results, setResults] = useState<ContractWithUrl[]>([])
@@ -23,8 +23,8 @@ export default function Search () {
   useEffect(() => {
     if (debouncedSearch) {
       fetch(`/api/public-contracts?q=${debouncedSearch}`)
-        .then(async (response) => await response.json())
-        .then((data) => {
+        .then(async response => await response.json())
+        .then(data => {
           const contracts = data.map((contract: Contract) => ({
             ...contract,
             url: `/contratos-publicos/${contract.company.identifier.toLocaleLowerCase()}`
@@ -39,21 +39,23 @@ export default function Search () {
   }, [debouncedSearch])
 
   return (
-        <Autocomplete
-            placeholder="Buscar..."
-            onChange={(value) => { setSearch(value) }}
-            notMatchText="No se encontraron resultados"
-            loading={loading}
-            options={results}
-            renderOption={(contract) => (
-                <div>
-                    <div>{contract.description}</div>
-                    <div className='opacity-50'>{contract.company.name}</div>
-                </div>
-            )}
-            onSelect={(contract) => {
-              router.push(contract.url)
-            }}
-        />
+    <Autocomplete
+      placeholder="Buscar..."
+      onChange={value => {
+        setSearch(value)
+      }}
+      notMatchText="No se encontraron resultados"
+      loading={loading}
+      options={results}
+      renderOption={contract => (
+        <div>
+          <div>{contract.description}</div>
+          <div className="opacity-50">{contract.company.name}</div>
+        </div>
+      )}
+      onSelect={contract => {
+        router.push(contract.url)
+      }}
+    />
   )
 }

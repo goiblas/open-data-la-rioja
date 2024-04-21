@@ -39,7 +39,7 @@ interface UnemploymentRate {
 }
 
 // "[GRUPOS DE EDAD ].[de 56 a 64 años]" -> "de 56 a 64 años"
-function getAgeGroup (ageGroupDto: string): string {
+function getAgeGroup(ageGroupDto: string): string {
   const ageGroup = ageGroupDto.split('.')[1]
 
   if (!ageGroup) {
@@ -50,7 +50,7 @@ function getAgeGroup (ageGroupDto: string): string {
 }
 
 // "[CICLO].[2022 (T. 1)]" -> 2022
-function getYearFromCycle (cycle: string): number {
+function getYearFromCycle(cycle: string): number {
   const cyclePart = cycle.split(' ')[0]
   const yearRegex = /\d{4}/
 
@@ -62,8 +62,10 @@ function getYearFromCycle (cycle: string): number {
   return Number(year)
 }
 
-async function getUnemploymentValues (): Promise<UnemploymentRate[]> {
-  const reponse = await database.get<UnemploymentDto>(config.unemployment.fileName)
+async function getUnemploymentValues(): Promise<UnemploymentRate[]> {
+  const reponse = await database.get<UnemploymentDto>(
+    config.unemployment.fileName
+  )
 
   return reponse
     .filter(dto => dto['[GRUPOS DE EDAD ]'] !== GENERAL_AGE_GROUP)
@@ -79,7 +81,7 @@ async function getUnemploymentValues (): Promise<UnemploymentRate[]> {
     })
 }
 
-export async function getUnemploymentRateByAgeGroup (): Promise<ChartData> {
+export async function getUnemploymentRateByAgeGroup(): Promise<ChartData> {
   const unemploymentRates = await getUnemploymentValues()
   const ageGroups = [...new Set(unemploymentRates.map(ur => ur.ageGroup))]
 
@@ -95,35 +97,43 @@ export async function getUnemploymentRateByAgeGroup (): Promise<ChartData> {
   }, {})
 
   // calculate average
-  const unemploymentRatesAverage = Object.keys(unemploymentRatesByYear).sort().map(year => {
-    const unemploymentRates = unemploymentRatesByYear[Number(year)]
+  const unemploymentRatesAverage = Object.keys(unemploymentRatesByYear)
+    .sort()
+    .map(year => {
+      const unemploymentRates = unemploymentRatesByYear[Number(year)]
 
-    const groupedByAgeGroup = unemploymentRates.reduce((acc, ur) => {
-      if (!acc[ur.ageGroup]) {
-        acc[ur.ageGroup] = []
+      const groupedByAgeGroup = unemploymentRates.reduce((acc, ur) => {
+        if (!acc[ur.ageGroup]) {
+          acc[ur.ageGroup] = []
+        }
+
+        acc[ur.ageGroup].push(ur)
+
+        return acc
+      }, {}) as Record<string, UnemploymentRate[]>
+
+      const averageByAgeGroup = Object.keys(groupedByAgeGroup).reduce(
+        (acc, ageGroup) => {
+          const ageGroupUnemploymentRates = groupedByAgeGroup[ageGroup]
+          const length = ageGroupUnemploymentRates.length
+
+          const average = round(
+            ageGroupUnemploymentRates.reduce((acc, e) => acc + e.average, 0) /
+              length
+          )
+
+          acc[ageGroup] = average
+
+          return acc
+        },
+        {}
+      )
+
+      return {
+        year: Number(year),
+        ...averageByAgeGroup
       }
-
-      acc[ur.ageGroup].push(ur)
-
-      return acc
-    }, {}) as Record<string, UnemploymentRate[]>
-
-    const averageByAgeGroup = Object.keys(groupedByAgeGroup).reduce((acc, ageGroup) => {
-      const ageGroupUnemploymentRates = groupedByAgeGroup[ageGroup]
-      const length = ageGroupUnemploymentRates.length
-
-      const average = round(ageGroupUnemploymentRates.reduce((acc, e) => acc + e.average, 0) / length)
-
-      acc[ageGroup] = average
-
-      return acc
-    }, {})
-
-    return {
-      year: Number(year),
-      ...averageByAgeGroup
-    }
-  })
+    })
 
   return {
     index: 'year',
@@ -132,8 +142,10 @@ export async function getUnemploymentRateByAgeGroup (): Promise<ChartData> {
   }
 }
 
-export async function getUnemploymentRateBySex (): Promise<ChartData> {
-  const reponse = await database.get<UnemploymentRateBySex>(config.unemployment_by_sex.fileName)
+export async function getUnemploymentRateBySex(): Promise<ChartData> {
+  const reponse = await database.get<UnemploymentRateBySex>(
+    config.unemployment_by_sex.fileName
+  )
 
   const unemploymentRates = reponse.map(ur => {
     return {
@@ -144,7 +156,9 @@ export async function getUnemploymentRateBySex (): Promise<ChartData> {
     }
   })
 
-  const categories = Object.keys(unemploymentRates[0]).filter(key => key !== 'year')
+  const categories = Object.keys(unemploymentRates[0]).filter(
+    key => key !== 'year'
+  )
 
   const groupedByYear = unemploymentRates.reduce((acc, ur) => {
     if (!acc[ur.year]) {
@@ -156,25 +170,31 @@ export async function getUnemploymentRateBySex (): Promise<ChartData> {
     return acc
   }, {})
 
-  const data = Object.keys(groupedByYear).sort().map(year => {
-    const unemploymentRates = groupedByYear[Number(year)]
+  const data = Object.keys(groupedByYear)
+    .sort()
+    .map(year => {
+      const unemploymentRates = groupedByYear[Number(year)]
 
-    const averageByCatogory = categories.reduce((acc, category) => {
-      const unemploymentOfYear = unemploymentRates.filter(ur => ur.year === Number(year))
-      const length = unemploymentOfYear.length
+      const averageByCatogory = categories.reduce((acc, category) => {
+        const unemploymentOfYear = unemploymentRates.filter(
+          ur => ur.year === Number(year)
+        )
+        const length = unemploymentOfYear.length
 
-      const average = round(unemploymentOfYear.reduce((acc, e) => acc + e[category], 0) / length)
+        const average = round(
+          unemploymentOfYear.reduce((acc, e) => acc + e[category], 0) / length
+        )
 
-      acc[category] = average
+        acc[category] = average
 
-      return acc
-    }, {})
+        return acc
+      }, {})
 
-    return {
-      year: Number(year),
-      ...averageByCatogory
-    }
-  })
+      return {
+        year: Number(year),
+        ...averageByCatogory
+      }
+    })
 
   return {
     index: 'year',

@@ -1,5 +1,5 @@
 // "[TIEMPO].[2023].[Octubre (2023)]" -> "Octubre"
-export function getMonthFromTimeDto (time: string): string {
+export function getMonthFromTimeDto(time: string): string {
   const month = time.split('.')[2]
 
   const monthRegex = /\w+/
@@ -13,7 +13,7 @@ export function getMonthFromTimeDto (time: string): string {
 }
 
 // "[TIEMPO].[2023].[Octubre (2023)]" -> 2023
-export function getYearFromTimeDto (time: string): number {
+export function getYearFromTimeDto(time: string): number {
   const year = time.split('.')[1]
 
   const yearRegex = /\d{4}/
@@ -26,10 +26,10 @@ export function getYearFromTimeDto (time: string): number {
   return Number(yearNumber)
 }
 
-export function capitalize (str: string): string {
+export function capitalize(str: string): string {
   return str.charAt(0).toUpperCase() + str.slice(1)
 }
 
-export function round (value: number): number {
+export function round(value: number): number {
   return Math.round(value * 100) / 100
 }

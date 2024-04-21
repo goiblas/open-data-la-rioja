@@ -14,7 +14,7 @@ export interface WorkOccupancy {
 }
 
 // [CICLO].[2022 (T. 3)] -> 2022
-function getYear (cycle: string): number {
+function getYear(cycle: string): number {
   const cyclePart = cycle.split(' ')[0]
   const yearRegex = /\d{4}/
 
@@ -27,15 +27,17 @@ function getYear (cycle: string): number {
 }
 
 // "[ACTIVIDAD EN EL EMPLEO ].[Agricultura]" -> "Agricultura"
-function getSector (activity: string): string {
+function getSector(activity: string): string {
   const sector = activity.split('.')[1]
   return sector.replace('[', '').replace(']', '')
 }
 
 const GENERAL_ACTIVITY = 'Actividad principal'
 
-export async function getWorkOccupancy (): Promise<WorkOccupancy[]> {
-  const databaseDtos = await database.get<WorkOccupancyDto>(config.work_occupancy.fileName)
+export async function getWorkOccupancy(): Promise<WorkOccupancy[]> {
+  const databaseDtos = await database.get<WorkOccupancyDto>(
+    config.work_occupancy.fileName
+  )
 
   const workOccupancy = databaseDtos
     .map(dto => {
@@ -47,7 +49,9 @@ export async function getWorkOccupancy (): Promise<WorkOccupancy[]> {
     })
     .filter(wo => wo.sector !== GENERAL_ACTIVITY)
     .reduce((acc, wo) => {
-      const index = acc.findIndex(a => a.sector === wo.sector && a.year === wo.year)
+      const index = acc.findIndex(
+        a => a.sector === wo.sector && a.year === wo.year
+      )
       if (index === -1) {
         acc.push(wo)
       } else {

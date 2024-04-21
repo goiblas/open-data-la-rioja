@@ -8,19 +8,21 @@ interface EmigrationsPerDestinationClientProps {
   categories: BarChartProps['categories']
 }
 
-export default function EmigrationsPerDestinationClient (props: EmigrationsPerDestinationClientProps) {
+export default function EmigrationsPerDestinationClient(
+  props: EmigrationsPerDestinationClientProps
+) {
   const { data, index, categories } = props
 
   return (
-        <BarChart
-            className='mt-6'
-            data={data}
-            index={index}
-            categories={categories}
-            valueFormatter={formatLargeNumber}
-            onValueChange={() => {}}
-            yAxisWidth={40}
-            stack
-        />
+    <BarChart
+      className="mt-6"
+      data={data}
+      index={index}
+      categories={categories}
+      valueFormatter={formatLargeNumber}
+      onValueChange={() => {}}
+      yAxisWidth={40}
+      stack
+    />
   )
 }

@@ -10,7 +10,9 @@ describe('getMonthFromTimeDto', () => {
 
   test('throws error if time dto is invalid', () => {
     const time = '[TIEMPO].[2023]'
-    expect(() => getMonthFromTimeDto(time)).toThrowError(`Error getting month from ${time}`)
+    expect(() => getMonthFromTimeDto(time)).toThrowError(
+      `Error getting month from ${time}`
+    )
   })
 })
 
@@ -23,6 +25,8 @@ describe('getYearFromTimeDto', () => {
 
   test('throws error if time dto is invalid', () => {
     const time = '[TIEMPO][.]'
-    expect(() => getYearFromTimeDto(time)).toThrowError(`Error getting year from ${time}`)
+    expect(() => getYearFromTimeDto(time)).toThrowError(
+      `Error getting year from ${time}`
+    )
   })
 })

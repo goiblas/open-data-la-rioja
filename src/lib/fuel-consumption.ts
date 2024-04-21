@@ -25,7 +25,7 @@ interface Fuel {
 
 type FuelWithType = Fuel & { type: string }
 
-function getType (fuel: string): string {
+function getType(fuel: string): string {
   const type = fuel.split('.')[1]
 
   if (!type) {
@@ -35,7 +35,7 @@ function getType (fuel: string): string {
   return type.replace('[', '').replace(']', '').trim()
 }
 
-function getSpecificType (fuel: string): string {
+function getSpecificType(fuel: string): string {
   const typeArray = fuel.split('.')
 
   if (fuel === FUEL_BIA) {
@@ -47,7 +47,7 @@ function getSpecificType (fuel: string): string {
   return type.replace('[', '').replace(']', '').trim()
 }
 
-function isSpecificType (fuel: string): boolean {
+function isSpecificType(fuel: string): boolean {
   if (fuel === ALL_TYPES) {
     return false
   }
@@ -59,7 +59,7 @@ function isSpecificType (fuel: string): boolean {
   return fuel.split('.').length > 2
 }
 
-function isGeneralType (fuel: string): boolean {
+function isGeneralType(fuel: string): boolean {
   if (fuel === ALL_TYPES) {
     return false
   }
@@ -67,7 +67,7 @@ function isGeneralType (fuel: string): boolean {
   return fuel.split('.').length === 2
 }
 
-async function getFuelsWithSpecificType (): Promise<FuelWithType[]> {
+async function getFuelsWithSpecificType(): Promise<FuelWithType[]> {
   const reponse = await database.get<FuelDto>(config.fuel.fileName)
 
   return reponse
@@ -82,7 +82,7 @@ async function getFuelsWithSpecificType (): Promise<FuelWithType[]> {
     })
 }
 
-async function getFuelsWithType (): Promise<FuelWithType[]> {
+async function getFuelsWithType(): Promise<FuelWithType[]> {
   const reponse = await database.get<FuelDto>(config.fuel.fileName)
 
   return reponse
@@ -97,7 +97,7 @@ async function getFuelsWithType (): Promise<FuelWithType[]> {
     })
 }
 
-async function getFuels (): Promise<Fuel[]> {
+async function getFuels(): Promise<Fuel[]> {
   const reponse = await database.get<FuelDto>(config.fuel.fileName)
 
   return reponse
@@ -111,7 +111,7 @@ async function getFuels (): Promise<Fuel[]> {
     })
 }
 
-export async function getFuelConsumptionPerType (): Promise<ChartData> {
+export async function getFuelConsumptionPerType(): Promise<ChartData> {
   const fuels = await getFuelsWithType()
 
   const years = [...new Set(fuels.map(fuel => fuel.year))]
@@ -146,7 +146,7 @@ export async function getFuelConsumptionPerType (): Promise<ChartData> {
   }
 }
 
-export async function getFuelConsumptionTotalPerYear (): Promise<ChartData> {
+export async function getFuelConsumptionTotalPerYear(): Promise<ChartData> {
   const fuels = await getFuels()
 
   const years = [...new Set(fuels.map(fuel => fuel.year))]
@@ -173,7 +173,7 @@ export async function getFuelConsumptionTotalPerYear (): Promise<ChartData> {
   }
 }
 
-export async function getFuelConsumptionPerSpecificType (): Promise<ChartData> {
+export async function getFuelConsumptionPerSpecificType(): Promise<ChartData> {
   const fuels = await getFuelsWithSpecificType()
 
   const years = [...new Set(fuels.map(fuel => fuel.year))]
@@ -207,7 +207,7 @@ export async function getFuelConsumptionPerSpecificType (): Promise<ChartData> {
   }
 }
 
-export async function getFuelConsumptionPerMonth (): Promise<ChartDataPerYear> {
+export async function getFuelConsumptionPerMonth(): Promise<ChartDataPerYear> {
   const fuels = await getFuelsWithType()
 
   const years = [...new Set(fuels.map(fuel => fuel.year))]
