@@ -8,7 +8,7 @@
         "standard-with-typescript",
         "plugin:react/recommended",
         "plugin:@next/next/recommended",
-        "prettier"
+        "plugin:prettier/recommended"
     ],
     "parserOptions": {
         "ecmaVersion": "latest",
@@ -17,9 +17,11 @@
         "warnOnUnsupportedTypeScriptVersion": false
     },
     "plugins": [
-        "react"
+        "react",
+        "prettier"
     ],
     "rules": {
+        "prettier/prettier": "error",
         "react/prop-types": "off",
         "react/react-in-jsx-scope": "off",
         "@typescript-eslint/no-floating-promises": "off",
