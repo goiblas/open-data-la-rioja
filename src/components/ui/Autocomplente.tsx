@@ -25,7 +25,7 @@ interface AutocompleteProps<T> {
   placeholder?: string
 }
 
-export default function Autocomplete<T> (props: AutocompleteProps<T>) {
+export default function Autocomplete<T>(props: AutocompleteProps<T>) {
   const {
     options,
     renderOption,
@@ -141,14 +141,15 @@ export default function Autocomplete<T> (props: AutocompleteProps<T>) {
 
       {loading && (
         <div className="listbox">
-          <div className='py-4 text-center text-slate-400'>...</div>
+          <div className="py-4 text-center text-slate-400">...</div>
         </div>
       )}
 
       {showOptions && (
         <Listbox id={`listbox-${id}`} aria-labelledby={`input-${id}`}>
-
-          {options.length === 0 && (<li className="autocomplete-notmatch">{notMatchText}</li>)}
+          {options.length === 0 && (
+            <li className="autocomplete-notmatch">{notMatchText}</li>
+          )}
 
           {options.length > 0 &&
             options.map((option, index) => (
@@ -164,11 +165,13 @@ export default function Autocomplete<T> (props: AutocompleteProps<T>) {
                   })
                 }}
               >
-                {renderOption ? renderOption(option) : option as unknown as string}
+                {renderOption
+                  ? renderOption(option)
+                  : (option as unknown as string)}
               </ListItem>
             ))}
         </Listbox>
       )}
     </div>
   )
-};
+}

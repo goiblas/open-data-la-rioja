@@ -22,7 +22,8 @@ interface IPCDto {
   '[TIEMPO]': string
 }
 
-const ORIGIN_GENERAL_GROUP = '[GENERAL Y GRUPOS ECOICOP].[00 Índice general]' as const
+const ORIGIN_GENERAL_GROUP =
+  '[GENERAL Y GRUPOS ECOICOP].[00 Índice general]' as const
 export const GENERAL_GROUP = 'General' as const
 
 interface IPC {
@@ -33,28 +34,30 @@ interface IPC {
   measureMensual: number
 }
 
-function round (value: number): number {
+function round(value: number): number {
   return Math.round(value * 100) / 100
 }
 
 // "[RÚBRICAS].[Turismo y hostelería]" -> "Turismo y hostelería"
-function getTopicFromRubric (rubric: string): string {
+function getTopicFromRubric(rubric: string): string {
   return rubric.replace('[RÚBRICAS].[', '').replace(']', '')
 }
 
 // "[GENERAL Y GRUPOS ECOICOP].[01 Alimentos y bebidas no alcohólicas]" -> "Alimentos y bebidas no alcohólicas"
-function getGroupName (origin: string): string {
+function getGroupName(origin: string): string {
   if (origin === ORIGIN_GENERAL_GROUP) {
     return GENERAL_GROUP
   }
 
-  const originName = origin.replace('[GENERAL Y GRUPOS ECOICOP].[', '').replace(']', '')
+  const originName = origin
+    .replace('[GENERAL Y GRUPOS ECOICOP].[', '')
+    .replace(']', '')
   const nameWithoutNumber = originName.replace(/\d{2} /, '')
 
   return nameWithoutNumber
 }
 
-function getMonth (time: string): string {
+function getMonth(time: string): string {
   try {
     return getMonthFromTimeDto(time)
   } catch (error) {
@@ -62,8 +65,10 @@ function getMonth (time: string): string {
   }
 }
 
-export async function getIPCByProduct (): Promise<IPC[]> {
-  const response = await database.get<IPByRubricCDto>(config.ipc_rubrics.fileName)
+export async function getIPCByProduct(): Promise<IPC[]> {
+  const response = await database.get<IPByRubricCDto>(
+    config.ipc_rubrics.fileName
+  )
 
   return response.map(dto => {
     return {
@@ -76,7 +81,7 @@ export async function getIPCByProduct (): Promise<IPC[]> {
   })
 }
 
-export async function getIPCs (): Promise<IPC[]> {
+export async function getIPCs(): Promise<IPC[]> {
   const response = await database.get<IPCDto>(config.ipc.fileName)
   return response.map(dto => {
     return {
@@ -89,7 +94,7 @@ export async function getIPCs (): Promise<IPC[]> {
   })
 }
 
-function capitalize (string: string): string {
+function capitalize(string: string): string {
   return string.charAt(0).toUpperCase() + string.slice(1)
 }
 
@@ -116,7 +121,11 @@ const limitData = (data: any, limitMonths: number, initialDate: string) => {
     .flat()
 }
 
-export async function getCurrentPeriodIPCs ({ months }: { months: number }): Promise<ChartData> {
+export async function getCurrentPeriodIPCs({
+  months
+}: {
+  months: number
+}): Promise<ChartData> {
   const IPCs = await getIPCs()
   const fullData = IPCs.filter(IPC => !!IPC.month)
     .reverse()
@@ -141,7 +150,7 @@ export async function getCurrentPeriodIPCs ({ months }: { months: number }): Pro
   }
 }
 
-export async function getAllProducts () {
+export async function getAllProducts() {
   const IPCByProduct = await getIPCByProduct()
   const data = IPCByProduct.filter(IPC => !!IPC.month)
     .reverse()

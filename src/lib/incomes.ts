@@ -28,7 +28,7 @@ export interface Income {
   year: number
 }
 
-function mapDtoToIncome (income: IncomeDTO): Income {
+function mapDtoToIncome(income: IncomeDTO): Income {
   return {
     id: `${income.ID_CONCEPTO}-${income.ID_SUBCONCEPTO}`,
     category: income.DESC_CAPITULO,
@@ -39,7 +39,7 @@ function mapDtoToIncome (income: IncomeDTO): Income {
   }
 }
 
-export async function getIncomes (): Promise<ChartData> {
+export async function getIncomes(): Promise<ChartData> {
   const reponse = await database.get<IncomeDTO>(config.incomes.fileName)
   const incomes = reponse.map(mapDtoToIncome)
 
@@ -61,7 +61,7 @@ export async function getIncomes (): Promise<ChartData> {
   }
 }
 
-export async function getIncomesByCategory (): Promise<ChartData> {
+export async function getIncomesByCategory(): Promise<ChartData> {
   const reponse = await database.get<IncomeDTO>(config.incomes.fileName)
   const incomes = reponse.map(mapDtoToIncome)
 
@@ -81,7 +81,11 @@ export async function getIncomesByCategory (): Promise<ChartData> {
 
     return {
       year,
-      ...Object.fromEntries(categories.map((c, i) => [c, amounts[i]]).filter(([, amount]) => amount !== 0))
+      ...Object.fromEntries(
+        categories
+          .map((c, i) => [c, amounts[i]])
+          .filter(([, amount]) => amount !== 0)
+      )
     }
   })
 

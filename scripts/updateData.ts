@@ -12,19 +12,21 @@ const parser = new XMLParser({
 const ORIGIN_XML: string = 'https://ias1.larioja.org/opendata/datosRDF'
 const DEST: string = 'data'
 
-const files: Array<{ downloadUrl?: string, fileName: string, url: string }> =
+const files: Array<{ downloadUrl?: string; fileName: string; url: string }> =
   Object.values(config)
 
-async function getXML (): Promise<string> {
+async function getXML(): Promise<string> {
   const response = await fetch(ORIGIN_XML)
   return await response.text()
 }
 
-async function download (url: string, dest: string) {
+async function download(url: string, dest: string) {
   return await new Promise((resolve, reject) => {
     const file = fs.createWriteStream(dest)
 
-    const handleResponse = (response: { pipe: (arg0: fs.WriteStream) => void }) => {
+    const handleResponse = (response: {
+      pipe: (arg0: fs.WriteStream) => void
+    }) => {
       response.pipe(file)
       file.on('finish', () => {
         file.close(resolve)
@@ -40,7 +42,7 @@ async function download (url: string, dest: string) {
   })
 }
 
-async function main (): Promise<void> {
+async function main(): Promise<void> {
   const xml = await getXML()
   const json = parser.parse(xml)
 
@@ -57,7 +59,7 @@ async function main (): Promise<void> {
       continue
     }
 
-    const dataset = datasets.find((d) => d.Dataset?.['@_about'] === file.url)
+    const dataset = datasets.find(d => d.Dataset?.['@_about'] === file.url)
 
     if (!dataset) {
       console.error(`Dataset not found for ${file.fileName}`)
@@ -65,14 +67,15 @@ async function main (): Promise<void> {
     }
 
     const jsonDistribution = dataset.Dataset.distribution.find(
-      (d) => d.Distribution?.mediaType === 'application/json'
+      d => d.Distribution?.mediaType === 'application/json'
     )
     if (!jsonDistribution) {
       console.error(`Distribution not found for ${file.fileName}`)
       continue
     }
 
-    const jsonUrl: string = jsonDistribution.Distribution.downloadURL['@_resource']
+    const jsonUrl: string =
+      jsonDistribution.Distribution.downloadURL['@_resource']
     try {
       await download(jsonUrl, `${DEST}/${file.fileName}`)
       console.log(`Downloaded ${file.fileName}`)

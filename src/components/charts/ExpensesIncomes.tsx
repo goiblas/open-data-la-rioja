@@ -3,7 +3,11 @@ import { getExpenses } from '@/lib/expenses'
 import CardExpanded from '@/components/ui/CardExpanded'
 import ExpensesIncomesClient from './ExpensesIncomesClient'
 
-export default async function ExpensesIncomes ({ originUrls }: { originUrls?: string[] }) {
+export default async function ExpensesIncomes({
+  originUrls
+}: {
+  originUrls?: string[]
+}) {
   const { data: incomesData } = await getIncomes()
   const { data: dataExpenses } = await getExpenses()
 
@@ -23,12 +27,12 @@ export default async function ExpensesIncomes ({ originUrls }: { originUrls?: st
   })
 
   return (
-        <CardExpanded originUrls={originUrls}>
-            <ExpensesIncomesClient
-                data={data}
-                index={'year'}
-                categories={['Ingresos', 'Gastos']}
-            />
-        </CardExpanded>
+    <CardExpanded originUrls={originUrls}>
+      <ExpensesIncomesClient
+        data={data}
+        index={'year'}
+        categories={['Ingresos', 'Gastos']}
+      />
+    </CardExpanded>
   )
 }

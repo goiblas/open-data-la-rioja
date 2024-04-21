@@ -1,85 +1,85 @@
 {
-    "unemployment": {
-        "fileName": "parados_por_edad.json",
-        "url": "https://web.larioja.org/dato-abierto/datoabierto?n=opd-29"
-    },
-    "unemployment_by_sex": {
-        "fileName": "tasas_por_sexo.json",
-        "url": "https://web.larioja.org/dato-abierto/datoabierto?n=opd-34"
-    },
-    "work_accidents": {
-        "fileName": "accidentes_sector.json",
-        "url": "https://web.larioja.org/dato-abierto/datoabierto?n=opd-355",
-        "downloadUrl": "https://ias1.larioja.org/opendata/download?r=Y2Q9MzU1fGNmPTA0"
-    },
-    "work_occupancy": {
-        "fileName": "ocupados_por_sector.json",
-        "url": "https://web.larioja.org/dato-abierto/datoabierto?n=opd-28"
-    },
-    "fuel": {
-        "fileName": "combustible.json",
-        "url": "https://web.larioja.org/dato-abierto/datoabierto?n=opd-102"
-    },
-    "electricity": {
-        "fileName": "electrica.json",
-        "url": "https://web.larioja.org/dato-abierto/datoabierto?n=opd-101"
-    },
-    "population_by_age": {
-        "fileName": "padron_comarcas.json",
-        "url": "https://web.larioja.org/dato-abierto/datoabierto?n=opd-65"
-    },
-    "population": {
-        "fileName": "padron_distrito.json",
-        "url": "https://web.larioja.org/dato-abierto/datoabierto?n=opd-66"
-    },
-    "emigration": {
-        "fileName": "emigracion_anio_sexo_edad_pais.json",
-        "url": "https://web.larioja.org/dato-abierto/datoabierto?n=opd-327",
-        "downloadUrl": "https://ias1.larioja.org/opendata/download?r=Y2Q9MzI3fGNmPTA0"
-    },
-    "foreign_inmigration": {
-        "fileName": "inmigracion_anio_sexo_edad_pais.json",
-        "url": "https://web.larioja.org/dato-abierto/datoabierto?n=opd-324",
-        "downloadUrl": "https://ias1.larioja.org/opendata/download?r=Y2Q9MzI0fGNmPTA0"
-    },
-    "inmigration": {
-        "fileName": "migracion_destino_rioja.json",
-        "url": "https://web.larioja.org/dato-abierto/datoabierto?n=opd-329"
-    },
-    "public_contracts": {
-        "fileName": "contratacion_electronica.json",
-        "url": "https://web.larioja.org/dato-abierto/datoabierto?n=opd-179"
-    },
-    "ipc_rubrics": {
-        "fileName": "ipc_rubricas.json",
-        "url": "https://web.larioja.org/dato-abierto/datoabierto?n=opd-124"
-    },
-    "ipc": {
-        "fileName": "ipc.json",
-        "url": "https://web.larioja.org/dato-abierto/datoabierto?n=opd-57"
-    },
-    "expenses": {
-        "fileName": "ejecucion_presupuestaria_gastos.json",
-        "url": "https://web.larioja.org/dato-abierto/datoabierto?n=opd-174"
-    },
-    "incomes": {
-        "fileName": "ejecucion_presupuestaria_ingresos.json",
-        "url": "https://web.larioja.org/dato-abierto/datoabierto?n=opd-175"
-    },
-    "marriageEvolution": {
-        "fileName": "evolucion_edad_matrimonio.json",
-        "url": "https://web.larioja.org/dato-abierto/datoabierto?n=opd-54"
-    },
-    "parenting_age": {
-        "fileName": "nacimientos_por_edad_padres.json",
-        "url": "https://web.larioja.org/dato-abierto/datoabierto?n=opd-53"
-    },
-    "house_transfer": {
-        "fileName": "transmisiones_viviendas.json",
-        "url": "https://web.larioja.org/dato-abierto/datoabierto?n=opd-118"
-    },
-    "car_registrations": {
-        "fileName": "matriculaciones_estado.json",
-        "url": "https://web.larioja.org/dato-abierto/datoabierto?n=opd-146"
-    }
+  "unemployment": {
+    "fileName": "parados_por_edad.json",
+    "url": "https://web.larioja.org/dato-abierto/datoabierto?n=opd-29"
+  },
+  "unemployment_by_sex": {
+    "fileName": "tasas_por_sexo.json",
+    "url": "https://web.larioja.org/dato-abierto/datoabierto?n=opd-34"
+  },
+  "work_accidents": {
+    "fileName": "accidentes_sector.json",
+    "url": "https://web.larioja.org/dato-abierto/datoabierto?n=opd-355",
+    "downloadUrl": "https://ias1.larioja.org/opendata/download?r=Y2Q9MzU1fGNmPTA0"
+  },
+  "work_occupancy": {
+    "fileName": "ocupados_por_sector.json",
+    "url": "https://web.larioja.org/dato-abierto/datoabierto?n=opd-28"
+  },
+  "fuel": {
+    "fileName": "combustible.json",
+    "url": "https://web.larioja.org/dato-abierto/datoabierto?n=opd-102"
+  },
+  "electricity": {
+    "fileName": "electrica.json",
+    "url": "https://web.larioja.org/dato-abierto/datoabierto?n=opd-101"
+  },
+  "population_by_age": {
+    "fileName": "padron_comarcas.json",
+    "url": "https://web.larioja.org/dato-abierto/datoabierto?n=opd-65"
+  },
+  "population": {
+    "fileName": "padron_distrito.json",
+    "url": "https://web.larioja.org/dato-abierto/datoabierto?n=opd-66"
+  },
+  "emigration": {
+    "fileName": "emigracion_anio_sexo_edad_pais.json",
+    "url": "https://web.larioja.org/dato-abierto/datoabierto?n=opd-327",
+    "downloadUrl": "https://ias1.larioja.org/opendata/download?r=Y2Q9MzI3fGNmPTA0"
+  },
+  "foreign_inmigration": {
+    "fileName": "inmigracion_anio_sexo_edad_pais.json",
+    "url": "https://web.larioja.org/dato-abierto/datoabierto?n=opd-324",
+    "downloadUrl": "https://ias1.larioja.org/opendata/download?r=Y2Q9MzI0fGNmPTA0"
+  },
+  "inmigration": {
+    "fileName": "migracion_destino_rioja.json",
+    "url": "https://web.larioja.org/dato-abierto/datoabierto?n=opd-329"
+  },
+  "public_contracts": {
+    "fileName": "contratacion_electronica.json",
+    "url": "https://web.larioja.org/dato-abierto/datoabierto?n=opd-179"
+  },
+  "ipc_rubrics": {
+    "fileName": "ipc_rubricas.json",
+    "url": "https://web.larioja.org/dato-abierto/datoabierto?n=opd-124"
+  },
+  "ipc": {
+    "fileName": "ipc.json",
+    "url": "https://web.larioja.org/dato-abierto/datoabierto?n=opd-57"
+  },
+  "expenses": {
+    "fileName": "ejecucion_presupuestaria_gastos.json",
+    "url": "https://web.larioja.org/dato-abierto/datoabierto?n=opd-174"
+  },
+  "incomes": {
+    "fileName": "ejecucion_presupuestaria_ingresos.json",
+    "url": "https://web.larioja.org/dato-abierto/datoabierto?n=opd-175"
+  },
+  "marriageEvolution": {
+    "fileName": "evolucion_edad_matrimonio.json",
+    "url": "https://web.larioja.org/dato-abierto/datoabierto?n=opd-54"
+  },
+  "parenting_age": {
+    "fileName": "nacimientos_por_edad_padres.json",
+    "url": "https://web.larioja.org/dato-abierto/datoabierto?n=opd-53"
+  },
+  "house_transfer": {
+    "fileName": "transmisiones_viviendas.json",
+    "url": "https://web.larioja.org/dato-abierto/datoabierto?n=opd-118"
+  },
+  "car_registrations": {
+    "fileName": "matriculaciones_estado.json",
+    "url": "https://web.larioja.org/dato-abierto/datoabierto?n=opd-146"
+  }
 }

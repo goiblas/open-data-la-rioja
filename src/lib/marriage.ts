@@ -21,12 +21,13 @@ const ageGroups: string[] = [
 export const getYearsWithData = (data: object[]) => {
   const yearsFiltered = data.map((el: object) => el['[AÑOS]'])
   const uniqueYears = [...new Set(yearsFiltered)]
-  const onlyYears = uniqueYears.map(el => el.split('.')[1].replace('[', '').replace(']', ''))
+  const onlyYears = uniqueYears.map(el =>
+    el.split('.')[1].replace('[', '').replace(']', '')
+  )
   return onlyYears
 }
 
-export const getMarriagesByAgeGroups = () => {
-}
+export const getMarriagesByAgeGroups = () => {}
 
 export const groupByYear = async () => {
   const data = await database.get('evolucion_edad_matrimonio.json')
@@ -63,11 +64,14 @@ export const getCountMarriagesByGroups = async () => {
       if (key === 'año') {
         return { ...acc, [key]: value }
       }
-      const cleanedElement = key.split(',')[1].split('.')[1].replace('[', '').replace(']', '')
+      const cleanedElement = key
+        .split(',')[1]
+        .split('.')[1]
+        .replace('[', '')
+        .replace(']', '')
       return { ...acc, [cleanedElement]: value }
     }, {})
-  }
-  )
+  })
 
   const categories = ageGroups.map(e => {
     return e.split(',')[1].split('.')[1].replace('[', '').replace(']', '')

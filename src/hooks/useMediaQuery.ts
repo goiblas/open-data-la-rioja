@@ -11,7 +11,7 @@ const breakpoints: Breakpoints = {
   '2xl': '(min-width: 1536px)'
 }
 
-export default function useMediaQuery (query: string): boolean {
+export default function useMediaQuery(query: string): boolean {
   const breakpoint = breakpoints[query] ?? query
 
   return useMediaQueryHook(breakpoint)

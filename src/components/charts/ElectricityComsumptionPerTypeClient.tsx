@@ -8,18 +8,20 @@ interface ElectricityComsumptionPerTypeClientProps {
   categories: string[]
 }
 
-export default function ElectricityComsumptionPerTypeClient (props: ElectricityComsumptionPerTypeClientProps) {
+export default function ElectricityComsumptionPerTypeClient(
+  props: ElectricityComsumptionPerTypeClientProps
+) {
   const { index, data, categories } = props
 
   return (
-        <LineChart
-            className="mt-6"
-            data={data}
-            index={index}
-            categories={categories}
-            valueFormatter={formatLargeNumber}
-            onValueChange={() => {}}
-            yAxisWidth={52}
-        />
+    <LineChart
+      className="mt-6"
+      data={data}
+      index={index}
+      categories={categories}
+      valueFormatter={formatLargeNumber}
+      onValueChange={() => {}}
+      yAxisWidth={52}
+    />
   )
 }

@@ -9,7 +9,7 @@ interface CompanyTop {
   url: string
 }
 
-async function getTopCompanies (): Promise<CompanyTop[]> {
+async function getTopCompanies(): Promise<CompanyTop[]> {
   const data = await getContracts()
 
   const companies = data.reduce<Record<string, CompanyTop>>((acc, contract) => {
@@ -30,26 +30,30 @@ async function getTopCompanies (): Promise<CompanyTop[]> {
     return acc
   }, {})
 
-  return Object.values(companies).sort((a, b) => b.amount - a.amount).slice(0, 10)
+  return Object.values(companies)
+    .sort((a, b) => b.amount - a.amount)
+    .slice(0, 10)
 }
 
-export default async function Page () {
+export default async function Page() {
   const topCompanies = await getTopCompanies()
 
   return (
-        <>
-        <h1 className="text-3xl text-slate-100 font-bold font-display mb-8 mt-3 md:mt-8">
-            Top 10 empresas con adjudicaciones de mayor importe
-        </h1>
+    <>
+      <h1 className="text-3xl text-slate-100 font-bold font-display mb-8 mt-3 md:mt-8">
+        Top 10 empresas con adjudicaciones de mayor importe
+      </h1>
 
-        {topCompanies.map((company) => (
-            <div className="py-4" key={company.url}>
-                <Link href={company.url}>
-                    <div className="text-lg text-slate-100 font-bold font-display mb-1">{company.name}</div>
-                    <div>{formatCurrency(company.amount)}</div>
-                </Link>
+      {topCompanies.map(company => (
+        <div className="py-4" key={company.url}>
+          <Link href={company.url}>
+            <div className="text-lg text-slate-100 font-bold font-display mb-1">
+              {company.name}
             </div>
-        ))}
-        </>
+            <div>{formatCurrency(company.amount)}</div>
+          </Link>
+        </div>
+      ))}
+    </>
   )
 }

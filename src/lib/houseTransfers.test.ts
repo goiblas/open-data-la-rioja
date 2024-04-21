@@ -12,16 +12,20 @@ describe.skip('house transfers', () => {
     const mockData = [
       {
         '[Measures].[Número de transmisiones (La Rioja)]': 56,
-        '[Measures].[Var (%) en lo que va de año (La Rioja)]': -29.4227188081937,
-        '[VIVIENDA Y COMPRAVENTA SEGÚN ESTADO]': '[VIVIENDA Y COMPRAVENTA SEGÚN ESTADO].[Compraventa].[Compraventa vivienda nueva]',
+        '[Measures].[Var (%) en lo que va de año (La Rioja)]':
+          -29.4227188081937,
+        '[VIVIENDA Y COMPRAVENTA SEGÚN ESTADO]':
+          '[VIVIENDA Y COMPRAVENTA SEGÚN ESTADO].[Compraventa].[Compraventa vivienda nueva]',
         '[Measures].[Var (%) anual (La Rioja)]': 19.1489361702128,
         '[Measures].[Var (%) mensual (La Rioja)]': -20,
         '[TIEMPO]': '[TIEMPO].[2023].[Julio (2023)]'
       },
       {
         '[Measures].[Número de transmisiones (La Rioja)]': 280,
-        '[Measures].[Var (%) en lo que va de año (La Rioja)]': -16.4010882238632,
-        '[VIVIENDA Y COMPRAVENTA SEGÚN ESTADO]': '[VIVIENDA Y COMPRAVENTA SEGÚN ESTADO].[Compraventa].[Compraventa vivienda usada]',
+        '[Measures].[Var (%) en lo que va de año (La Rioja)]':
+          -16.4010882238632,
+        '[VIVIENDA Y COMPRAVENTA SEGÚN ESTADO]':
+          '[VIVIENDA Y COMPRAVENTA SEGÚN ESTADO].[Compraventa].[Compraventa vivienda usada]',
         '[Measures].[Var (%) anual (La Rioja)]': -14.3730886850153,
         '[Measures].[Var (%) mensual (La Rioja)]': 0.3584229390681,
         '[TIEMPO]': '[TIEMPO].[2023].[Julio (2023)]'
@@ -48,24 +52,30 @@ describe.skip('house transfers', () => {
     const mockData = [
       {
         '[Measures].[Número de transmisiones (La Rioja)]': 56,
-        '[Measures].[Var (%) en lo que va de año (La Rioja)]': -29.4227188081937,
-        '[VIVIENDA Y COMPRAVENTA SEGÚN ESTADO]': '[VIVIENDA Y COMPRAVENTA SEGÚN ESTADO].[Compraventa].[Compraventa vivienda nueva]',
+        '[Measures].[Var (%) en lo que va de año (La Rioja)]':
+          -29.4227188081937,
+        '[VIVIENDA Y COMPRAVENTA SEGÚN ESTADO]':
+          '[VIVIENDA Y COMPRAVENTA SEGÚN ESTADO].[Compraventa].[Compraventa vivienda nueva]',
         '[Measures].[Var (%) anual (La Rioja)]': 19.1489361702128,
         '[Measures].[Var (%) mensual (La Rioja)]': -20,
         '[TIEMPO]': '[TIEMPO].[2023].[Julio (2023)]'
       },
       {
         '[Measures].[Número de transmisiones (La Rioja)]': 280,
-        '[Measures].[Var (%) en lo que va de año (La Rioja)]': -16.4010882238632,
-        '[VIVIENDA Y COMPRAVENTA SEGÚN ESTADO]': '[VIVIENDA Y COMPRAVENTA SEGÚN ESTADO].[Compraventa].[Compraventa vivienda usada]',
+        '[Measures].[Var (%) en lo que va de año (La Rioja)]':
+          -16.4010882238632,
+        '[VIVIENDA Y COMPRAVENTA SEGÚN ESTADO]':
+          '[VIVIENDA Y COMPRAVENTA SEGÚN ESTADO].[Compraventa].[Compraventa vivienda usada]',
         '[Measures].[Var (%) anual (La Rioja)]': -14.3730886850153,
         '[Measures].[Var (%) mensual (La Rioja)]': 0.3584229390681,
         '[TIEMPO]': '[TIEMPO].[2023].[Julio (2023)]'
       },
       {
         '[Measures].[Número de transmisiones (La Rioja)]': 12,
-        '[Measures].[Var (%) en lo que va de año (La Rioja)]': -34.9693251533742,
-        '[VIVIENDA Y COMPRAVENTA SEGÚN ESTADO]': '[VIVIENDA Y COMPRAVENTA SEGÚN ESTADO].[Donación]',
+        '[Measures].[Var (%) en lo que va de año (La Rioja)]':
+          -34.9693251533742,
+        '[VIVIENDA Y COMPRAVENTA SEGÚN ESTADO]':
+          '[VIVIENDA Y COMPRAVENTA SEGÚN ESTADO].[Donación]',
         '[Measures].[Var (%) anual (La Rioja)]': 33.3333333333333,
         '[Measures].[Var (%) mensual (La Rioja)]': -25,
         '[TIEMPO]': '[TIEMPO].[2023].[Julio (2023)]'
@@ -92,8 +102,10 @@ describe.skip('house transfers', () => {
     const mockData = [
       {
         '[Measures].[Número de transmisiones (La Rioja)]': 56,
-        '[Measures].[Var (%) en lo que va de año (La Rioja)]': -29.4227188081937,
-        '[VIVIENDA Y COMPRAVENTA SEGÚN ESTADO]': '[VIVIENDA Y COMPRAVENTA SEGÚN ESTADO].[Compraventa].[Compraventa vivienda nueva]',
+        '[Measures].[Var (%) en lo que va de año (La Rioja)]':
+          -29.4227188081937,
+        '[VIVIENDA Y COMPRAVENTA SEGÚN ESTADO]':
+          '[VIVIENDA Y COMPRAVENTA SEGÚN ESTADO].[Compraventa].[Compraventa vivienda nueva]',
         '[Measures].[Var (%) anual (La Rioja)]': 19.1489361702128,
         '[Measures].[Var (%) mensual (La Rioja)]': -20,
         '[TIEMPO]': '[TIEMPO].[2023].[Julio (2023)]'
@@ -120,32 +132,40 @@ describe.skip('house transfers', () => {
     const mockData = [
       {
         '[Measures].[Número de transmisiones (La Rioja)]': 56,
-        '[Measures].[Var (%) en lo que va de año (La Rioja)]': -29.4227188081937,
-        '[VIVIENDA Y COMPRAVENTA SEGÚN ESTADO]': '[VIVIENDA Y COMPRAVENTA SEGÚN ESTADO].[Compraventa].[Compraventa vivienda nueva]',
+        '[Measures].[Var (%) en lo que va de año (La Rioja)]':
+          -29.4227188081937,
+        '[VIVIENDA Y COMPRAVENTA SEGÚN ESTADO]':
+          '[VIVIENDA Y COMPRAVENTA SEGÚN ESTADO].[Compraventa].[Compraventa vivienda nueva]',
         '[Measures].[Var (%) anual (La Rioja)]': 19.1489361702128,
         '[Measures].[Var (%) mensual (La Rioja)]': -20,
         '[TIEMPO]': '[TIEMPO].[2023].[Julio (2023)]'
       },
       {
         '[Measures].[Número de transmisiones (La Rioja)]': 280,
-        '[Measures].[Var (%) en lo que va de año (La Rioja)]': -16.4010882238632,
-        '[VIVIENDA Y COMPRAVENTA SEGÚN ESTADO]': '[VIVIENDA Y COMPRAVENTA SEGÚN ESTADO].[Compraventa].[Compraventa vivienda usada]',
+        '[Measures].[Var (%) en lo que va de año (La Rioja)]':
+          -16.4010882238632,
+        '[VIVIENDA Y COMPRAVENTA SEGÚN ESTADO]':
+          '[VIVIENDA Y COMPRAVENTA SEGÚN ESTADO].[Compraventa].[Compraventa vivienda usada]',
         '[Measures].[Var (%) anual (La Rioja)]': -14.3730886850153,
         '[Measures].[Var (%) mensual (La Rioja)]': 0.3584229390681,
         '[TIEMPO]': '[TIEMPO].[2023].[Agosto (2023)]'
       },
       {
         '[Measures].[Número de transmisiones (La Rioja)]': 12,
-        '[Measures].[Var (%) en lo que va de año (La Rioja)]': -34.9693251533742,
-        '[VIVIENDA Y COMPRAVENTA SEGÚN ESTADO]': '[VIVIENDA Y COMPRAVENTA SEGÚN ESTADO].[Compraventa].[Compraventa vivienda usada]',
+        '[Measures].[Var (%) en lo que va de año (La Rioja)]':
+          -34.9693251533742,
+        '[VIVIENDA Y COMPRAVENTA SEGÚN ESTADO]':
+          '[VIVIENDA Y COMPRAVENTA SEGÚN ESTADO].[Compraventa].[Compraventa vivienda usada]',
         '[Measures].[Var (%) anual (La Rioja)]': 33.3333333333333,
         '[Measures].[Var (%) mensual (La Rioja)]': -25,
         '[TIEMPO]': '[TIEMPO].[2023].[Enero (2024)]'
       },
       {
         '[Measures].[Número de transmisiones (La Rioja)]': 16,
-        '[Measures].[Var (%) en lo que va de año (La Rioja)]': -29.4227188081937,
-        '[VIVIENDA Y COMPRAVENTA SEGÚN ESTADO]': '[VIVIENDA Y COMPRAVENTA SEGÚN ESTADO].[Compraventa].[Compraventa vivienda nueva]',
+        '[Measures].[Var (%) en lo que va de año (La Rioja)]':
+          -29.4227188081937,
+        '[VIVIENDA Y COMPRAVENTA SEGÚN ESTADO]':
+          '[VIVIENDA Y COMPRAVENTA SEGÚN ESTADO].[Compraventa].[Compraventa vivienda nueva]',
         '[Measures].[Var (%) anual (La Rioja)]': 19.1489361702128,
         '[Measures].[Var (%) mensual (La Rioja)]': -20,
         '[TIEMPO]': '[TIEMPO].[2023].[Enero (2024)]'
@@ -158,12 +178,14 @@ describe.skip('house transfers', () => {
         month: 'Julio',
         'Vivienda usada': 0,
         'Vivienda nueva': 56
-      }, {
+      },
+      {
         year: 2023,
         month: 'Agosto',
         'Vivienda usada': 280,
         'Vivienda nueva': 0
-      }, {
+      },
+      {
         year: 2024,
         month: 'Enero',
         'Vivienda usada': 12,

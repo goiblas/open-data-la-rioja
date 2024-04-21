@@ -8,18 +8,20 @@ interface EmigrationsPerYearClientProps {
   categories: BarChartProps['categories']
 }
 
-export default function EmigrationsPerYearClient (props: EmigrationsPerYearClientProps) {
+export default function EmigrationsPerYearClient(
+  props: EmigrationsPerYearClientProps
+) {
   const { index, data, categories } = props
 
   return (
-        <BarChart
-            className='mt-6'
-            data={data}
-            index={index}
-            categories={categories}
-            valueFormatter={formatLargeNumber}
-            yAxisWidth={40}
-            showLegend={false}
-        />
+    <BarChart
+      className="mt-6"
+      data={data}
+      index={index}
+      categories={categories}
+      valueFormatter={formatLargeNumber}
+      yAxisWidth={40}
+      showLegend={false}
+    />
   )
 }

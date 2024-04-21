@@ -60,8 +60,11 @@ export interface ContractDTO {
   ADJUDICA_NOMBRE?: string
 }
 
-function mapDtoToContract (expense: ContractDTO): Contract {
-  const durationMonths = expense.DURACION_MESES ?? typeof expense.DURACION_DIAS !== 'undefined' ? Math.trunc(expense.DURACION_DIAS / 30) : 0
+function mapDtoToContract(expense: ContractDTO): Contract {
+  const durationMonths =
+    expense.DURACION_MESES ?? typeof expense.DURACION_DIAS !== 'undefined'
+      ? Math.trunc(expense.DURACION_DIAS / 30)
+      : 0
 
   return {
     id: expense.CODIGO_EXPEDIENTE,
@@ -81,32 +84,49 @@ function mapDtoToContract (expense: ContractDTO): Contract {
 
 const INVALID_CONTRACTS = ['Desierto', 'Desistimiento', '']
 
-function isValidCompany (company: Company) {
-  return company.name !== '' && company.identifier !== '' && company.identifierType !== ''
+function isValidCompany(company: Company) {
+  return (
+    company.name !== '' &&
+    company.identifier !== '' &&
+    company.identifierType !== ''
+  )
 }
 
-export async function getContracts (): Promise<Contract[]> {
-  const contracts = await database.get<ContractDTO>(config.public_contracts.fileName)
+export async function getContracts(): Promise<Contract[]> {
+  const contracts = await database.get<ContractDTO>(
+    config.public_contracts.fileName
+  )
 
   return contracts
     .map(mapDtoToContract)
-    .filter(contract => !INVALID_CONTRACTS.includes(contract.adjudicationStatus))
+    .filter(
+      contract => !INVALID_CONTRACTS.includes(contract.adjudicationStatus)
+    )
     .filter(contract => isValidCompany(contract.company))
     .sort((a, b) => b.year - a.year)
 }
 
-export async function getContractsByCompany (companyId: string): Promise<Contract[]> {
+export async function getContractsByCompany(
+  companyId: string
+): Promise<Contract[]> {
   const contracts = await getContracts()
 
-  return contracts.filter(contract => contract.company.identifier.toLowerCase() === companyId)
+  return contracts.filter(
+    contract => contract.company.identifier.toLowerCase() === companyId
+  )
 }
 
-export async function getCompanies (): Promise<Company[]> {
+export async function getCompanies(): Promise<Company[]> {
   const contracts = await getContracts()
 
   const companies = contracts.map(contract => contract.company)
-  const uniqueCompanies = companies.filter((company, index) => companies.findIndex(c => c.identifier === company.identifier) === index)
-  const sortedCompanies = uniqueCompanies.sort((a, b) => a.name.localeCompare(b.name))
+  const uniqueCompanies = companies.filter(
+    (company, index) =>
+      companies.findIndex(c => c.identifier === company.identifier) === index
+  )
+  const sortedCompanies = uniqueCompanies.sort((a, b) =>
+    a.name.localeCompare(b.name)
+  )
   const normalizedCompanies = sortedCompanies.map(company => ({
     ...company,
     identifier: company.identifier.toLowerCase()
@@ -115,11 +135,15 @@ export async function getCompanies (): Promise<Company[]> {
   return normalizedCompanies
 }
 
-export async function searchContract (query: string): Promise<Contract[]> {
+export async function searchContract(query: string): Promise<Contract[]> {
   const contracts = await getContracts()
 
-  const filterByDescription = (contract: Contract) => contract.description.toLowerCase().includes(query.toLowerCase())
-  const filterByCompany = (contract: Contract) => contract.company.name.toLowerCase().includes(query.toLowerCase())
+  const filterByDescription = (contract: Contract) =>
+    contract.description.toLowerCase().includes(query.toLowerCase())
+  const filterByCompany = (contract: Contract) =>
+    contract.company.name.toLowerCase().includes(query.toLowerCase())
 
-  return contracts.filter(contract => filterByDescription(contract) || filterByCompany(contract))
+  return contracts.filter(
+    contract => filterByDescription(contract) || filterByCompany(contract)
+  )
 }

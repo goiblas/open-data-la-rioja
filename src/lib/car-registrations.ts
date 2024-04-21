@@ -25,8 +25,10 @@ export interface CarRegistration {
   'Vehículo usado': number
 }
 
-export async function getCarRegistrations (): Promise<CarRegistration[]> {
-  const response = await database.get<CarRegistrationDto>(config.car_registrations.fileName)
+export async function getCarRegistrations(): Promise<CarRegistration[]> {
+  const response = await database.get<CarRegistrationDto>(
+    config.car_registrations.fileName
+  )
 
   return []
 }

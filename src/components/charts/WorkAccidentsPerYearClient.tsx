@@ -8,18 +8,20 @@ interface WorkAccidentsPerYearClientProps {
   categories: string[]
 }
 
-export default function WorkAccidentsPerYearClient (props: WorkAccidentsPerYearClientProps) {
+export default function WorkAccidentsPerYearClient(
+  props: WorkAccidentsPerYearClientProps
+) {
   const { index, data, categories } = props
 
   return (
-        <AreaChart
-            className="mt-6"
-            data={data}
-            index={index}
-            categories={categories}
-            valueFormatter={formatLargeNumber}
-            onValueChange={() => {}}
-            yAxisWidth={40}
-        />
+    <AreaChart
+      className="mt-6"
+      data={data}
+      index={index}
+      categories={categories}
+      valueFormatter={formatLargeNumber}
+      onValueChange={() => {}}
+      yAxisWidth={40}
+    />
   )
 }

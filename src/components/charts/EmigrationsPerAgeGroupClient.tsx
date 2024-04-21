@@ -8,18 +8,20 @@ interface EmigrationsPerAgeGroupClientProps {
   categories: AreaChartProps['categories']
 }
 
-export default function EmigrationsPerAgeGroupClient (props: EmigrationsPerAgeGroupClientProps) {
+export default function EmigrationsPerAgeGroupClient(
+  props: EmigrationsPerAgeGroupClientProps
+) {
   const { data, index, categories } = props
 
   return (
-        <AreaChart
-            data={data}
-            index={index}
-            categories={categories}
-            valueFormatter={formatLargeNumber}
-            onValueChange={() => {}}
-            yAxisWidth={32}
-            connectNulls
-        />
+    <AreaChart
+      data={data}
+      index={index}
+      categories={categories}
+      valueFormatter={formatLargeNumber}
+      onValueChange={() => {}}
+      yAxisWidth={32}
+      connectNulls
+    />
   )
 }

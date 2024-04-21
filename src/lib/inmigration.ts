@@ -28,7 +28,7 @@ interface Inmigration {
 const TotalKey = 'Total' as const
 
 // [EDAD GRUPOS QUINQUENALES].[50 a 54 años] -> 50 a 54 años
-function getAgeGroup (ageGroup: string): string {
+function getAgeGroup(ageGroup: string): string {
   const ageGroupPart = ageGroup.split('.')[1]
   if (!ageGroupPart) {
     throw new Error(`Invalid age group in: ${ageGroup}`)
@@ -39,7 +39,7 @@ function getAgeGroup (ageGroup: string): string {
 
 // [PAÍS DE ORIGEN/DESTINO].[América del Norte] -> América del Norte
 // [CCAA DE DESTINO].[Andalucía] -> Andalucía
-function getDestination (destination: string): string {
+function getDestination(destination: string): string {
   const destinationPart = destination.split('.')[1]
   if (!destinationPart) {
     throw new Error(`Invalid destination in: ${destination}`)
@@ -48,8 +48,10 @@ function getDestination (destination: string): string {
   return destinationPart.replace('[', '').replace(']', '').trim()
 }
 
-async function getForeignInmigrations (): Promise<Inmigration[]> {
-  const response = await database.get<ForeignInmigrationDto>(config.foreign_inmigration.fileName)
+async function getForeignInmigrations(): Promise<Inmigration[]> {
+  const response = await database.get<ForeignInmigrationDto>(
+    config.foreign_inmigration.fileName
+  )
 
   return response.map(dto => {
     return {
@@ -61,8 +63,10 @@ async function getForeignInmigrations (): Promise<Inmigration[]> {
   })
 }
 
-export async function getInmigrations (): Promise<Inmigration[]> {
-  const response = await database.get<InmigrationDto>(config.inmigration.fileName)
+export async function getInmigrations(): Promise<Inmigration[]> {
+  const response = await database.get<InmigrationDto>(
+    config.inmigration.fileName
+  )
 
   return response.map(dto => {
     return {
@@ -74,10 +78,12 @@ export async function getInmigrations (): Promise<Inmigration[]> {
   })
 }
 
-export async function getForeignEmigrationPerYear (): Promise<ChartData> {
+export async function getForeignEmigrationPerYear(): Promise<ChartData> {
   const foreignInmigrations = await getForeignInmigrations()
 
-  const years = [...new Set(foreignInmigrations.map(wa => wa.year).sort((a, b) => a - b))]
+  const years = [
+    ...new Set(foreignInmigrations.map(wa => wa.year).sort((a, b) => a - b))
+  ]
 
   const data = years.map(year => {
     const yearData = foreignInmigrations.filter(wa => wa.year === year)
@@ -95,17 +101,20 @@ export async function getForeignEmigrationPerYear (): Promise<ChartData> {
   }
 }
 
-export async function getInmigrationPerYear (): Promise<ChartData> {
+export async function getInmigrationPerYear(): Promise<ChartData> {
   const foreignInmigrations = await getInmigrations()
 
-  const years = [...new Set(foreignInmigrations.map(wa => wa.year).sort((a, b) => a - b))]
+  const years = [
+    ...new Set(foreignInmigrations.map(wa => wa.year).sort((a, b) => a - b))
+  ]
   const currentYear = new Date().getFullYear()
 
   const data = years
     .filter(year => year <= currentYear)
     .map(year => {
       const yearData = foreignInmigrations.filter(wa => wa.year === year)
-      const total = yearData.find(wa => wa.destination === TotalKey)?.measure ?? 0
+      const total =
+        yearData.find(wa => wa.destination === TotalKey)?.measure ?? 0
       return {
         year,
         Inmigración: total

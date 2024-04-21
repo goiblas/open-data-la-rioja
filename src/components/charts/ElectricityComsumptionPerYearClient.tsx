@@ -8,18 +8,20 @@ interface ElectricityComsumptionPerYearClientProps {
   categories: string[]
 }
 
-export default function ElectricityComsumptionPerYearClient (props: ElectricityComsumptionPerYearClientProps) {
+export default function ElectricityComsumptionPerYearClient(
+  props: ElectricityComsumptionPerYearClientProps
+) {
   const { index, data, categories } = props
 
   return (
-        <BarChart
-            className="mt-6"
-            data={data}
-            index={index}
-            categories={categories}
-            showLegend={false}
-            valueFormatter={formatLargeNumber}
-            yAxisWidth={52}
-        />
+    <BarChart
+      className="mt-6"
+      data={data}
+      index={index}
+      categories={categories}
+      showLegend={false}
+      valueFormatter={formatLargeNumber}
+      yAxisWidth={52}
+    />
   )
 }

@@ -37,7 +37,7 @@ export interface Population {
 
 // "[EDAD].[de 0 a 4 años]" -> "de 0 a 4 años"
 // "[EDAD].[Edades]" -> "all"
-function getAgeGroup (ageGroupDto: string): string {
+function getAgeGroup(ageGroupDto: string): string {
   const ageGroup = ageGroupDto.split('.')[1]
 
   if (!ageGroup) {
@@ -48,22 +48,23 @@ function getAgeGroup (ageGroupDto: string): string {
   return ageGroupText === 'Edades' ? 'all' : ageGroupText
 }
 
-export async function getPopulationByAge (): Promise<PopulationByAge[]> {
-  const reponse = await database.get<PopulationByAgeDto>(config.population.fileName)
+export async function getPopulationByAge(): Promise<PopulationByAge[]> {
+  const reponse = await database.get<PopulationByAgeDto>(
+    config.population.fileName
+  )
 
-  return reponse
-    .map(dto => {
-      return {
-        year: getYearFromTimeDto(dto['[AÑOS]']),
-        ageGroup: getAgeGroup(dto['[EDAD]']),
-        men: dto['[Measures].[Habitante], [SEXO].[Hombres]'],
-        women: dto['[Measures].[Habitante], [SEXO].[Mujeres]'],
-        total: dto['[Measures].[Habitante], [SEXO].[Sexos]']
-      }
-    })
+  return reponse.map(dto => {
+    return {
+      year: getYearFromTimeDto(dto['[AÑOS]']),
+      ageGroup: getAgeGroup(dto['[EDAD]']),
+      men: dto['[Measures].[Habitante], [SEXO].[Hombres]'],
+      women: dto['[Measures].[Habitante], [SEXO].[Mujeres]'],
+      total: dto['[Measures].[Habitante], [SEXO].[Sexos]']
+    }
+  })
 }
 
-async function getPopulation (): Promise<Population[]> {
+async function getPopulation(): Promise<Population[]> {
   const reponse = await database.get<PopulationDto>(config.population.fileName)
 
   return reponse.map(dto => {
@@ -75,14 +76,16 @@ async function getPopulation (): Promise<Population[]> {
   })
 }
 
-export async function getPopulationTotalPerYear (): Promise<ChartData> {
+export async function getPopulationTotalPerYear(): Promise<ChartData> {
   const population = await getPopulation()
 
   const years = [...new Set(population.map(p => p.year).sort((a, b) => a - b))]
 
   const data = years.map(year => {
     const populationOfYear = population.filter(p => p.year === year)
-    const totalDistrict = populationOfYear.find(p => p.district === TOTAL_DISTRICT)
+    const totalDistrict = populationOfYear.find(
+      p => p.district === TOTAL_DISTRICT
+    )
     const capital = populationOfYear.find(p => p.district === CAPITAL_DISTRICT)
 
     return {

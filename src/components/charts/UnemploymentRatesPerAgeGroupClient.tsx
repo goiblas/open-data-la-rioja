@@ -7,18 +7,20 @@ interface UnemploymentRatesPerAgeGroupProps {
   categories: AreaChartProps['categories']
 }
 
-export default function UnemploymentRatesPerAgeGroupClient (props: UnemploymentRatesPerAgeGroupProps) {
+export default function UnemploymentRatesPerAgeGroupClient(
+  props: UnemploymentRatesPerAgeGroupProps
+) {
   const { data, index, categories } = props
 
   return (
-        <AreaChart
-            data={data}
-            index={index}
-            categories={categories}
-            valueFormatter={value => `${value}%`}
-            onValueChange={() => {}}
-            yAxisWidth={32}
-            connectNulls
-        />
+    <AreaChart
+      data={data}
+      index={index}
+      categories={categories}
+      valueFormatter={value => `${value}%`}
+      onValueChange={() => {}}
+      yAxisWidth={32}
+      connectNulls
+    />
   )
 }

@@ -15,7 +15,7 @@ export interface WorkAccidentDto {
 }
 
 // [GRADO DE LA LESIÓN].[Leve] -> Leve
-function getInjury (injury: string) {
+function getInjury(injury: string) {
   const match = injury.match(/\[*\]\.\[(.+)\]/)
 
   if (!match) {
@@ -26,14 +26,14 @@ function getInjury (injury: string) {
 }
 
 // "[CICLO].[Enero-octubre 2020]" -> 2020
-function getYear (cycle: string): number {
+function getYear(cycle: string): number {
   const match = cycle.match(/\d{4}/)
   return match ? parseInt(match[0]) : 0
 }
 
 // "[CNAE_09].[CONSTRUCCIÓN]" -> "Construcción"
 // "[CNAE_09].[AGRICULTURA].[A Agricultura, ganadería, silvicultura y pesca]" -> "Agricultura"
-function getSector (cnae: string): string {
+function getSector(cnae: string): string {
   const match = cnae.split('.')[1]
 
   if (!match) {
@@ -44,8 +44,10 @@ function getSector (cnae: string): string {
   return capitalize(sectorText.toLowerCase())
 }
 
-async function getWorkAccidents () {
-  const databaseDtos = await database.get<WorkAccidentDto>(config.work_accidents.fileName)
+async function getWorkAccidents() {
+  const databaseDtos = await database.get<WorkAccidentDto>(
+    config.work_accidents.fileName
+  )
 
   const workAccidents = databaseDtos
     .map(dto => ({
@@ -59,12 +61,16 @@ async function getWorkAccidents () {
   return workAccidents
 }
 
-export async function getWorkAccidentsPerYear (): Promise<ChartData> {
+export async function getWorkAccidentsPerYear(): Promise<ChartData> {
   const allWorkAccidents = await getWorkAccidents()
 
-  const workAccidents = allWorkAccidents.filter(wa => wa.injury !== TOTAL_INJURIES)
+  const workAccidents = allWorkAccidents.filter(
+    wa => wa.injury !== TOTAL_INJURIES
+  )
 
-  const years = [...new Set(workAccidents.map(wa => wa.year).sort((a, b) => a - b))]
+  const years = [
+    ...new Set(workAccidents.map(wa => wa.year).sort((a, b) => a - b))
+  ]
   const injuries = [...new Set(workAccidents.map(wa => wa.injury))]
 
   const data = years.map(year => {
@@ -94,14 +100,16 @@ export async function getWorkAccidentsPerYear (): Promise<ChartData> {
   }
 }
 
-export async function getWorkAccidentsSeriousPerSector (): Promise<ChartData> {
+export async function getWorkAccidentsSeriousPerSector(): Promise<ChartData> {
   const allWorkAccidents = await getWorkAccidents()
 
   const workAccidents = allWorkAccidents
     .filter(wa => wa.injury !== TOTAL_INJURIES)
     .filter(wa => wa.injury !== MINOR_INJURIES)
 
-  const years = [...new Set(workAccidents.map(wa => wa.year).sort((a, b) => a - b))]
+  const years = [
+    ...new Set(workAccidents.map(wa => wa.year).sort((a, b) => a - b))
+  ]
   const sectors = [...new Set(workAccidents.map(wa => wa.sector))]
 
   const data = years.map(year => {

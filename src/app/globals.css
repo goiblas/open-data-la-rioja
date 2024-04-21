@@ -53,7 +53,7 @@
     left: 0;
     box-sizing: border-box;
     overflow: hidden;
-    
+
     @apply bg-slate-900 text-slate-50 shadow-xl rounded-md;
   }
 
@@ -67,12 +67,12 @@
   }
 
   .listbox-item:hover {
-      @apply bg-slate-700;
+    @apply bg-slate-700;
   }
 
-  .listbox-item[aria-selected="true"] {
-      outline: none;
-      @apply bg-blue-500 text-white;
+  .listbox-item[aria-selected='true'] {
+    outline: none;
+    @apply bg-blue-500 text-white;
   }
 
   .autocomplete {
