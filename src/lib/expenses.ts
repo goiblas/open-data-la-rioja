@@ -79,11 +79,36 @@ export async function getExpenses(): Promise<ChartData> {
 }
 
 export async function getExpensesByCategory(): Promise<ChartData> {
-  // TODO: Implement this function
+  const response = await database.get<ExpenseDTO>(config.expenses.fileName)
+  const expenses = response.map(mapDtoToExpense)
+
+  const years = Array.from(new Set(expenses.map(d => d.year)))
+  const categories = Array.from(new Set(expenses.map(d => d.category)))
+
+  const data = years.map(year => {
+    const amounts = categories.map(category => {
+      const categoryAmount = expenses.reduce((acc, d) => {
+        if (d.year === year && d.category === category) {
+          return acc + d.amount
+        }
+        return acc
+      }, 0)
+      return categoryAmount
+    })
+
+    return {
+      year,
+      ...Object.fromEntries(
+        categories
+          .map((c, i) => [c, amounts[i]])
+          .filter(([, amount]) => amount !== 0)
+      )
+    }
+  })
 
   return {
     index: 'year',
-    categories: [],
-    data: []
+    categories,
+    data
   }
 }
