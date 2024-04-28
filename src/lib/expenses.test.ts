@@ -72,7 +72,7 @@ describe('expenses', () => {
     expect(index).toEqual('year')
   })
 
-  test.skip('should get expenses by category formatted', async () => {
+  test('should get expenses by category formatted', async () => {
     const databaseMock = vi.spyOn(database, 'get')
     const mockData = [
       {
