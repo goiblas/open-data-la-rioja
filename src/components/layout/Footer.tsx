@@ -1,4 +1,24 @@
 import Link from 'next/link'
+import { Fragment } from 'react'
+
+const contributors = [
+  {
+    name: 'Jesús Olazagoitia',
+    url: 'https://goiblas.com/'
+  },
+  {
+    name: 'Gabriel Romero',
+    url: 'https://www.gabrielromero.dev/'
+  },
+  {
+    name: 'Ibai Alberdi',
+    url: 'https://github.com/ibaiway'
+  },
+  {
+    name: 'mpigagr',
+    url: 'https://github.com/mpigagr'
+  }
+]
 
 export default function Footer() {
   return (
@@ -6,26 +26,18 @@ export default function Footer() {
       <div>
         <div className="mb-1">Desarrollado con ♥ por:</div>
         <div>
-          <Link
-            className="underline-offset-2 decoration-slate-600 underline hover:decoration-transparent"
-            href="https://goiblas.com/"
-          >
-            Jesús Olazagoitia
-          </Link>
-          ,{' '}
-          <Link
-            className="underline-offset-2 decoration-slate-600 underline hover:decoration-transparent"
-            href="https://www.gabrielromero.dev/"
-          >
-            Gabriel Romero
-          </Link>
-          ,{' '}
-          <Link
-            className="underline-offset-2 decoration-slate-600 underline hover:decoration-transparent"
-            href="https://github.com/ibaiway"
-          >
-            Ibai Alberdi
-          </Link>
+          {contributors.map((contributor, index) => (
+            <Fragment key={contributor.url}>
+              <Link
+                href={contributor.url}
+                className="underline-offset-2 decoration-slate-600 underline hover:decoration-transparent"
+              >
+                {contributor.name}
+              </Link>
+              {index < contributors.length - 2 && ', '}
+              {index === contributors.length - 2 && ' y '}
+            </Fragment>
+          ))}
         </div>
       </div>
 
