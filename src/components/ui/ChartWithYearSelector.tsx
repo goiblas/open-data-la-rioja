@@ -2,16 +2,26 @@
 import { BarChart, Select, SelectItem } from '@tremor/react'
 import React, { useState } from 'react'
 import { type ChartDataPerYear } from '@/types'
+import type Treemap from './Treemap'
 
 export type ChartWithYearSelectorProps = ChartDataPerYear & {
-  Chart?: typeof BarChart
+  Chart?: typeof BarChart | typeof Treemap
   className?: string
+  valueFormatter?: (value: number) => string
 }
 
 export default function ChartWithYearSelector(
   props: ChartWithYearSelectorProps
 ) {
-  const { data, years, categories, index, Chart = BarChart, className } = props
+  const {
+    data,
+    years,
+    categories,
+    index,
+    Chart = BarChart,
+    className,
+    valueFormatter
+  } = props
   const [year, setYear] = useState(years[years.length - 1])
 
   const monthData = data[year]
@@ -39,6 +49,7 @@ export default function ChartWithYearSelector(
         data={monthData}
         index={index}
         categories={categories}
+        valueFormatter={valueFormatter}
       />
     </div>
   )
