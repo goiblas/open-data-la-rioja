@@ -1,13 +1,13 @@
-import { getExpensesByCategory } from '@/lib/expenses'
 import CardExpanded from '@/components/ui/CardExpanded'
-import ExpensesPerCategoryClient from './ExpensesPerCategoryClient'
+import IncomesPerCategoryClient from './IncomesPerCategoryClient'
+import { getIncomesByCategory } from '@/lib/incomes'
 
-export default async function ExpensesPerCategory({
+export default async function IncomesPerCategory({
   originUrl
 }: {
   originUrl?: string
 }) {
-  const { data } = await getExpensesByCategory()
+  const { data } = await getIncomesByCategory()
 
   const years = data.map(d => d.year)
 
@@ -24,7 +24,7 @@ export default async function ExpensesPerCategory({
 
   return (
     <CardExpanded originUrl={originUrl}>
-      <ExpensesPerCategoryClient data={formattedData} years={years} />
+      <IncomesPerCategoryClient data={formattedData} years={years} />
     </CardExpanded>
   )
 }

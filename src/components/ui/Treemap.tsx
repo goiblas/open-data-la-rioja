@@ -18,7 +18,7 @@ interface TreemapProps {
 export default function Treemap({
   data,
   className,
-  color = 'purple',
+  color = 'cyan',
   valueFormatter
 }: TreemapProps) {
   const formattedData = Object.entries(data)

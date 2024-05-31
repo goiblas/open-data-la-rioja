@@ -1,18 +1,18 @@
 'use client'
-import { useState } from 'react'
+import React, { useState } from 'react'
 import Treemap from '@/components/ui/Treemap'
 import { formatLargeNumber } from '@/lib/shared/formatters'
 import { Select, SelectItem } from '@tremor/react'
 
-interface ExpensesPerCategoryClientProps {
+interface IncomesPerCategoryClientProps {
   data: any
   years: number[]
 }
 
-export default function ExpensesPerCategoryClient({
+export default function IncomesPerCategoryClient({
   data,
   years
-}: ExpensesPerCategoryClientProps) {
+}: IncomesPerCategoryClientProps) {
   const [year, setYear] = useState(years[years.length - 1])
 
   const monthData = data[year]
@@ -38,6 +38,7 @@ export default function ExpensesPerCategoryClient({
       <Treemap
         className="mt-2"
         data={monthData}
+        color="blue"
         valueFormatter={formatLargeNumber}
       />
     </div>
