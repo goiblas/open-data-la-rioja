@@ -1,28 +1,45 @@
 'use client'
-import ChartWithYearSelector from '@/components/ui/ChartWithYearSelector'
+import { useState } from 'react'
 import Treemap from '@/components/ui/Treemap'
 import { formatLargeNumber } from '@/lib/shared/formatters'
-import { type ChartDataPerYear } from '@/types'
+import { Select, SelectItem } from '@tremor/react'
 
-type ExpensesPerCategoryClientProps = ChartDataPerYear & {
-  index: string
-  categories: string[]
+interface ExpensesPerCategoryClientProps {
+  data: any
+  years: number[]
 }
 
 export default function ExpensesPerCategoryClient({
-  index,
   data,
-  categories,
   years
 }: ExpensesPerCategoryClientProps) {
+  const [year, setYear] = useState(years[years.length - 1])
+
+  const monthData = data[year]
+
   return (
-    <ChartWithYearSelector
-      data={data}
-      index={index}
-      years={years}
-      categories={categories}
-      Chart={Treemap}
-      valueFormatter={formatLargeNumber}
-    />
+    <div>
+      <div className="ml-auto max-w-fit">
+        <Select
+          enableClear={false}
+          value={`${year}`}
+          onValueChange={value => {
+            setYear(Number(value))
+          }}
+        >
+          {years.map(year => (
+            <SelectItem key={year} value={`${year}`}>
+              {year}
+            </SelectItem>
+          ))}
+        </Select>
+      </div>
+
+      <Treemap
+        className="mt-2"
+        data={monthData}
+        valueFormatter={formatLargeNumber}
+      />
+    </div>
   )
 }

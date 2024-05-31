@@ -7,7 +7,7 @@ export default async function ExpensesPerCategory({
 }: {
   originUrl?: string
 }) {
-  const { index, data, categories } = await getExpensesByCategory()
+  const { data } = await getExpensesByCategory()
 
   const years = data.map(d => d.year)
 
@@ -24,12 +24,7 @@ export default async function ExpensesPerCategory({
 
   return (
     <CardExpanded originUrl={originUrl}>
-      <ExpensesPerCategoryClient
-        data={formattedData}
-        index={index}
-        years={years}
-        categories={categories}
-      />
+      <ExpensesPerCategoryClient data={formattedData} years={years} />
     </CardExpanded>
   )
 }
