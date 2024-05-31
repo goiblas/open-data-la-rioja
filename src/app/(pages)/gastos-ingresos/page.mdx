@@ -1,5 +1,6 @@
 import ExpensesIncomes from '@/components/charts/ExpensesIncomes'
 import ExpensesPerCategory from '@/components/charts/ExpensesPerCategory'
+import IncomesPerCategory from '@/components/charts/IncomesPerCategory'
 
 export const metadata = {
   title: 'Gastos e ingresos'
@@ -16,10 +17,18 @@ Evolución de la ejecución presupuestaria de gastos e ingresos de la Comunidad 
   ]}
 />
 
-# Gastos por categoría
+## Gastos por categoría
 
 Distribución de los gastos de la Comunidad Autónoma de La Rioja por categoría.
 
 <ExpensesPerCategory 
   originUrl="https://web.larioja.org/dato-abierto/datoabierto?n=opd-174"
+/>
+
+## Ingresos por categoría
+
+Distribución de los ingresos de la Comunidad Autónoma de La Rioja por categoría.
+
+<IncomesPerCategory 
+  originUrl="https://web.larioja.org/dato-abierto/datoabierto?n=opd-175"
 />

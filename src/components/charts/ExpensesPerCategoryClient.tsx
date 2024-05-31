@@ -17,7 +17,6 @@ export default function ExpensesPerCategoryClient({
 }: ExpensesPerCategoryClientProps) {
   return (
     <ChartWithYearSelector
-      className="mt-6"
       data={data}
       index={index}
       years={years}
