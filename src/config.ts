@@ -90,6 +90,10 @@ export const menuItems: MenuItem[] = [
       {
         title: 'Gastos e ingresos',
         url: '/gastos-ingresos'
+      },
+      {
+        title: 'Sociedades creadas',
+        url: '/sociedades-creadas'
       }
     ]
   }
