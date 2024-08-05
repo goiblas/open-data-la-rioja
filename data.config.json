@@ -81,5 +81,9 @@
   "car_registrations": {
     "fileName": "matriculaciones_estado.json",
     "url": "https://web.larioja.org/dato-abierto/datoabierto?n=opd-146"
+  },
+  "companies_creation": {
+    "fileName": "sociedades_mercantiles.json",
+    "url": "https://web.larioja.org/dato-abierto/datoabierto?n=opd-139"
   }
 }
