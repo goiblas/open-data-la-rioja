@@ -67,7 +67,7 @@ export const menuItems: MenuItem[] = [
       },
       {
         title: 'Natalidad',
-        url: 'natalidad'
+        url: '/natalidad'
       }
     ]
   },
