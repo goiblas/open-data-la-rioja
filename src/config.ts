@@ -68,6 +68,10 @@ export const menuItems: MenuItem[] = [
       {
         title: 'Natalidad',
         url: '/natalidad'
+      },
+      {
+        title: 'Mortalidad',
+        url: '/mortalidad'
       }
     ]
   },

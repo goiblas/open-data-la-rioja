@@ -85,5 +85,9 @@
   "companies_creation": {
     "fileName": "sociedades_mercantiles.json",
     "url": "https://web.larioja.org/dato-abierto/datoabierto?n=opd-139"
+  },
+  "mortality": {
+    "fileName": "mortalidad.json",
+    "url": "https://web.larioja.org/dato-abierto/datoabierto?n=opd-51"
   }
 }
