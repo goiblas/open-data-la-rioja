@@ -1,4 +1,5 @@
 import MortalityYearlyEvolution from '@/components/charts/MortalityYearlyEvolution'
+import MortalityEvolutionByGenres from '@/components/charts/MortalityEvolutionByGenres'
 
 export const metadata = {
   title: 'Mortalidad'
@@ -6,6 +7,14 @@ export const metadata = {
 
 # Mortalidad
 
-La natalidad en La Rioja desglosada por año, los datos llegan hasta el año 2020, información obtenida del portal de datos abiertos del Gobierno de La Rioja.
+## Evolución de la mortalidad por rangos etarios
+
+Evolución de la mortalidad, por rangos etarios en La Rioja, desglosada por año. Los datos llegan hasta el año 2022, información obtenida del portal de datos abiertos del Gobierno de La Rioja.
 
 <MortalityYearlyEvolution originUrl="https://web.larioja.org/dato-abierto/datoabierto?n=opd-53" />
+
+## Evolución de la mortailidad por género
+
+Evolución de la mortailidad, entre hombres y mujeres en La Rioja, desglosada por año. Los datos llegan hasta el año 2022, información obtenida del portal de datos abiertos del Gobierno de La Rioja.
+
+<MortalityEvolutionByGenres />

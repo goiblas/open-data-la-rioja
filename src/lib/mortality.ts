@@ -85,6 +85,10 @@ const stepYears = {
   '85 años o más': 0
 }
 
+const getCleanYear = (year: string): string => {
+  return year.split('.')[1].replace('[', '').replace(']', '')
+}
+
 export async function getMortalityRawData(): Promise<MortalityDto[]> {
   const response = await database.get<MortalityDto>(config.mortality.fileName)
   return response
@@ -118,47 +122,38 @@ export const getEvolutionOfDeceases = async (
   orderBy: string = 'ASC'
 ): Promise<stepYearsDto[]> => {
   const dataset = await getMortalityRawData()
-  const data = dataset.reduce(
-    (acc: stepYearsDto[], obj: MortalityDto, index: number) => {
-      const { '[MUNICIPIO]': MUNICIPIO, '[AÑOS]': AÑO, ...rest } = obj
-      const clearYear = AÑO.split('.')[1].replace('[', '').replace(']', '')
-      const cleanData = Object.keys(rest).reduce<Record<string, number>>(
-        (acc, key) => {
-          const cleanKey = key
-            .split('.')[3]
-            .replace('[', '')
-            .replace(']', '')
-            .trim()
-          if (cleanKey in acc) {
-            return {
-              ...acc,
-              ...{ [cleanKey]: acc[cleanKey] + (obj[cleanKey] || 0) }
-            }
-          }
-          return { ...acc, ...{ [cleanKey]: rest[key] || 0 } }
-        },
-        {}
-      )
-      if (index === 0 || acc[acc.length - 1].AÑO !== clearYear) {
-        const initData = {
-          AÑO: clearYear,
-          ...cleanData
-        }
-        return [...acc, initData]
-      }
-
-      Object.keys(rest).forEach((each, index) => {
-        const cleanKey = each
+  const data = dataset.reduce((acc: stepYearsDto[], obj: MortalityDto) => {
+    const { '[MUNICIPIO]': MUNICIPIO, '[AÑOS]': AÑO, ...rest } = obj
+    const clearYear = AÑO.split('.')[1].replace('[', '').replace(']', '')
+    const cleanData = Object.keys(rest).reduce<Record<string, number>>(
+      (acc, key) => {
+        const cleanKey = key
           .split('.')[3]
           .replace('[', '')
           .replace(']', '')
           .trim()
-        acc[acc.length - 1][cleanKey] += rest[each] || 0
+        if (cleanKey in acc) {
+          acc[cleanKey] += Number(rest[key]) || 0
+        }
+        return acc
+      },
+      { ...stepYears }
+    )
+
+    if (!acc.length || acc[acc.length - 1].AÑO !== clearYear) {
+      const initData: stepYearsDto = {
+        AÑO: clearYear,
+        ...stepYears,
+        ...cleanData
+      }
+      return [...acc, initData]
+    } else {
+      Object.keys(cleanData).forEach(key => {
+        acc[acc.length - 1][key] += cleanData[key] || 0
       })
       return acc
-    },
-    []
-  )
+    }
+  }, [])
 
   return getOrderByYear(data, orderBy)
 }
@@ -170,31 +165,32 @@ export const getGenreDeceasesForYears = async (): Promise<stepYearsDto[]> => {
       const { MUJERES, HOMBRES } = Object.keys(obj).reduce(
         (acc, eachObject) => {
           if (eachObject.includes('Mujeres')) {
-            acc.MUJERES += obj[eachObject] || 0
-            acc[eachObject] = obj[eachObject]
+            acc.MUJERES += Number(obj[eachObject]) || 0
+            acc[eachObject] = Number(obj[eachObject]) || 0
           }
           if (eachObject.includes('Hombres')) {
-            acc.HOMBRES += obj[eachObject] || 0
-            acc[eachObject] = obj[eachObject]
+            acc.HOMBRES += Number(obj[eachObject]) || 0
+            acc[eachObject] = Number(obj[eachObject]) || 0
           }
           return acc
         },
         { HOMBRES: 0, MUJERES: 0 }
       )
+      const AÑO = getCleanYear(obj['[AÑOS]'])
       if (index === 0) {
         const objResult = {
-          AÑO: obj['[AÑOS]'],
+          AÑO,
           MUJERES,
           HOMBRES
         }
         return [...acc, objResult]
       }
-      if (acc[acc.length - 1].AÑO === obj['[AÑOS]']) {
+      if (acc[acc.length - 1].AÑO === AÑO) {
         acc[acc.length - 1].MUJERES += MUJERES
         acc[acc.length - 1].HOMBRES += HOMBRES
       } else {
         const initDataForOneYear = {
-          AÑO: obj['[AÑOS]'],
+          AÑO,
           HOMBRES,
           MUJERES
         }
@@ -204,5 +200,7 @@ export const getGenreDeceasesForYears = async (): Promise<stepYearsDto[]> => {
     },
     []
   )
-  return data
+  return data.sort((a, b) => {
+    return a.AÑO - b.AÑO
+  })
 }
