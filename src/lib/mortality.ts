@@ -104,13 +104,15 @@ const getOrderByYear = (data: stepYearsDto[], type = 'ASC'): stepYearsDto[] => {
       const valorA = rangoA ? parseInt(rangoA[0]) : Infinity
       const valorB = rangoB ? parseInt(rangoB[0]) : Infinity
 
-      return type === 'ASC' ? valorA - valorB : valorA - valorB
+      return type === 'ASC' ? valorA - valorB : valorB - valorA
     })
-    return { AÑO, ...Object.fromEntries(entries) }
+    return { AÑO, ...stepYears, ...Object.fromEntries(entries) }
   })
+
   const orderDataByYear = orderedData.sort((a, b) => {
     return parseInt(a['AÑO']) - parseInt(b['AÑO'])
   })
+
   return orderDataByYear
 }
 
