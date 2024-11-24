@@ -12,8 +12,12 @@ const parser = new XMLParser({
 const ORIGIN_XML: string = 'https://ias1.larioja.org/opendata/datosRDF'
 const DEST: string = 'data'
 
-const files: Array<{ downloadUrl?: string; fileName: string; url: string }> =
-  Object.values(config)
+const files: Array<{
+  downloadUrl?: string
+  fileName: string
+  url: string
+  skip?: boolean
+}> = Object.values(config)
 
 async function getXML(): Promise<string> {
   const response = await fetch(ORIGIN_XML)
@@ -49,6 +53,11 @@ async function main(): Promise<void> {
   const datasets = json.RDF.Catalog.dataset
 
   for (const file of files) {
+    if (file.skip) {
+      console.log(`Skipping ${file.fileName}`)
+      continue
+    }
+
     if (file.downloadUrl) {
       try {
         await download(file.downloadUrl, `${DEST}/${file.fileName}`)
