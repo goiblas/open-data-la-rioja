@@ -62,7 +62,7 @@ export interface ContractDTO {
 
 function mapDtoToContract(expense: ContractDTO): Contract {
   const durationMonths =
-    expense.DURACION_MESES ?? typeof expense.DURACION_DIAS !== 'undefined'
+    (expense.DURACION_MESES ?? typeof expense.DURACION_DIAS !== 'undefined')
       ? Math.trunc(expense.DURACION_DIAS / 30)
       : 0
 
